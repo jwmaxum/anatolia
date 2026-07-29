@@ -1,0 +1,192 @@
+[
+  {
+    "id": "menu-cer",
+    "title": "Ceramic + Porcelain",
+    "url": "/collections/ceramic-porcelain",
+    "parent_id": null,
+    "sort_order": 1,
+    "is_active": true,
+    "position": "both",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-cer-feat",
+    "title": "Featured Collections",
+    "url": "/collections/ceramic-porcelain/featured",
+    "parent_id": "menu-cer",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-cer-wood",
+    "title": "Wood Inspiration",
+    "url": "/collections/ceramic-porcelain/wood-inspiration",
+    "parent_id": "menu-cer",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Wood-Inspiration_Cabin_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-cer-stone",
+    "title": "Stone Inspiration",
+    "url": "/collections/ceramic-porcelain/stone-inspiration",
+    "parent_id": "menu-cer",
+    "sort_order": 3,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Stone.jpg?w=276&h=189&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-cer-textile",
+    "title": "Textile Inspiration",
+    "url": "/collections/ceramic-porcelain/textile-inspiration",
+    "parent_id": "menu-cer",
+    "sort_order": 4,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Textile-Inspiration_Belgian-Linen_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-cer-artisan",
+    "title": "Artisan Inspiration",
+    "url": "/collections/ceramic-porcelain/artisan-inspiration",
+    "parent_id": "menu-cer",
+    "sort_order": 5,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Artisan.jpg?w=276&h=189&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-nat",
+    "title": "Natural Stone",
+    "url": "/collections/natural-stone",
+    "parent_id": null,
+    "sort_order": 2,
+    "is_active": true,
+    "position": "both",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Marble_Menu_Image_2022-09-28-140959_sgdq.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-nat-marble",
+    "title": "Marble Collection",
+    "url": "/collections/natural-stone/marble",
+    "parent_id": "menu-nat",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Marble_Menu_Image_2022-09-28-140959_sgdq.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-nat-dolomite",
+    "title": "Dolomite",
+    "url": "/collections/natural-stone/dolomite",
+    "parent_id": "menu-nat",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Dolomite_Menu_Image_2022-09-21-194506_cdym.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-nat-limestone",
+    "title": "Limestone",
+    "url": "/collections/natural-stone/limestone",
+    "parent_id": "menu-nat",
+    "sort_order": 3,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Limestone_Menu_Image_2022-09-28-141018_whar.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-nat-travertine",
+    "title": "Travertine",
+    "url": "/collections/natural-stone/travertine",
+    "parent_id": "menu-nat",
+    "sort_order": 4,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Travertine.jpg?w=276&h=189&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-sint",
+    "title": "Sintered Slab",
+    "url": "/collections/sintered-slab",
+    "parent_id": null,
+    "sort_order": 3,
+    "is_active": true,
+    "position": "both",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-sint-onyx",
+    "title": "Onyx Inspiration",
+    "url": "/collections/sintered-slab/onyx",
+    "parent_id": "menu-sint",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-sint-quartzite",
+    "title": "Quartzite Inspiration",
+    "url": "/collections/sintered-slab/quartzite",
+    "parent_id": "menu-sint",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Quartzite_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-sint-cement",
+    "title": "Cement Inspiration",
+    "url": "/collections/sintered-slab/cement",
+    "parent_id": "menu-sint",
+    "sort_order": 3,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Cement_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+  },
+  {
+    "id": "menu-about",
+    "title": "About Anatolia",
+    "url": "/about",
+    "parent_id": null,
+    "sort_order": 4,
+    "is_active": true,
+    "position": "both",
+    "image_url": ""
+  },
+  {
+    "id": "menu-about-story",
+    "title": "Our Philosophy & Story",
+    "url": "/about/story",
+    "parent_id": "menu-about",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header",
+    "image_url": ""
+  },
+  {
+    "id": "menu-about-sustainability",
+    "title": "Sustainability",
+    "url": "/about/sustainability",
+    "parent_id": "menu-about",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header",
+    "image_url": ""
+  },
+  {
+    "id": "menu-contact",
+    "title": "Contact",
+    "url": "/contact",
+    "parent_id": null,
+    "sort_order": 5,
+    "is_active": true,
+    "position": "both",
+    "image_url": ""
+  }
+]

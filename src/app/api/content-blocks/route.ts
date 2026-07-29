@@ -1,0 +1,37 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getAllContentBlocks, getContentBlockByKey, saveContentBlock } from '@/lib/content-blocks-db';
+
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const key = searchParams.get('key');
+
+    if (key) {
+      const block = await getContentBlockByKey(key);
+      return NextResponse.json({ success: true, data: block });
+    }
+
+    const blocks = await getAllContentBlocks();
+    return NextResponse.json({ success: true, data: blocks });
+  } catch (error) {
+    console.error('API GET /api/content-blocks error:', error);
+    return NextResponse.json({ success: false, error: 'Failed to fetch content blocks' }, { status: 500 });
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { section_key } = body;
+
+    if (!section_key) {
+      return NextResponse.json({ success: false, error: 'section_key is required' }, { status: 400 });
+    }
+
+    const saved = await saveContentBlock(body);
+    return NextResponse.json({ success: true, data: saved });
+  } catch (error) {
+    console.error('API POST /api/content-blocks error:', error);
+    return NextResponse.json({ success: false, error: 'Failed to save content block' }, { status: 500 });
+  }
+}

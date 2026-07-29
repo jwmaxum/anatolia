@@ -1,0 +1,36 @@
+[
+  {
+    "id": "hero-1",
+    "media_type": "video",
+    "media_url": "https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-building-facade-41561-large.mp4",
+    "poster_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1600&h=900&q=85&auto=format&fit=crop",
+    "title": "Architectural Surface Innovations",
+    "subtitle": "Discover patented sintered slabs and porcelain tiles engineered for timeless architectural spaces.",
+    "cta_label": "Explore Collections",
+    "cta_url": "/collections",
+    "sort_order": 1,
+    "is_active": true
+  },
+  {
+    "id": "hero-2",
+    "media_type": "image",
+    "media_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1600&h=900&q=85&auto=format&fit=crop",
+    "title": "Curated Natural Stone & Sintered Slabs",
+    "subtitle": "Hand-selected Marble, Dolomite, and Onyx inspirations crafted with Italian precision.",
+    "cta_label": "View Lookbook",
+    "cta_url": "/collections?look=Marble+Look",
+    "sort_order": 2,
+    "is_active": true
+  },
+  {
+    "id": "hero-3",
+    "media_type": "image",
+    "media_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=1600&h=900&q=85&auto=format&fit=crop",
+    "title": "Aeterna Slabs 6mm + 12mm",
+    "subtitle": "Extraordinary continuous veining and durable sintered technology for interior & exterior design.",
+    "cta_label": "Discover Sintered Slabs",
+    "cta_url": "/collections?look=Sintered+Slab",
+    "sort_order": 3,
+    "is_active": true
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "art-1",
+    "title": "Anatolia Unveils Sintered Slab Innovation Center in Italy",
+    "slug": "sintered-slab-innovation-center-italy",
+    "category": "News",
+    "excerpt": "A state-of-the-art 300,000 sq ft manufacturing facility combining sustainable electric kilns with patented 3D veining precision.",
+    "content": "Anatolia is proud to announce the grand opening of its flagship Sintered Slab Innovation Center in Sassuolo, Italy. Engineered to meet the growing demand for large-format continuous veined surfaces, the plant features 100% zero-water waste recycling and solar-powered continuous pressing technology.\n\nArchitects and interior designers can now specify continuous vein-matched 6mm and 12mm sintered slabs with custom honing and polish finishes.",
+    "cover_image": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop",
+    "is_published": true,
+    "published_date": "2026-07-20"
+  },
+  {
+    "id": "art-2",
+    "title": "Milan Design Week 2026: The Serene Earth Pavilion",
+    "slug": "milan-design-week-2026-serene-earth",
+    "category": "Event",
+    "excerpt": "Experience Anatolia's immersive installation featuring vein-cut Travertine Instrata and backlit Onyx Halo slabs.",
+    "content": "Join Anatolia at Salone del Mobile / Milan Design Week 2026. Designed in collaboration with world-renowned architectural studio Studio V, the 'Serene Earth' pavilion presents a sensory exploration of stone surfaces inspired by natural geological formations.",
+    "cover_image": "https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop",
+    "is_published": true,
+    "published_date": "2026-07-15"
+  },
+  {
+    "id": "art-3",
+    "title": "Sustainable Porcelain Manufacturing: Zero Waste Futures",
+    "slug": "sustainable-porcelain-zero-waste",
+    "category": "Architecture",
+    "excerpt": "How closed-loop water filtration and recycled raw materials are defining Anatolia's eco-certified tile series.",
+    "content": "Sustainability is deeply embedded in every step of Anatolia's manufacturing process. From sourcing raw minerals near production hubs to utilizing 100% recycled greywater, we ensure high durability without compromising ecological integrity.",
+    "cover_image": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop",
+    "is_published": true,
+    "published_date": "2026-07-02"
+  }
+]
