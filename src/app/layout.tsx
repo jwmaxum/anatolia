@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'Anatolia | Premium Tile, Stone & Sintered Stone Slabs',
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko" dir="ltr">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -24,12 +25,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#0a0a0c] text-stone-100 antialiased selection:bg-[#c5a880] selection:text-black">
-        {/* RSC Header with Active Menu Engine */}
-        <Header />
-        <main className="flex-grow">{children}</main>
-        {/* RSC Footer with Active Menu Links */}
-        <Footer />
+      <body className="min-h-screen flex flex-col bg-[#1a1a1a] text-stone-100 antialiased selection:bg-[#c5a880] selection:text-black">
+        <LanguageProvider>
+          {/* RSC Header with Active Menu Engine & Multi-language Selector */}
+          <Header />
+          <main className="flex-grow">{children}</main>
+          {/* RSC Footer */}
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

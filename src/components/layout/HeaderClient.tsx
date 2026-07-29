@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { MenuItem } from '@/lib/types';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+import LanguageSelector from './LanguageSelector';
 import { Menu, X, ChevronDown, Search, Globe, Shield } from 'lucide-react';
 
 interface HeaderClientProps {
@@ -10,6 +12,7 @@ interface HeaderClientProps {
 }
 
 export default function HeaderClient({ menus }: HeaderClientProps) {
+  const { t } = useLanguage();
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
@@ -27,20 +30,19 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
       <div className="bg-[#121216] border-b border-white/5 py-1.5 px-4 text-xs text-stone-400 flex justify-between items-center tracking-wider font-light">
         <div className="flex items-center space-x-3">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c5a880] animate-pulse"></span>
-          <span>ANATOLIA LUXURY SURFACES & SLABS</span>
+          <span>{t('site_tagline', 'ANATOLIA LUXURY SURFACES & SLABS')}</span>
         </div>
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-4">
           <Link
-            href="/admin/navigation"
+            href="/admin"
             className="flex items-center space-x-1.5 text-[#c5a880] hover:text-white transition-colors bg-[#c5a880]/10 border border-[#c5a880]/30 px-2.5 py-0.5 rounded text-[11px] font-medium"
           >
             <Shield size={12} />
-            <span>Admin Menu Engine</span>
+            <span>Admin Studio</span>
           </Link>
-          <div className="hidden sm:flex items-center space-x-2 text-stone-400 hover:text-white cursor-pointer">
-            <Globe size={12} />
-            <span>EN / GLOBAL</span>
-          </div>
+
+          {/* 7-Language i18n Selector Component */}
+          <LanguageSelector />
         </div>
       </div>
 

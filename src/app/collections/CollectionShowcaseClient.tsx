@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ProductItem } from '@/lib/types';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 import {
   Filter,
   X,
@@ -32,6 +33,7 @@ export default function CollectionShowcaseClient({
   initialLookFilter,
   initialCollectionFilter,
 }: CollectionShowcaseClientProps) {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const urlLook = searchParams.get('look');
   const urlCollection = searchParams.get('collection');
