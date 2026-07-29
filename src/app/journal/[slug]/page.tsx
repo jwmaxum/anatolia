@@ -1,8 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getJournalBySlug } from '@/lib/journal-db';
+import { getJournalBySlug, getJournalArticles } from '@/lib/journal-db';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+
+export async function generateStaticParams() {
+  const articles = await getJournalArticles();
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,

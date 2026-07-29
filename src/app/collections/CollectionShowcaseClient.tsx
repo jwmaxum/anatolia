@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { ProductItem } from '@/lib/types';
 import {
   Filter,
@@ -31,15 +32,19 @@ export default function CollectionShowcaseClient({
   initialLookFilter,
   initialCollectionFilter,
 }: CollectionShowcaseClientProps) {
+  const searchParams = useSearchParams();
+  const urlLook = searchParams.get('look');
+  const urlCollection = searchParams.get('collection');
+
   // Filter States
   const [selectedFormats, setSelectedFormats] = useState<string[]>([]);
   const [selectedFinishes, setSelectedFinishes] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedLooks, setSelectedLooks] = useState<string[]>(
-    initialLookFilter ? [initialLookFilter] : []
+    urlLook ? [urlLook] : initialLookFilter ? [initialLookFilter] : []
   );
   const [selectedCollection, setSelectedCollection] = useState<string>(
-    initialCollectionFilter || 'All'
+    urlCollection || initialCollectionFilter || 'All'
   );
   const [searchQuery, setSearchQuery] = useState('');
 

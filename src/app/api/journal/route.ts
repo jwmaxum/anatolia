@@ -7,6 +7,8 @@ import {
   deleteJournalArticle,
 } from '@/lib/journal-db';
 
+export const dynamic = 'force-static';
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);

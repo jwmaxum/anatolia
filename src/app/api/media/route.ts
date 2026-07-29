@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMediaItems, addMediaItem, deleteMediaItem } from '@/lib/media-db';
 
+export const dynamic = 'force-static';
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
