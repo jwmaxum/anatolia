@@ -1,157 +1,127 @@
 [
   {
-    "id": "menu-cer",
-    "title": "Ceramic + Porcelain",
-    "url": "/collections/ceramic-porcelain",
+    "id": "menu-fresh",
+    "title": "Fresh & Gourmet",
+    "url": "/collections/fresh-gourmet",
     "parent_id": null,
     "sort_order": 1,
     "is_active": true,
     "position": "both",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=255&h=175&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-cer-feat",
-    "title": "Featured Collections",
-    "url": "/collections/ceramic-porcelain/featured",
-    "parent_id": "menu-cer",
+    "id": "menu-fresh-produce",
+    "title": "Organic Produce",
+    "url": "/collections/fresh-gourmet/organic-produce",
+    "parent_id": "menu-fresh",
     "sort_order": 1,
     "is_active": true,
     "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=255&h=175&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-cer-wood",
-    "title": "Wood Inspiration",
-    "url": "/collections/ceramic-porcelain/wood-inspiration",
-    "parent_id": "menu-cer",
+    "id": "menu-fresh-meats",
+    "title": "Prime Meats & Seafood",
+    "url": "/collections/fresh-gourmet/prime-meats-seafood",
+    "parent_id": "menu-fresh",
     "sort_order": 2,
     "is_active": true,
     "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Wood-Inspiration_Cabin_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?w=255&h=175&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-cer-stone",
-    "title": "Stone Inspiration",
-    "url": "/collections/ceramic-porcelain/stone-inspiration",
-    "parent_id": "menu-cer",
+    "id": "menu-fresh-mushrooms",
+    "title": "Wild Mushrooms & Caviar",
+    "url": "/collections/fresh-gourmet/wild-mushrooms-caviar",
+    "parent_id": "menu-fresh",
     "sort_order": 3,
     "is_active": true,
     "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Stone.jpg?w=276&h=189&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=276&h=189&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-cer-textile",
-    "title": "Textile Inspiration",
-    "url": "/collections/ceramic-porcelain/textile-inspiration",
-    "parent_id": "menu-cer",
+    "id": "menu-pantry",
+    "title": "Artisanal Pantry",
+    "url": "/collections/artisanal-pantry",
+    "parent_id": null,
+    "sort_order": 2,
+    "is_active": true,
+    "position": "both",
+    "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=255&h=175&auto=compress%2Cformat&fit=crop"
+  },
+  {
+    "id": "menu-pantry-oil",
+    "title": "Extra Virgin Olive Oil",
+    "url": "/collections/artisanal-pantry/olive-oil",
+    "parent_id": "menu-pantry",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=255&h=175&auto=compress%2Cformat&fit=crop"
+  },
+  {
+    "id": "menu-pantry-balsamic",
+    "title": "Aged Balsamic Vinegar",
+    "url": "/collections/artisanal-pantry/balsamic",
+    "parent_id": "menu-pantry",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://images.unsplash.com/photo-1509358271058-acd02cc93898?w=255&h=175&auto=compress%2Cformat&fit=crop"
+  },
+  {
+    "id": "menu-pantry-truffle",
+    "title": "Truffles & Spices",
+    "url": "/collections/artisanal-pantry/truffles-spices",
+    "parent_id": "menu-pantry",
+    "sort_order": 3,
+    "is_active": true,
+    "position": "header",
+    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=255&h=175&auto=compress%2Cformat&fit=crop"
+  },
+  {
+    "id": "menu-pantry-pasta",
+    "title": "Artisan Pasta & Grains",
+    "url": "/collections/artisanal-pantry/artisan-pasta",
+    "parent_id": "menu-pantry",
     "sort_order": 4,
     "is_active": true,
     "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Textile-Inspiration_Belgian-Linen_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1621996346565-e3d5d6281318?w=276&h=189&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-cer-artisan",
-    "title": "Artisan Inspiration",
-    "url": "/collections/ceramic-porcelain/artisan-inspiration",
-    "parent_id": "menu-cer",
-    "sort_order": 5,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Artisan.jpg?w=276&h=189&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-nat",
-    "title": "Natural Stone",
-    "url": "/collections/natural-stone",
-    "parent_id": null,
-    "sort_order": 2,
-    "is_active": true,
-    "position": "both",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Marble_Menu_Image_2022-09-28-140959_sgdq.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-nat-marble",
-    "title": "Marble Collection",
-    "url": "/collections/natural-stone/marble",
-    "parent_id": "menu-nat",
-    "sort_order": 1,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Marble_Menu_Image_2022-09-28-140959_sgdq.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-nat-dolomite",
-    "title": "Dolomite",
-    "url": "/collections/natural-stone/dolomite",
-    "parent_id": "menu-nat",
-    "sort_order": 2,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Dolomite_Menu_Image_2022-09-21-194506_cdym.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-nat-limestone",
-    "title": "Limestone",
-    "url": "/collections/natural-stone/limestone",
-    "parent_id": "menu-nat",
-    "sort_order": 3,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Limestone_Menu_Image_2022-09-28-141018_whar.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-nat-travertine",
-    "title": "Travertine",
-    "url": "/collections/natural-stone/travertine",
-    "parent_id": "menu-nat",
-    "sort_order": 4,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Travertine.jpg?w=276&h=189&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-sint",
-    "title": "Sintered Slab",
-    "url": "/collections/sintered-slab",
+    "id": "menu-dairy",
+    "title": "Dairy & Charcuterie",
+    "url": "/collections/dairy-charcuterie",
     "parent_id": null,
     "sort_order": 3,
     "is_active": true,
     "position": "both",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=255&h=175&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-sint-onyx",
-    "title": "Onyx Inspiration",
-    "url": "/collections/sintered-slab/onyx",
-    "parent_id": "menu-sint",
+    "id": "menu-dairy-cheese",
+    "title": "Aged Cheeses DOP",
+    "url": "/collections/dairy-charcuterie/aged-cheeses",
+    "parent_id": "menu-dairy",
     "sort_order": 1,
     "is_active": true,
     "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=255&h=175&auto=compress%2Cformat&fit=crop"
   },
   {
-    "id": "menu-sint-quartzite",
-    "title": "Quartzite Inspiration",
-    "url": "/collections/sintered-slab/quartzite",
-    "parent_id": "menu-sint",
+    "id": "menu-dairy-jamon",
+    "title": "Jamón & Cured Meats",
+    "url": "/collections/dairy-charcuterie/jamon-cured-meats",
+    "parent_id": "menu-dairy",
     "sort_order": 2,
     "is_active": true,
     "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Quartzite_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
-  },
-  {
-    "id": "menu-sint-cement",
-    "title": "Cement Inspiration",
-    "url": "/collections/sintered-slab/cement",
-    "parent_id": "menu-sint",
-    "sort_order": 3,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Cement_menu_image.jpg?w=255&h=175&auto=compress%2Cformat&fit=min"
+    "image_url": "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=255&h=175&auto=compress%2Cformat&fit=crop"
   },
   {
     "id": "menu-about",
-    "title": "About Anatolia",
+    "title": "About Anatolia Gourmet",
     "url": "/about",
     "parent_id": null,
     "sort_order": 4,
@@ -161,7 +131,7 @@
   },
   {
     "id": "menu-about-story",
-    "title": "Our Philosophy & Story",
+    "title": "Our Heritage & Farms",
     "url": "/about/story",
     "parent_id": "menu-about",
     "sort_order": 1,
@@ -171,7 +141,7 @@
   },
   {
     "id": "menu-about-sustainability",
-    "title": "Sustainability",
+    "title": "Organic Farming & Ethics",
     "url": "/about/sustainability",
     "parent_id": "menu-about",
     "sort_order": 2,

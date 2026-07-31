@@ -1,35 +1,35 @@
 [
   {
     "id": "art-1",
-    "title": "Anatolia Unveils Sintered Slab Innovation Center in Italy",
-    "slug": "sintered-slab-innovation-center-italy",
-    "category": "News",
-    "excerpt": "A state-of-the-art 300,000 sq ft manufacturing facility combining sustainable electric kilns with patented 3D veining precision.",
-    "content": "Anatolia is proud to announce the grand opening of its flagship Sintered Slab Innovation Center in Sassuolo, Italy. Engineered to meet the growing demand for large-format continuous veined surfaces, the plant features 100% zero-water waste recycling and solar-powered continuous pressing technology.\n\nArchitects and interior designers can now specify continuous vein-matched 6mm and 12mm sintered slabs with custom honing and polish finishes.",
-    "cover_image": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop",
+    "title": "Anatolia Unveils Organic Culinary Innovation Lab in Florence",
+    "slug": "florence-culinary-innovation-lab",
+    "category": "Culinary News",
+    "excerpt": "A state-of-the-art tasting lab and cold-press facility dedicated to certifying biodynamic olive oils and heritage vinegar casks.",
+    "content": "Anatolia Gourmet is thrilled to announce the opening of its flagship Culinary Innovation Lab in Florence, Italy. Engineered for sensory analysis and organic verification, the lab works directly with over 40 traditional Tuscan estate farmers.\n\nChefs and culinary connoisseurs can now request bespoke olive oil batch pressings and custom aged balsamic barrel selections with full blockchain traceability.",
+    "cover_image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=1000&h=700&auto=compress%2Cformat&fit=crop",
     "is_published": true,
-    "published_date": "2026-07-20"
+    "published_date": "2026-07-28"
   },
   {
     "id": "art-2",
-    "title": "Milan Design Week 2026: The Serene Earth Pavilion",
-    "slug": "milan-design-week-2026-serene-earth",
+    "title": "Paris Gourmet Expo 2026: The Harvest & Terroir Showcase",
+    "slug": "paris-gourmet-expo-2026-terroir",
     "category": "Event",
-    "excerpt": "Experience Anatolia's immersive installation featuring vein-cut Travertine Instrata and backlit Onyx Halo slabs.",
-    "content": "Join Anatolia at Salone del Mobile / Milan Design Week 2026. Designed in collaboration with world-renowned architectural studio Studio V, the 'Serene Earth' pavilion presents a sensory exploration of stone surfaces inspired by natural geological formations.",
-    "cover_image": "https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop",
+    "excerpt": "Experience Anatolia's exclusive tasting pavilion featuring 36-month Jamón Ibérico de Bellota and wild Piedmont black truffles.",
+    "content": "Join Anatolia Gourmet at the Paris Fine Foods Expo 2026. Our pavilion offers an immersive sensory journey through rare artisan cheeses, cold-extracted Tuscan oils, and Miyazaki A5 Wagyu paired by world-class sommeliers.",
+    "cover_image": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=1000&h=700&auto=compress%2Cformat&fit=crop",
     "is_published": true,
-    "published_date": "2026-07-15"
+    "published_date": "2026-07-18"
   },
   {
     "id": "art-3",
-    "title": "Sustainable Porcelain Manufacturing: Zero Waste Futures",
-    "slug": "sustainable-porcelain-zero-waste",
-    "category": "Architecture",
-    "excerpt": "How closed-loop water filtration and recycled raw materials are defining Anatolia's eco-certified tile series.",
-    "content": "Sustainability is deeply embedded in every step of Anatolia's manufacturing process. From sourcing raw minerals near production hubs to utilizing 100% recycled greywater, we ensure high durability without compromising ecological integrity.",
-    "cover_image": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop",
+    "title": "The Art of Cold-Pressing: Why First-Harvest EVOO Matters",
+    "slug": "art-of-cold-pressing-evoo",
+    "category": "Gastronomy",
+    "excerpt": "How low-temperature extraction within 4 hours of harvesting preserves polyphenol antioxidants and vivid herbaceous aromas.",
+    "content": "Purity is paramount in every bottle of Anatolia EVOO. By maintaining cold pressing under 24°C and avoiding filtration chemical additives, we preserve the vibrant green color and high antioxidant concentration essential for gourmet cuisine.",
+    "cover_image": "https://images.unsplash.com/photo-1509358271058-acd02cc93898?w=1000&h=700&auto=compress%2Cformat&fit=crop",
     "is_published": true,
-    "published_date": "2026-07-02"
+    "published_date": "2026-07-05"
   }
 ]

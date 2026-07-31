@@ -105,12 +105,12 @@ export async function saveProduct(product: Partial<ProductItem> & { id?: string 
   const newId = `prod-${Date.now()}`;
   const newProd: ProductItem = {
     id: newId,
-    name: product.name || 'New Collection Tile',
-    collection: product.collection || 'Ceramic + Porcelain',
-    format: product.format || '60x120 cm',
-    finish: product.finish || 'Polished',
-    color: product.color || 'Bianco',
-    look: product.look || 'Marble Look',
+    name: product.name || 'New Gourmet Ingredient',
+    collection: product.collection || 'Artisanal Pantry',
+    format: product.format || '500ml Bottle',
+    finish: product.finish || 'Cold-Pressed',
+    color: product.color || 'Emerald Gold',
+    look: product.look || 'Italian Heritage',
     image_url: product.image_url || '',
     description: product.description || '',
     thickness: product.thickness || '9 mm',

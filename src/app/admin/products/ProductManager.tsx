@@ -17,11 +17,11 @@ import {
   Grid,
 } from 'lucide-react';
 
-const FORMAT_OPTIONS = ['60x120 cm', '120x280 cm Slab', '30x60 cm', 'Mosaics'];
-const FINISH_OPTIONS = ['Polished', 'Matte', 'Honed', 'Textured'];
-const COLOR_OPTIONS = ['Bianco', 'Nero', 'Calacatta Gold', 'Travertine', 'Beige', 'Gray'];
-const LOOK_OPTIONS = ['Marble Look', 'Stone Look', 'Sintered Slab', 'Wood Look', 'Onyx Look'];
-const COLLECTION_OPTIONS = ['Ceramic + Porcelain', 'Natural Stone', 'Sintered Slab'];
+const FORMAT_OPTIONS = ['500ml Bottle', '250g Jar', '500g Block', '100g Sliced Pack', '350g Prime Cut', '3kg Box'];
+const FINISH_OPTIONS = ['Cold-Pressed', '36-Month Aged', '25-Year Barrel Aged', 'Dry-Aged & Chilled', 'Wild Harvested'];
+const COLOR_OPTIONS = ['Emerald Gold', 'Warm Ivory', 'Obsidian Black', 'Deep Ruby', 'Dark Velvet Brown', 'Amber Gold'];
+const LOOK_OPTIONS = ['Italian Heritage', 'DOP Certified Organic', 'Gourmet Reserve', 'Artisan Charcuterie', 'A5 Prime Grade', 'Certified Organic'];
+const COLLECTION_OPTIONS = ['Fresh & Gourmet', 'Artisanal Pantry', 'Dairy & Charcuterie'];
 
 export default function ProductManager() {
   const [products, setProducts] = useState<ProductItem[]>([]);
@@ -35,14 +35,14 @@ export default function ProductManager() {
   const [editingProduct, setEditingProduct] = useState<ProductItem | null>(null);
 
   const [name, setName] = useState('');
-  const [collection, setCollection] = useState('Ceramic + Porcelain');
-  const [format, setFormat] = useState('60x120 cm');
-  const [finish, setFinish] = useState('Polished');
-  const [color, setColor] = useState('Bianco');
-  const [look, setLook] = useState('Marble Look');
+  const [collection, setCollection] = useState('Artisanal Pantry');
+  const [format, setFormat] = useState('500ml Bottle');
+  const [finish, setFinish] = useState('Cold-Pressed');
+  const [color, setColor] = useState('Emerald Gold');
+  const [look, setLook] = useState('Italian Heritage');
   const [imageUrl, setImageUrl] = useState('');
   const [description, setDescription] = useState('');
-  const [thickness, setThickness] = useState('9.5 mm');
+  const [thickness, setThickness] = useState('Single Estate');
   const [origin, setOrigin] = useState('Italy');
   const [isFeatured, setIsFeatured] = useState(false);
 
@@ -73,14 +73,14 @@ export default function ProductManager() {
   const openCreateModal = () => {
     setEditingProduct(null);
     setName('');
-    setCollection('Ceramic + Porcelain');
-    setFormat('60x120 cm');
-    setFinish('Polished');
-    setColor('Bianco');
-    setLook('Marble Look');
+    setCollection('Artisanal Pantry');
+    setFormat('500ml Bottle');
+    setFinish('Cold-Pressed');
+    setColor('Emerald Gold');
+    setLook('Italian Heritage');
     setImageUrl('');
     setDescription('');
-    setThickness('9.5 mm');
+    setThickness('Single Estate');
     setOrigin('Italy');
     setIsFeatured(false);
     setIsModalOpen(true);
@@ -213,7 +213,7 @@ export default function ProductManager() {
             </h1>
           </div>
           <p className="text-xs text-stone-400 mt-1">
-            Create, edit, and delete Anatolia tile & slab products with 4-attribute metadata (Format, Finish, Color, Look) and thumbnail image uploads.
+            Create, edit, and delete Anatolia gourmet food products with 4-attribute metadata (Packaging, Aging, Flavor Profile, Origin) and thumbnail image uploads.
           </p>
         </div>
 

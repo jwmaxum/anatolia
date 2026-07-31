@@ -23,10 +23,10 @@ interface CollectionShowcaseClientProps {
   initialCollectionFilter?: string;
 }
 
-const FORMAT_OPTIONS = ['60x120 cm', '120x280 cm Slab', '30x60 cm', 'Mosaics'];
-const FINISH_OPTIONS = ['Polished', 'Matte', 'Honed', 'Textured'];
-const COLOR_OPTIONS = ['Bianco', 'Nero', 'Calacatta Gold', 'Travertine', 'Beige', 'Gray'];
-const LOOK_OPTIONS = ['Marble Look', 'Stone Look', 'Sintered Slab', 'Wood Look', 'Onyx Look'];
+const FORMAT_OPTIONS = ['500ml Bottle', '250g Jar', '500g Block', '100g Sliced Pack', '350g Prime Cut', '3kg Box'];
+const FINISH_OPTIONS = ['Cold-Pressed', '36-Month Aged', '25-Year Barrel Aged', 'Dry-Aged & Chilled', 'Wild Harvested'];
+const COLOR_OPTIONS = ['Emerald Gold', 'Warm Ivory', 'Obsidian Black', 'Deep Ruby', 'Dark Velvet Brown', 'Amber Gold'];
+const LOOK_OPTIONS = ['Italian Heritage', 'DOP Certified Organic', 'Gourmet Reserve', 'Artisan Charcuterie', 'A5 Prime Grade', 'Certified Organic'];
 
 export default function CollectionShowcaseClient({
   initialProducts,
@@ -146,15 +146,15 @@ export default function CollectionShowcaseClient({
             <span>Lookbook Showcase</span>
           </div>
           <h1 className="font-serif-luxury text-4xl sm:text-6xl font-light text-white tracking-tight">
-            Architectural Surfaces & Slabs
+            Artisanal Gourmet & Fine Foods
           </h1>
           <p className="text-stone-400 text-xs sm:text-sm max-w-xl mx-auto font-light leading-relaxed">
-            Filter by format, finish, color, and natural stone look to discover Anatolia’s precision-crafted surface collections.
+            Filter by packaging size, aging process, flavor profile, and organic origin to discover Anatolia’s precision-curated gourmet collections.
           </p>
 
           {/* Quick Collection Tabs */}
           <div className="pt-6 flex flex-wrap justify-center gap-2">
-            {['All', 'Ceramic + Porcelain', 'Natural Stone', 'Sintered Slab'].map((coll) => (
+            {['All', 'Fresh & Gourmet', 'Artisanal Pantry', 'Dairy & Charcuterie'].map((coll) => (
               <button
                 key={coll}
                 onClick={() => setSelectedCollection(coll)}

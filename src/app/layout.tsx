@@ -5,9 +5,9 @@ import Footer from '@/components/layout/Footer';
 import { LanguageProvider } from '@/lib/i18n/LanguageContext';
 
 export const metadata: Metadata = {
-  title: 'Anatolia | Premium Tile, Stone & Sintered Stone Slabs',
+  title: 'Anatolia Gourmet | Premium Artisanal Ingredients & Fine Foods',
   description:
-    'Premium quality tile, stone, sintered stone slabs, mosaics, creative designs, and patented technology represent Anatolia’s leadership in the global architectural market.',
+    'Hand-selected extra virgin olive oils, 36-month DOP cheeses, truffle products, and organic gourmet ingredients imported directly from heritage producers.',
 };
 
 export default function RootLayout({

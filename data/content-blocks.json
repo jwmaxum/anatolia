@@ -3,22 +3,22 @@
     "id": "block-featured-cat",
     "section_key": "featured_categories",
     "page": "home",
-    "title": "Engineered Collections",
-    "subtitle": "Product Categories",
-    "description": "From porcelain floorings to large sintered stone slabs, each collection evokes a sense of calm and tactile sophistication.",
+    "title": "Curated Fine Food Categories",
+    "subtitle": "Gourmet Selections",
+    "description": "From farm-fresh organic produce to aged artisan cheeses and rare pantry essentials, each item brings authentic culinary excellence to your table.",
     "badge": "Product Showcase",
-    "updated_at": "2026-07-29T14:40:00Z"
+    "updated_at": "2026-07-31T00:00:00Z"
   },
   {
     "id": "block-brand-story",
     "section_key": "brand_story",
     "page": "home",
-    "title": "Pioneering Patented Surface Innovations.",
-    "subtitle": "Leadership & Excellence",
-    "description": "Anatolia stands at the forefront of global tile and slab manufacturing. Driven by sustainable practices and state-of-the-art technological advancements, we craft surfaces that redefine interior and exterior architecture.",
-    "media_url": "https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Contemporary_SEARCH_RESULT_IMAGE.jpg?w=800&h=600&auto=compress%2Cformat&fit=crop",
+    "title": "Farm to Table Excellence & Organic Craftsmanship.",
+    "subtitle": "Heritage & Quality",
+    "description": "Anatolia Gourmet stands at the pinnacle of global artisanal food sourcing. Guided by sustainable organic farming and direct partnerships with heritage producers across Italy, Spain, and Japan, we curate pure ingredients that redefine fine dining.",
+    "media_url": "https://images.unsplash.com/photo-1509358271058-acd02cc93898?w=800&h=600&auto=compress%2Cformat&fit=crop",
     "media_type": "image",
     "badge": "Craftsmanship",
-    "updated_at": "2026-07-29T14:40:00Z"
+    "updated_at": "2026-07-31T00:00:00Z"
   }
 ]

@@ -3,9 +3,9 @@ import { getProducts } from '@/lib/products-db';
 import CollectionShowcaseClient from './CollectionShowcaseClient';
 
 export const metadata = {
-  title: 'Product Collections & Lookbook | Anatolia',
+  title: 'Fine Food Collections & Showcase | Anatolia Gourmet',
   description:
-    'Explore Anatolia porcelain tiles, natural stone, and sintered slabs. Filter by Format, Surface Finish, Color, and Aesthetic Look.',
+    'Explore Anatolia Gourmet artisanal extra virgin olive oil, DOP cheeses, and organic ingredients. Filter by Size, Processing, Flavor, and Origin.',
 };
 
 export default async function CollectionsPage() {

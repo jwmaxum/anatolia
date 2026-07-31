@@ -2,14 +2,14 @@
 
 @layer base {
   :root {
-    --background: #1a1a1a;
-    --bg-light-gray: #f8f8f9;
-    --foreground: #ffffff;
-    --dark-charcoal: #1a1a1a;
-    --accent-gold: #c5a880;
-    --accent-gold-hover: #dbbc93;
-    --card-bg: #22222a;
-    --border-dark: #2c2c36;
+    --background: #0d110e;
+    --bg-light-gray: #f9f8f6;
+    --foreground: #f4f4f5;
+    --dark-charcoal: #0d110e;
+    --accent-gold: #c59b27;
+    --accent-gold-hover: #e0b438;
+    --card-bg: #141b16;
+    --border-dark: #1e2921;
   }
 
   body {
@@ -26,10 +26,10 @@
 
 /* Anatolia Micro Zoom-in & Glassmorphic Utilities */
 .glass-header {
-  background: rgba(26, 26, 26, 0.88);
+  background: rgba(13, 17, 14, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(197, 155, 39, 0.15);
 }
 
 .img-zoom-hover {
