@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { LanguageProvider } from '@/lib/i18n/LanguageContext';
+import { AppProviders } from '@/components/providers/AppProviders';
+import CartDrawer from '@/components/cart/CartDrawer';
 
 export const metadata: Metadata = {
   title: 'Anatolia Gourmet | Premium Artisanal Ingredients & Fine Foods',
@@ -26,13 +27,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#1a1a1a] text-stone-100 antialiased selection:bg-[#c5a880] selection:text-black">
-        <LanguageProvider>
+        <AppProviders>
           {/* RSC Header with Active Menu Engine & Multi-language Selector */}
           <Header />
+          <CartDrawer />
           <main className="flex-grow">{children}</main>
           {/* RSC Footer */}
           <Footer />
-        </LanguageProvider>
+        </AppProviders>
       </body>
     </html>
   );

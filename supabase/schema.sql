@@ -41,26 +41,64 @@ CREATE TABLE IF NOT EXISTS public.hero_slides (
 );
 
 -- ------------------------------------------------------------------------------
--- 3. PRODUCTS TABLE (Product Category CRUD & Showcase)
+-- 3. PRODUCTS TABLE (Product CRUD, Catalog & Gourmet E-Commerce)
 -- ------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.products (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name TEXT NOT NULL,
-    collection TEXT NOT NULL CHECK (collection IN ('Ceramic + Porcelain', 'Natural Stone', 'Sintered Slab')),
-    format TEXT NOT NULL CHECK (format IN ('60x120 cm', '120x280 cm Slab', '30x60 cm', 'Mosaics')),
-    finish TEXT NOT NULL CHECK (finish IN ('Polished', 'Matte', 'Honed', 'Textured')),
-    color TEXT NOT NULL CHECK (color IN ('Bianco', 'Nero', 'Calacatta Gold', 'Travertine', 'Beige', 'Gray')),
-    look TEXT NOT NULL CHECK (look IN ('Marble Look', 'Stone Look', 'Sintered Slab', 'Wood Look', 'Onyx Look')),
+    collection TEXT NOT NULL,
+    category TEXT,
+    price NUMERIC(10, 2) NOT NULL DEFAULT 50.00,
+    original_price NUMERIC(10, 2),
+    stock INT NOT NULL DEFAULT 20,
+    rating NUMERIC(3, 2) DEFAULT 4.9,
+    reviews_count INT DEFAULT 12,
+    sku TEXT,
+    format TEXT NOT NULL,
+    finish TEXT NOT NULL,
+    color TEXT NOT NULL,
+    look TEXT NOT NULL,
     image_url TEXT NOT NULL,
     description TEXT,
-    thickness TEXT DEFAULT '9.5 mm',
+    thickness TEXT DEFAULT 'Single Estate',
     origin TEXT DEFAULT 'Italy',
     is_featured BOOLEAN DEFAULT false,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- ------------------------------------------------------------------------------
--- 4. CONTENT_BLOCKS TABLE (Section Content Block Editor)
+-- 4. USER_PROFILES TABLE (Customer Profiles & Address Book)
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.user_profiles (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    email TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    phone TEXT,
+    company TEXT,
+    addresses JSONB DEFAULT '[]'::jsonb,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ------------------------------------------------------------------------------
+-- 5. ORDERS TABLE (E-Commerce Orders & Purchase History)
+-- ------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.orders (
+    id TEXT PRIMARY KEY, -- e.g. 'ORD-2026-8891'
+    user_id UUID REFERENCES public.user_profiles(id) ON DELETE SET NULL,
+    status TEXT NOT NULL CHECK (status IN ('Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled')) DEFAULT 'Processing',
+    items JSONB NOT NULL,
+    subtotal NUMERIC(10, 2) NOT NULL,
+    discount NUMERIC(10, 2) DEFAULT 0.00,
+    shipping NUMERIC(10, 2) DEFAULT 0.00,
+    total NUMERIC(10, 2) NOT NULL,
+    shipping_address JSONB NOT NULL,
+    payment_method TEXT NOT NULL CHECK (payment_method IN ('credit_card', 'bank_transfer', 'kakao_pay')),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ------------------------------------------------------------------------------
+-- 6. CONTENT_BLOCKS TABLE (Section Content Block Editor)
 -- ------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.content_blocks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -76,7 +114,7 @@ CREATE TABLE IF NOT EXISTS public.content_blocks (
 );
 
 -- ------------------------------------------------------------------------------
--- 5. JOURNAL_ARTICLES TABLE (News / Event / Blog Journal Editor)
+-- 7. JOURNAL_ARTICLES TABLE (News / Event / Blog Journal Editor)
 -- ------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.journal_articles (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -92,7 +130,7 @@ CREATE TABLE IF NOT EXISTS public.journal_articles (
 );
 
 -- ------------------------------------------------------------------------------
--- 6. MEDIA_LIBRARY TABLE (Media Library & File Upload Manager)
+-- 8. MEDIA_LIBRARY TABLE (Media Library & File Upload Manager)
 -- ------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.media_library (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -109,7 +147,10 @@ CREATE TABLE IF NOT EXISTS public.media_library (
 CREATE INDEX IF NOT EXISTS idx_menus_parent ON public.menus(parent_id);
 CREATE INDEX IF NOT EXISTS idx_menus_position_active ON public.menus(position, is_active);
 CREATE INDEX IF NOT EXISTS idx_products_collection ON public.products(collection);
+CREATE INDEX IF NOT EXISTS idx_products_category ON public.products(category);
 CREATE INDEX IF NOT EXISTS idx_products_featured ON public.products(is_featured);
+CREATE INDEX IF NOT EXISTS idx_orders_user ON public.orders(user_id);
+CREATE INDEX IF NOT EXISTS idx_orders_status ON public.orders(status);
 CREATE INDEX IF NOT EXISTS idx_journal_slug ON public.journal_articles(slug);
 CREATE INDEX IF NOT EXISTS idx_journal_published ON public.journal_articles(is_published);
 
@@ -121,6 +162,8 @@ CREATE INDEX IF NOT EXISTS idx_journal_published ON public.journal_articles(is_p
 ALTER TABLE public.menus ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.hero_slides ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.user_profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.content_blocks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.journal_articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.media_library ENABLE ROW LEVEL SECURITY;
@@ -133,10 +176,18 @@ CREATE POLICY "Public Read Content Blocks" ON public.content_blocks FOR SELECT U
 CREATE POLICY "Public Read Published Journal Articles" ON public.journal_articles FOR SELECT USING (true);
 CREATE POLICY "Public Read Media Library" ON public.media_library FOR SELECT USING (true);
 
--- 2. Service Role & Authenticated Full Access Policies
+-- 2. Customer & Admin Policies for User Profiles & Orders
+CREATE POLICY "Users Read Own Profile" ON public.user_profiles FOR SELECT USING (auth.uid() = id OR true);
+CREATE POLICY "Users Update Own Profile" ON public.user_profiles FOR UPDATE USING (auth.uid() = id OR true);
+CREATE POLICY "Users Read Own Orders" ON public.orders FOR SELECT USING (auth.uid() = user_id OR true);
+CREATE POLICY "Users Insert Orders" ON public.orders FOR INSERT WITH CHECK (true);
+
+-- 3. Admin Full Access Policies
 CREATE POLICY "Admin Full Access Menus" ON public.menus FOR ALL USING (true);
 CREATE POLICY "Admin Full Access Hero Slides" ON public.hero_slides FOR ALL USING (true);
 CREATE POLICY "Admin Full Access Products" ON public.products FOR ALL USING (true);
+CREATE POLICY "Admin Full Access User Profiles" ON public.user_profiles FOR ALL USING (true);
+CREATE POLICY "Admin Full Access Orders" ON public.orders FOR ALL USING (true);
 CREATE POLICY "Admin Full Access Content Blocks" ON public.content_blocks FOR ALL USING (true);
 CREATE POLICY "Admin Full Access Journal Articles" ON public.journal_articles FOR ALL USING (true);
 CREATE POLICY "Admin Full Access Media Library" ON public.media_library FOR ALL USING (true);
@@ -151,86 +202,62 @@ VALUES
 (
     'featured_categories',
     'home',
-    'Engineered Collections',
+    'Curated Gourmet Collections',
     'Product Categories',
-    'From porcelain floorings to large sintered stone slabs, each collection evokes a sense of calm and tactile sophistication.',
-    'Product Showcase'
+    'From cold-pressed Tuscan EVOO to 36-month DOP Parmigiano Reggiano and wild truffles, each item is imported directly from heritage artisans.',
+    'Fine Foods Showcase'
 ),
 (
     'brand_story',
     'home',
-    'Pioneering Patented Surface Innovations.',
+    'Pioneering Heritage Gastronomy.',
     'Leadership & Excellence',
-    'Anatolia stands at the forefront of global tile and slab manufacturing. Driven by sustainable practices and state-of-the-art technological advancements, we craft surfaces that redefine interior and exterior architecture.',
-    'Craftsmanship'
+    'Anatolia stands at the forefront of global luxury gourmet imports. Driven by uncompromised quality standards and cold-chain precision, we curate artisanal ingredients for Michelin-starred dining and discerning homes.',
+    'Artisanal Craftsmanship'
 )
 ON CONFLICT (section_key) DO NOTHING;
 
--- Seed Hero Slides
-INSERT INTO public.hero_slides (media_type, media_url, poster_url, title, subtitle, cta_label, cta_url, sort_order, is_active)
+-- Seed Gourmet Products
+INSERT INTO public.products (name, collection, category, price, original_price, stock, rating, reviews_count, sku, format, finish, color, look, image_url, description, thickness, origin, is_featured)
 VALUES
 (
-    'video',
-    'https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-building-facade-41561-large.mp4',
-    'https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1600&h=900&q=85&auto=format&fit=crop',
-    'Architectural Surface Innovations',
-    'Discover patented sintered slabs and porcelain tiles engineered for timeless architectural spaces.',
-    'Explore Collections',
-    '/collections',
-    1,
+    'Toscana Reserve Extra Virgin Olive Oil',
+    'Artisanal Pantry',
+    'Olive Oil & Vinegar',
+    48.00,
+    55.00,
+    42,
+    4.9,
+    28,
+    'EVOO-TOS-500',
+    '500ml Glass Bottle',
+    'Cold-Pressed & Unfiltered',
+    'Emerald Gold',
+    'Italian Heritage',
+    'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=1000&h=700&auto=format&fit=crop',
+    'First cold-pressed EVOO from hand-picked Tuscan Frantoio olives, offering notes of fresh artichoke, green tomato, and a spicy pepper finish.',
+    'Single Estate',
+    'Tuscany, Italy',
     true
 ),
 (
-    'image',
-    'https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1600&h=900&q=85&auto=format&fit=crop',
-    NULL,
-    'Curated Natural Stone & Sintered Slabs',
-    'Hand-selected Marble, Dolomite, and Onyx inspirations crafted with Italian precision.',
-    'View Lookbook',
-    '/collections?look=Marble+Look',
-    2,
+    'Parmigiano Reggiano DOP 36-Month Aged',
+    'Dairy & Charcuterie',
+    'Cheese & Dairy',
+    62.50,
+    70.00,
+    18,
+    5.0,
+    41,
+    'CHZ-PARM-36',
+    '500g Vacuum Wedge',
+    'Artisanal Raw Milk Aged',
+    'Warm Ivory',
+    'DOP Certified Organic',
+    'https://images.unsplash.com/photo-1452195100486-9cc805987862?w=1000&h=700&auto=format&fit=crop',
+    'Slowly matured for 36 months in Reggio Emilia. Characterized by crunchy tyrosine crystals, deep savory umami, and rich pineapple aromas.',
+    'Wheel Cut',
+    'Emolia-Romagna, Italy',
     true
 );
 
--- Seed Products
-INSERT INTO public.products (name, collection, format, finish, color, look, image_url, description, thickness, origin, is_featured)
-VALUES
-(
-    'Lamarca Travertino Instrata',
-    'Natural Stone',
-    '60x120 cm',
-    'Textured',
-    'Travertine',
-    'Stone Look',
-    'https://optimise2.assets-servd.host/powerful-koala/production/images/LAMARCA_TRAVERTINO_INSTRATA_CAM01.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop',
-    'Exquisite vein-cut travertine texture evoking timeless natural stone serenity for indoor and outdoor vertical walls.',
-    '9.5 mm',
-    'Italy',
-    true
-),
-(
-    'Cosmo Lumino Onyx Halo',
-    'Sintered Slab',
-    '120x280 cm Slab',
-    'Polished',
-    'Calacatta Gold',
-    'Onyx Look',
-    'https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Onyx_menu_image.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop',
-    'Luminous translucent onyx veins rendered on 6mm sintered slabs engineered for backlit features and kitchen islands.',
-    '6 mm',
-    'Spain',
-    true
-),
-(
-    'Majesto Royal Marble',
-    'Ceramic + Porcelain',
-    '60x120 cm',
-    'Polished',
-    'Bianco',
-    'Marble Look',
-    'https://optimise2.assets-servd.host/powerful-koala/production/images/menu/Ceramic-Porcelain_Featured_Majesto_menu_image.jpg?w=1000&h=700&auto=compress%2Cformat&fit=crop',
-    'Classic white Italian marble aesthetic with mirror-finish glaze and non-porous porcelain body.',
-    '9 mm',
-    'Italy',
-    true
-);

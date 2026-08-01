@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { MenuItem } from '@/lib/types';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
+import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
+import { useWishlist } from '@/context/WishlistContext';
 import LanguageSelector from './LanguageSelector';
-import { Menu, X, ChevronDown, Search, Shield } from 'lucide-react';
+import { Menu, X, ChevronDown, Search, Shield, Heart, User, ShoppingBag } from 'lucide-react';
 
 interface HeaderClientProps {
   menus: MenuItem[];
@@ -13,9 +16,15 @@ interface HeaderClientProps {
 
 export default function HeaderClient({ menus }: HeaderClientProps) {
   const { t } = useLanguage();
+  const { cartItems, setIsCartOpen } = useCart();
+  const { user, isLoggedIn } = useAuth();
+  const { wishlist } = useWishlist();
+
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
+
+  const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   // Active menu hover image preview (Anatolia megamenu feature)
   const activeParentMenu = menus.find((m) => m.id === activeMenuId);
@@ -146,12 +155,49 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center space-x-4">
-            <button
-              aria-label="Search collections"
-              className="p-2 text-stone-400 hover:text-[#c59b27] transition-colors"
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <Link
+              href="/shop"
+              aria-label="Shop Catalog"
+              className="p-2 text-stone-300 hover:text-[#c59b27] transition-colors hidden sm:flex items-center space-x-1 text-xs uppercase font-medium tracking-wider"
             >
-              <Search size={18} />
+              <span>Shop</span>
+            </Link>
+
+            {/* Wishlist Link */}
+            <Link
+              href="/account?tab=wishlist"
+              aria-label="Wishlist"
+              className="relative p-2 text-stone-400 hover:text-[#c59b27] transition-colors"
+            >
+              <Heart size={19} />
+              {wishlist.length > 0 && (
+                <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#c59b27] animate-pulse" />
+              )}
+            </Link>
+
+            {/* User / Customer Account Link */}
+            <Link
+              href={isLoggedIn ? '/account' : '/account/login'}
+              aria-label="Customer Account"
+              className="p-2 text-stone-400 hover:text-[#c59b27] transition-colors flex items-center space-x-1"
+              title={isLoggedIn ? `Account (${user?.name})` : 'Customer Login'}
+            >
+              <User size={19} />
+            </Link>
+
+            {/* Cart Drawer Trigger Button */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              aria-label="Shopping Cart"
+              className="relative p-2 text-stone-300 hover:text-[#c59b27] transition-colors flex items-center"
+            >
+              <ShoppingBag size={20} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-[#c59b27] text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-md">
+                  {cartItemCount}
+                </span>
+              )}
             </button>
 
             {/* Mobile Hamburger Toggle Button */}

@@ -67,15 +67,74 @@ export interface JournalArticle {
 export interface ProductItem {
   id: string;
   name: string;
-  collection: string; // e.g. "Ceramic + Porcelain", "Natural Stone", "Sintered Slab"
-  format: string; // e.g. "60x120 cm", "120x280 cm Slab", "30x60 cm", "Mosaics"
-  finish: string; // e.g. "Polished", "Matte", "Honed", "Textured"
-  color: string; // e.g. "Bianco", "Nero", "Calacatta Gold", "Travertine", "Beige", "Gray"
-  look: string; // e.g. "Marble Look", "Stone Look", "Sintered Slab", "Wood Look", "Onyx Look"
+  collection: string;
+  category?: string;
+  price?: number;
+  original_price?: number | null;
+  stock?: number;
+  rating?: number;
+  reviews_count?: number;
+  sku?: string;
+  format: string;
+  finish: string;
+  color: string;
+  look: string;
   image_url: string;
   description: string;
   thickness?: string;
   origin?: string;
   is_featured?: boolean;
 }
+
+export interface CartItem {
+  product: ProductItem;
+  quantity: number;
+  selectedFormat?: string;
+  selectedFinish?: string;
+}
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  name: string;
+  phone?: string;
+  company?: string;
+  addresses?: ShippingAddress[];
+}
+
+export interface ShippingAddress {
+  id: string;
+  title: string; // e.g. "Home", "Office"
+  fullName: string;
+  phone: string;
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  postalCode: string;
+  country: string;
+  isDefault?: boolean;
+}
+
+export interface OrderItem {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  image_url: string;
+  format?: string;
+}
+
+export interface Order {
+  id: string;
+  createdAt: string;
+  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+  items: OrderItem[];
+  subtotal: number;
+  discount: number;
+  shipping: number;
+  total: number;
+  shippingAddress: ShippingAddress;
+  paymentMethod: 'credit_card' | 'bank_transfer' | 'kakao_pay';
+}
+
 
