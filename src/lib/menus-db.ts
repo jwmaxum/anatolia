@@ -4,22 +4,165 @@ import { MenuItem, ReorderItemPayload } from './types';
 
 const DATA_PATH = path.join(process.cwd(), 'data', 'menus.json');
 
-// Helper to ensure data folder & file exist
+// Anatolia 실제 사이트 초기 메뉴 데이터 (Header & Footer)
+const INITIAL_MENUS: MenuItem[] = [
+  // Header Menus (Depth 1)
+  {
+    id: 'menu-hdr-1',
+    title: 'Home',
+    url: '/',
+    parent_id: null,
+    sort_order: 1,
+    is_active: true,
+    position: 'header',
+  },
+  {
+    id: 'menu-hdr-2',
+    title: 'Collections',
+    url: '/collections',
+    parent_id: null,
+    sort_order: 2,
+    is_active: true,
+    position: 'header',
+    badge: 'LUXURY',
+  },
+  {
+    id: 'menu-hdr-3',
+    title: 'Journal & News',
+    url: '/journal',
+    parent_id: null,
+    sort_order: 3,
+    is_active: true,
+    position: 'header',
+  },
+  {
+    id: 'menu-hdr-4',
+    title: 'Brand Story',
+    url: '/account',
+    parent_id: null,
+    sort_order: 4,
+    is_active: true,
+    position: 'header',
+  },
+  {
+    id: 'menu-hdr-5',
+    title: 'Pantry Shop',
+    url: '/shop',
+    parent_id: null,
+    sort_order: 5,
+    is_active: true,
+    position: 'header',
+  },
+
+  // Collections Sub-Menus (Depth 2)
+  {
+    id: 'menu-sub-1',
+    title: 'Fresh & Gourmet',
+    url: '/collections#fresh',
+    parent_id: 'menu-hdr-2',
+    sort_order: 1,
+    is_active: true,
+    position: 'header',
+  },
+  {
+    id: 'menu-sub-2',
+    title: 'Artisanal Pantry',
+    url: '/collections#pantry',
+    parent_id: 'menu-hdr-2',
+    sort_order: 2,
+    is_active: true,
+    position: 'header',
+  },
+  {
+    id: 'menu-sub-3',
+    title: 'Dairy & Charcuterie',
+    url: '/collections#dairy',
+    parent_id: 'menu-hdr-2',
+    sort_order: 3,
+    is_active: true,
+    position: 'header',
+  },
+
+  // Footer Menus (Depth 1)
+  {
+    id: 'menu-ftr-1',
+    title: 'About Anatolia',
+    url: '/account',
+    parent_id: null,
+    sort_order: 1,
+    is_active: true,
+    position: 'footer',
+  },
+  {
+    id: 'menu-ftr-2',
+    title: 'Organic Certified Estates',
+    url: '/collections',
+    parent_id: null,
+    sort_order: 2,
+    is_active: true,
+    position: 'footer',
+  },
+  {
+    id: 'menu-ftr-3',
+    title: 'Heritage Artisans',
+    url: '/journal',
+    parent_id: null,
+    sort_order: 3,
+    is_active: true,
+    position: 'footer',
+  },
+  {
+    id: 'menu-ftr-4',
+    title: 'Customer Care & FAQ',
+    url: '/account/login',
+    parent_id: null,
+    sort_order: 4,
+    is_active: true,
+    position: 'footer',
+  },
+  {
+    id: 'menu-ftr-5',
+    title: 'Shipping & Delivery Policy',
+    url: '/checkout',
+    parent_id: null,
+    sort_order: 5,
+    is_active: true,
+    position: 'footer',
+  },
+  {
+    id: 'menu-ftr-6',
+    title: 'Privacy Policy',
+    url: '/',
+    parent_id: null,
+    sort_order: 6,
+    is_active: true,
+    position: 'footer',
+  },
+];
+
+// Helper to ensure data folder & file exist with initial data fallback
 function ensureDataFile(): MenuItem[] {
   if (!fs.existsSync(path.dirname(DATA_PATH))) {
     fs.mkdirSync(path.dirname(DATA_PATH), { recursive: true });
   }
 
   if (!fs.existsSync(DATA_PATH)) {
-    return [];
+    saveMenusData(INITIAL_MENUS);
+    return INITIAL_MENUS;
   }
 
   try {
     const fileData = fs.readFileSync(DATA_PATH, 'utf-8');
-    return JSON.parse(fileData) as MenuItem[];
+    const parsed = JSON.parse(fileData) as MenuItem[];
+    if (!parsed || parsed.length === 0) {
+      saveMenusData(INITIAL_MENUS);
+      return INITIAL_MENUS;
+    }
+    return parsed;
   } catch (error) {
     console.error('Error reading menus.json:', error);
-    return [];
+    saveMenusData(INITIAL_MENUS);
+    return INITIAL_MENUS;
   }
 }
 

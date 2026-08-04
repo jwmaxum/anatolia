@@ -4,21 +4,65 @@ import { HeroSlide } from './types';
 
 const HERO_DATA_PATH = path.join(process.cwd(), 'data', 'hero-slides.json');
 
+const INITIAL_HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'hero-1',
+    media_type: 'video',
+    media_url: 'https://cdn.coverr.co/videos/coverr-pouring-extra-virgin-olive-oil-5421/1080p.mp4',
+    poster_url: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1920&q=80',
+    title: 'Curated Fine Foods Inspired by Nature.',
+    subtitle: 'Discover hand-selected collections of extra virgin olive oils, aged DOP cheeses, and organic gourmet ingredients.',
+    cta_label: 'Explore Gourmet Pantry',
+    cta_url: '/collections',
+    sort_order: 1,
+    is_active: true,
+  },
+  {
+    id: 'hero-2',
+    media_type: 'image',
+    media_url: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=1920&q=80',
+    title: '100% Certified Organic & Sustainable Estates',
+    subtitle: 'Directly imported from heritage Italian, Spanish, and Japanese artisan farms with uncompromising quality.',
+    cta_label: 'View Organic Estates',
+    cta_url: '/collections#pantry',
+    sort_order: 2,
+    is_active: true,
+  },
+  {
+    id: 'hero-3',
+    media_type: 'image',
+    media_url: 'https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=1920&q=80',
+    title: '36-Month Aged DOP Parmigiano & Charcuterie',
+    subtitle: 'Mastercrafted by traditional heritage cheesemakers for an unmatched sensory fine dining experience.',
+    cta_label: 'Discover Dairy & Charcuterie',
+    cta_url: '/collections#dairy',
+    sort_order: 3,
+    is_active: true,
+  },
+];
+
 function ensureHeroDataFile(): HeroSlide[] {
   if (!fs.existsSync(path.dirname(HERO_DATA_PATH))) {
     fs.mkdirSync(path.dirname(HERO_DATA_PATH), { recursive: true });
   }
 
   if (!fs.existsSync(HERO_DATA_PATH)) {
-    return [];
+    saveHeroData(INITIAL_HERO_SLIDES);
+    return INITIAL_HERO_SLIDES;
   }
 
   try {
     const fileData = fs.readFileSync(HERO_DATA_PATH, 'utf-8');
-    return JSON.parse(fileData) as HeroSlide[];
+    const parsed = JSON.parse(fileData) as HeroSlide[];
+    if (!parsed || parsed.length === 0) {
+      saveHeroData(INITIAL_HERO_SLIDES);
+      return INITIAL_HERO_SLIDES;
+    }
+    return parsed;
   } catch (error) {
     console.error('Error reading hero-slides.json:', error);
-    return [];
+    saveHeroData(INITIAL_HERO_SLIDES);
+    return INITIAL_HERO_SLIDES;
   }
 }
 

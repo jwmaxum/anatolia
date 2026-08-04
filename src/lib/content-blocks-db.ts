@@ -4,21 +4,67 @@ import { ContentBlock } from './types';
 
 const CONTENT_BLOCKS_PATH = path.join(process.cwd(), 'data', 'content-blocks.json');
 
+const INITIAL_CONTENT_BLOCKS: ContentBlock[] = [
+  {
+    id: 'block-1',
+    section_key: 'featured_categories',
+    page: 'home',
+    title: 'Curated Gourmet Collections',
+    subtitle: 'Product Categories',
+    description: 'From cold-pressed Tuscan EVOO to 36-month DOP Parmigiano Reggiano and wild truffles, each item is imported directly from heritage artisans.',
+    badge: 'Fine Foods Showcase',
+    media_url: 'https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=1200&q=80',
+    media_type: 'image',
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'block-2',
+    section_key: 'brand_story',
+    page: 'home',
+    title: 'Pioneering Heritage Gastronomy.',
+    subtitle: 'Leadership & Excellence',
+    description: 'Anatolia Gourmet stands at the pinnacle of global fine food sourcing. Guided by 100% sustainable organic farming and direct partnerships with heritage producers across Italy, Spain, and Japan.',
+    badge: 'Organic Farm Partnership',
+    media_url: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1200&q=80',
+    media_type: 'image',
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'block-3',
+    section_key: 'banner_alert',
+    page: 'home',
+    title: 'Complimentary Express Refrigerated Shipping',
+    subtitle: 'Worldwide Delivery',
+    description: 'Enjoy free temperature-controlled express air shipping on all artisanal cheese & olive oil orders over $200.',
+    badge: 'Limited Offer',
+    media_url: '',
+    media_type: 'image',
+    updated_at: new Date().toISOString(),
+  },
+];
+
 function ensureBlocksFile(): ContentBlock[] {
   if (!fs.existsSync(path.dirname(CONTENT_BLOCKS_PATH))) {
     fs.mkdirSync(path.dirname(CONTENT_BLOCKS_PATH), { recursive: true });
   }
 
   if (!fs.existsSync(CONTENT_BLOCKS_PATH)) {
-    return [];
+    saveBlocksData(INITIAL_CONTENT_BLOCKS);
+    return INITIAL_CONTENT_BLOCKS;
   }
 
   try {
     const fileData = fs.readFileSync(CONTENT_BLOCKS_PATH, 'utf-8');
-    return JSON.parse(fileData) as ContentBlock[];
+    const parsed = JSON.parse(fileData) as ContentBlock[];
+    if (!parsed || parsed.length === 0) {
+      saveBlocksData(INITIAL_CONTENT_BLOCKS);
+      return INITIAL_CONTENT_BLOCKS;
+    }
+    return parsed;
   } catch (error) {
     console.error('Error reading content-blocks.json:', error);
-    return [];
+    saveBlocksData(INITIAL_CONTENT_BLOCKS);
+    return INITIAL_CONTENT_BLOCKS;
   }
 }
 
