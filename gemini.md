@@ -48,8 +48,10 @@
 
 ### 1. 접속 방식 및 라우팅
 - 퍼블릭 UI에서는 숨김 처리되어 있으며, 주소창에 `도메인/admin` 입력으로 직통 접속.
-- PIN 코드 입력 화면(`sessionStorage` 검증) → 인증 완료 시 대시보드 진입.
-- 인증 PIN은 환경변수 `NEXT_PUBLIC_ADMIN_PIN`으로 관리 (미설정 시 기본값 `admin2026`).
+- **관리자 계정 아이디**: `siteadmin` (입력창에 기본값 표시 안함, 직접 입력)
+- **초기 임시 비밀번호**: `!admin1004`
+- **비밀번호 변경**: 로그인 후 사이드바 하단 `Change Password` 모달을 통해 변경 가능 (`localStorage` 저장).
+- 세션 유지(`sessionStorage` 검증) → 인증 완료 시 대시보드 진입.
 
 ### 2. 럭셔리 다크 테마 디자인 시스템
 - `#0a0a0c` 배경 + `#0d0d12` Sidebar + Gold(`#c5a880`) Active Indicator

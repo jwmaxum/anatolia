@@ -14,15 +14,39 @@ import {
   Lock,
   LogOut,
   Users,
+  KeyRound,
+  Check,
+  X,
 } from 'lucide-react';
+
+const DEFAULT_ADMIN_ID = 'siteadmin';
+const INITIAL_ADMIN_PW = '!admin1004';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const [pinInput, setPinInput] = useState('');
+  
+  // 로그인 폼 입력값 (Default 표시 제거)
+  const [usernameInput, setUsernameInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  // Simple Admin Authentication Check (PIN Guard for CMS Studio)
+  // 비밀번호 변경 모달 상태
+  const [isChangePwOpen, setIsChangePwOpen] = useState(false);
+  const [currentPwInput, setCurrentPwInput] = useState('');
+  const [newPwInput, setNewPwInput] = useState('');
+  const [confirmPwInput, setConfirmPwInput] = useState('');
+  const [pwChangeError, setPwChangeError] = useState('');
+  const [pwChangeSuccess, setPwChangeSuccess] = useState('');
+
+  // 저장된 비밀번호 가져오기 (없으면 초기 임시 비밀번호 !admin1004)
+  const getStoredPassword = (): string => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('anatolia_admin_pw') || process.env.NEXT_PUBLIC_ADMIN_PIN || INITIAL_ADMIN_PW;
+    }
+    return INITIAL_ADMIN_PW;
+  };
+
   useEffect(() => {
     const authStatus = sessionStorage.getItem('anatolia_admin_authenticated');
     if (authStatus === 'true') {
@@ -34,20 +58,54 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Admin Passcode from environment variable (NEXT_PUBLIC_ADMIN_PIN)
-    const adminPin = process.env.NEXT_PUBLIC_ADMIN_PIN || 'admin2026';
-    if (pinInput === adminPin) {
+    const storedPw = getStoredPassword();
+
+    if (usernameInput.trim() === DEFAULT_ADMIN_ID && passwordInput === storedPw) {
       sessionStorage.setItem('anatolia_admin_authenticated', 'true');
       setIsAuthenticated(true);
       setErrorMsg('');
     } else {
-      setErrorMsg('Invalid Security Key / PIN. Please try again.');
+      setErrorMsg('아이디 또는 비밀번호가 올바르지 않습니다.');
     }
   };
 
   const handleLogout = () => {
     sessionStorage.removeItem('anatolia_admin_authenticated');
     setIsAuthenticated(false);
+  };
+
+  const handleChangePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPwChangeError('');
+    setPwChangeSuccess('');
+
+    const storedPw = getStoredPassword();
+
+    if (currentPwInput !== storedPw) {
+      setPwChangeError('현재 비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    if (!newPwInput || newPwInput.length < 6) {
+      setPwChangeError('새 비밀번호는 최소 6자리 이상이어야 합니다.');
+      return;
+    }
+
+    if (newPwInput !== confirmPwInput) {
+      setPwChangeError('새 비밀번호 확인이 일치하지 않습니다.');
+      return;
+    }
+
+    localStorage.setItem('anatolia_admin_pw', newPwInput);
+    setPwChangeSuccess('비밀번호가 성공적으로 변경되었습니다!');
+    setCurrentPwInput('');
+    setNewPwInput('');
+    setConfirmPwInput('');
+
+    setTimeout(() => {
+      setIsChangePwOpen(false);
+      setPwChangeSuccess('');
+    }, 1500);
   };
 
   const navLinks = [
@@ -73,22 +131,35 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               Anatolia CMS Access
             </h1>
             <p className="text-xs text-stone-400">
-              Restricted area. Please enter your administrator key to continue.
+              관리자 계정 아이디와 비밀번호를 입력하세요.
             </p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1">
-                Admin Passcode / Key
+              <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                Admin Username (아이디)
+              </label>
+              <input
+                type="text"
+                value={usernameInput}
+                onChange={(e) => setUsernameInput(e.target.value)}
+                placeholder="아이디 입력..."
+                className="w-full px-4 py-3 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none transition-colors"
+                autoFocus
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                Password (비밀번호)
               </label>
               <input
                 type="password"
-                value={pinInput}
-                onChange={(e) => setPinInput(e.target.value)}
-                placeholder="Enter Passcode..."
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                placeholder="비밀번호 입력..."
                 className="w-full px-4 py-3 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none transition-colors"
-                autoFocus
               />
             </div>
 
@@ -166,8 +237,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </nav>
         </div>
 
-        {/* Back to Live Website & Logout */}
+        {/* Password Change, Lock & Logout */}
         <div className="pt-6 border-t border-stone-800/80 mt-6 space-y-2">
+          <button
+            onClick={() => setIsChangePwOpen(true)}
+            className="w-full flex items-center justify-center space-x-2 py-2 px-3 bg-stone-900 border border-stone-800 hover:border-[#c5a880]/50 rounded text-xs text-stone-300 hover:text-white transition-colors"
+          >
+            <KeyRound size={14} className="text-[#c5a880]" />
+            <span>Change Password</span>
+          </button>
+
           <button
             onClick={handleLogout}
             className="w-full flex items-center justify-center space-x-2 py-2 px-3 bg-red-950/30 border border-red-900/50 hover:bg-red-900/40 rounded text-xs text-red-300 transition-colors"
@@ -188,7 +267,97 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main Admin View Content */}
       <main className="flex-grow min-w-0 overflow-y-auto">{children}</main>
+
+      {/* Password Change Modal */}
+      {isChangePwOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-[#111118] border border-stone-800 rounded-xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
+            <button
+              onClick={() => setIsChangePwOpen(false)}
+              className="absolute top-4 right-4 text-stone-400 hover:text-white"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="flex items-center space-x-2 text-[#c5a880]">
+              <KeyRound size={20} />
+              <h2 className="font-serif-luxury text-lg font-semibold text-white">
+                관리자 비밀번호 변경
+              </h2>
+            </div>
+
+            <form onSubmit={handleChangePassword} className="space-y-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                  현재 비밀번호
+                </label>
+                <input
+                  type="password"
+                  value={currentPwInput}
+                  onChange={(e) => setCurrentPwInput(e.target.value)}
+                  placeholder="현재 비밀번호..."
+                  className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                  새 비밀번호
+                </label>
+                <input
+                  type="password"
+                  value={newPwInput}
+                  onChange={(e) => setNewPwInput(e.target.value)}
+                  placeholder="새 비밀번호 (6자 이상)..."
+                  className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                  새 비밀번호 확인
+                </label>
+                <input
+                  type="password"
+                  value={confirmPwInput}
+                  onChange={(e) => setConfirmPwInput(e.target.value)}
+                  placeholder="새 비밀번호 재입력..."
+                  className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none"
+                />
+              </div>
+
+              {pwChangeError && (
+                <p className="text-xs text-red-400 bg-red-950/40 border border-red-800/50 p-2 rounded text-center">
+                  {pwChangeError}
+                </p>
+              )}
+
+              {pwChangeSuccess && (
+                <p className="text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 p-2 rounded text-center flex items-center justify-center space-x-1">
+                  <Check size={14} />
+                  <span>{pwChangeSuccess}</span>
+                </p>
+              )}
+
+              <div className="flex space-x-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsChangePwOpen(false)}
+                  className="w-1/2 py-2.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded text-xs transition-colors"
+                >
+                  취소
+                </button>
+                <button
+                  type="submit"
+                  className="w-1/2 py-2.5 bg-[#c5a880] hover:bg-[#b59870] text-black font-semibold rounded text-xs transition-colors shadow"
+                >
+                  비밀번호 변경
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

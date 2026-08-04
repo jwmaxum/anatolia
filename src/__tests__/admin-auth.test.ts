@@ -1,53 +1,74 @@
 /**
- * 테스트: Admin PIN 검증 로직
- *
- * layout.tsx의 handleLogin 함수에서 사용하는 PIN 검증 로직을
- * 독립적으로 테스트합니다.
+ * 테스트: Admin ID/Password 검증 및 비밀번호 변경 로직
  */
 
-// PIN 검증 순수 함수 (layout.tsx 로직을 추출)
-function validateAdminPin(inputPin: string, envPin?: string): boolean {
-  const adminPin = envPin || 'admin2026';
-  return inputPin === adminPin;
+const DEFAULT_ADMIN_ID = 'siteadmin';
+const INITIAL_ADMIN_PW = '!admin1004';
+
+function validateAdminLogin(username: string, passwordInput: string, currentSavedPw?: string): boolean {
+  const validPw = currentSavedPw || INITIAL_ADMIN_PW;
+  return username.trim() === DEFAULT_ADMIN_ID && passwordInput === validPw;
 }
 
-describe('Admin PIN 검증', () => {
-  describe('환경변수 PIN 사용', () => {
-    it('올바른 PIN으로 로그인 성공', () => {
-      expect(validateAdminPin('mySecret123', 'mySecret123')).toBe(true);
-    });
+function changeAdminPassword(currentPw: string, newPw: string, confirmPw: string, savedPw?: string) {
+  const stored = savedPw || INITIAL_ADMIN_PW;
+  if (currentPw !== stored) {
+    return { success: false, error: '현재 비밀번호가 일치하지 않습니다.' };
+  }
+  if (!newPw || newPw.length < 6) {
+    return { success: false, error: '새 비밀번호는 최소 6자리 이상이어야 합니다.' };
+  }
+  if (newPw !== confirmPw) {
+    return { success: false, error: '새 비밀번호 확인이 일치하지 않습니다.' };
+  }
+  return { success: true, newPassword: newPw };
+}
 
-    it('잘못된 PIN으로 로그인 실패', () => {
-      expect(validateAdminPin('wrongPin', 'mySecret123')).toBe(false);
-    });
-
-    it('빈 PIN 입력 시 실패', () => {
-      expect(validateAdminPin('', 'mySecret123')).toBe(false);
-    });
+describe('Admin ID / Password 로그인 검증', () => {
+  it('올바른 아이디 siteadmin 및 초기 비밀번호 !admin1004로 로그인 성공', () => {
+    expect(validateAdminLogin('siteadmin', '!admin1004')).toBe(true);
   });
 
-  describe('기본 PIN (환경변수 미설정)', () => {
-    it('기본 PIN admin2026으로 로그인 성공', () => {
-      expect(validateAdminPin('admin2026', undefined)).toBe(true);
-    });
-
-    it('과거 하드코딩 PIN(anatolia1234)은 더 이상 작동 안 함', () => {
-      // 환경변수로 관리되므로 단일 PIN만 유효
-      expect(validateAdminPin('anatolia1234', undefined)).toBe(false);
-    });
+  it('아이디에 공백이 있어도 trim 후 로그인 성공', () => {
+    expect(validateAdminLogin(' siteadmin ', '!admin1004')).toBe(true);
   });
 
-  describe('보안 케이스', () => {
-    it('대소문자 구분', () => {
-      expect(validateAdminPin('ADMIN2026', 'admin2026')).toBe(false);
-    });
+  it('잘못된 아이디 입력 시 로그인 실패', () => {
+    expect(validateAdminLogin('admin', '!admin1004')).toBe(false);
+  });
 
-    it('앞뒤 공백 포함 시 실패', () => {
-      expect(validateAdminPin(' admin2026 ', 'admin2026')).toBe(false);
-    });
+  it('잘못된 비밀번호 입력 시 로그인 실패', () => {
+    expect(validateAdminLogin('siteadmin', 'wrongpassword')).toBe(false);
+  });
 
-    it('undefined 입력 시 실패', () => {
-      expect(validateAdminPin(undefined as unknown as string, 'admin2026')).toBe(false);
-    });
+  it('변경되어 저장된 비밀번호로 로그인 성공', () => {
+    expect(validateAdminLogin('siteadmin', 'newSecret2026!', 'newSecret2026!')).toBe(true);
+    expect(validateAdminLogin('siteadmin', '!admin1004', 'newSecret2026!')).toBe(false);
+  });
+});
+
+describe('비밀번호 변경 로직 검증', () => {
+  it('올바른 정보 입력 시 비밀번호 변경 성공', () => {
+    const res = changeAdminPassword('!admin1004', 'newPass123!', 'newPass123!');
+    expect(res.success).toBe(true);
+    expect(res.newPassword).toBe('newPass123!');
+  });
+
+  it('현재 비밀번호 오입력 시 변경 실패', () => {
+    const res = changeAdminPassword('wrongPw', 'newPass123!', 'newPass123!');
+    expect(res.success).toBe(false);
+    expect(res.error).toBe('현재 비밀번호가 일치하지 않습니다.');
+  });
+
+  it('새 비밀번호 6자 미만 시 변경 실패', () => {
+    const res = changeAdminPassword('!admin1004', '123', '123');
+    expect(res.success).toBe(false);
+    expect(res.error).toBe('새 비밀번호는 최소 6자리 이상이어야 합니다.');
+  });
+
+  it('새 비밀번호 확인 불일치 시 변경 실패', () => {
+    const res = changeAdminPassword('!admin1004', 'newPass123!', 'different123!');
+    expect(res.success).toBe(false);
+    expect(res.error).toBe('새 비밀번호 확인이 일치하지 않습니다.');
   });
 });
