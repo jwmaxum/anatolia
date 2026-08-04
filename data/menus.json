@@ -1,162 +1,188 @@
 [
   {
-    "id": "menu-fresh",
+    "id": "menu-hdr-1",
     "title": "Fresh & Gourmet",
-    "url": "/collections/fresh-gourmet",
+    "url": "/collections?cat=fresh",
     "parent_id": null,
     "sort_order": 1,
     "is_active": true,
-    "position": "both",
-    "image_url": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-fresh-produce",
-    "title": "Organic Produce",
-    "url": "/collections/fresh-gourmet/organic-produce",
-    "parent_id": "menu-fresh",
-    "sort_order": 1,
-    "is_active": true,
     "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=255&h=175&auto=compress%2Cformat&fit=crop"
+    "badge": "ORGANIC",
+    "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80"
   },
   {
-    "id": "menu-fresh-meats",
-    "title": "Prime Meats & Seafood",
-    "url": "/collections/fresh-gourmet/prime-meats-seafood",
-    "parent_id": "menu-fresh",
-    "sort_order": 2,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1544025162-d76694265947?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-fresh-mushrooms",
-    "title": "Wild Mushrooms & Caviar",
-    "url": "/collections/fresh-gourmet/wild-mushrooms-caviar",
-    "parent_id": "menu-fresh",
-    "sort_order": 3,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=276&h=189&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-pantry",
+    "id": "menu-hdr-2",
     "title": "Artisanal Pantry",
-    "url": "/collections/artisanal-pantry",
+    "url": "/collections?cat=pantry",
     "parent_id": null,
     "sort_order": 2,
     "is_active": true,
-    "position": "both",
-    "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-pantry-oil",
-    "title": "Extra Virgin Olive Oil",
-    "url": "/collections/artisanal-pantry/olive-oil",
-    "parent_id": "menu-pantry",
-    "sort_order": 1,
-    "is_active": true,
     "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=255&h=175&auto=compress%2Cformat&fit=crop"
+    "badge": "HERITAGE",
+    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80"
   },
   {
-    "id": "menu-pantry-balsamic",
-    "title": "Aged Balsamic Vinegar",
-    "url": "/collections/artisanal-pantry/balsamic",
-    "parent_id": "menu-pantry",
-    "sort_order": 2,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1509358271058-acd02cc93898?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-pantry-truffle",
-    "title": "Truffles & Spices",
-    "url": "/collections/artisanal-pantry/truffles-spices",
-    "parent_id": "menu-pantry",
-    "sort_order": 3,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-pantry-pasta",
-    "title": "Artisan Pasta & Grains",
-    "url": "/collections/artisanal-pantry/artisan-pasta",
-    "parent_id": "menu-pantry",
-    "sort_order": 4,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1621996346565-e3d5d6281318?w=276&h=189&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-dairy",
+    "id": "menu-hdr-3",
     "title": "Dairy & Charcuterie",
-    "url": "/collections/dairy-charcuterie",
+    "url": "/collections?cat=dairy",
     "parent_id": null,
     "sort_order": 3,
     "is_active": true,
-    "position": "both",
-    "image_url": "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-dairy-cheese",
-    "title": "Aged Cheeses DOP",
-    "url": "/collections/dairy-charcuterie/aged-cheeses",
-    "parent_id": "menu-dairy",
-    "sort_order": 1,
-    "is_active": true,
     "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=255&h=175&auto=compress%2Cformat&fit=crop"
+    "badge": "AGED DOP",
+    "image_url": "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80"
   },
   {
-    "id": "menu-dairy-jamon",
-    "title": "Jamón & Cured Meats",
-    "url": "/collections/dairy-charcuterie/jamon-cured-meats",
-    "parent_id": "menu-dairy",
-    "sort_order": 2,
-    "is_active": true,
-    "position": "header",
-    "image_url": "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=255&h=175&auto=compress%2Cformat&fit=crop"
-  },
-  {
-    "id": "menu-about",
+    "id": "menu-hdr-4",
     "title": "About Anatolia Gourmet",
     "url": "/about",
     "parent_id": null,
     "sort_order": 4,
     "is_active": true,
-    "position": "both",
-    "image_url": ""
+    "position": "header"
   },
   {
-    "id": "menu-about-story",
-    "title": "Our Heritage & Farms",
-    "url": "/about/story",
-    "parent_id": "menu-about",
-    "sort_order": 1,
-    "is_active": true,
-    "position": "header",
-    "image_url": ""
-  },
-  {
-    "id": "menu-about-sustainability",
-    "title": "Organic Farming & Ethics",
-    "url": "/about/sustainability",
-    "parent_id": "menu-about",
-    "sort_order": 2,
-    "is_active": true,
-    "position": "header",
-    "image_url": ""
-  },
-  {
-    "id": "menu-contact",
+    "id": "menu-hdr-5",
     "title": "Contact",
     "url": "/contact",
     "parent_id": null,
     "sort_order": 5,
     "is_active": true,
-    "position": "both",
-    "image_url": ""
+    "position": "header"
+  },
+  {
+    "id": "menu-hdr-6",
+    "title": "Shop",
+    "url": "/shop",
+    "parent_id": null,
+    "sort_order": 6,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-hdr-7",
+    "title": "Journal",
+    "url": "/journal",
+    "parent_id": null,
+    "sort_order": 7,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-1",
+    "title": "Organic Olive Oils",
+    "url": "/collections?cat=fresh#oil",
+    "parent_id": "menu-hdr-1",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-2",
+    "title": "Wild Harvest Truffles",
+    "url": "/collections?cat=fresh#truffle",
+    "parent_id": "menu-hdr-1",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-3",
+    "title": "Aged Modena Vinegars",
+    "url": "/collections?cat=pantry#balsamic",
+    "parent_id": "menu-hdr-2",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-4",
+    "title": "Raw Blossom Honey",
+    "url": "/collections?cat=pantry#honey",
+    "parent_id": "menu-hdr-2",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-5",
+    "title": "36-Month DOP Cheeses",
+    "url": "/collections?cat=dairy#cheese",
+    "parent_id": "menu-hdr-3",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-6",
+    "title": "Pure Iberico Hams",
+    "url": "/collections?cat=dairy#ham",
+    "parent_id": "menu-hdr-3",
+    "sort_order": 2,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-ftr-1",
+    "title": "About Anatolia Gourmet",
+    "url": "/about",
+    "parent_id": null,
+    "sort_order": 1,
+    "is_active": true,
+    "position": "footer"
+  },
+  {
+    "id": "menu-ftr-2",
+    "title": "Organic Certified Estates",
+    "url": "/collections",
+    "parent_id": null,
+    "sort_order": 2,
+    "is_active": true,
+    "position": "footer"
+  },
+  {
+    "id": "menu-ftr-3",
+    "title": "Heritage Artisans & Journal",
+    "url": "/journal",
+    "parent_id": null,
+    "sort_order": 3,
+    "is_active": true,
+    "position": "footer"
+  },
+  {
+    "id": "menu-ftr-4",
+    "title": "Contact & Customer Support",
+    "url": "/contact",
+    "parent_id": null,
+    "sort_order": 4,
+    "is_active": true,
+    "position": "footer"
+  },
+  {
+    "id": "menu-ftr-5",
+    "title": "Shipping & Delivery Policy",
+    "url": "/checkout",
+    "parent_id": null,
+    "sort_order": 5,
+    "is_active": true,
+    "position": "footer"
+  },
+  {
+    "id": "menu-ftr-6",
+    "title": "Privacy Policy",
+    "url": "/privacy",
+    "parent_id": null,
+    "sort_order": 6,
+    "is_active": true,
+    "position": "footer"
+  },
+  {
+    "id": "menu-ftr-7",
+    "title": "Terms of Service",
+    "url": "/terms",
+    "parent_id": null,
+    "sort_order": 7,
+    "is_active": true,
+    "position": "footer"
   }
 ]
