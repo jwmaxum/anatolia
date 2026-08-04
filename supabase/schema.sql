@@ -168,6 +168,28 @@ ALTER TABLE public.content_blocks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.journal_articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.media_library ENABLE ROW LEVEL SECURITY;
 
+-- 0. Drop Existing Policies for Clean Re-execution
+DROP POLICY IF EXISTS "Public Read Active Menus" ON public.menus;
+DROP POLICY IF EXISTS "Public Read Hero Slides" ON public.hero_slides;
+DROP POLICY IF EXISTS "Public Read Products" ON public.products;
+DROP POLICY IF EXISTS "Public Read Content Blocks" ON public.content_blocks;
+DROP POLICY IF EXISTS "Public Read Published Journal Articles" ON public.journal_articles;
+DROP POLICY IF EXISTS "Public Read Media Library" ON public.media_library;
+
+DROP POLICY IF EXISTS "Users Read Own Profile" ON public.user_profiles;
+DROP POLICY IF EXISTS "Users Update Own Profile" ON public.user_profiles;
+DROP POLICY IF EXISTS "Users Read Own Orders" ON public.orders;
+DROP POLICY IF EXISTS "Users Insert Orders" ON public.orders;
+
+DROP POLICY IF EXISTS "Admin Full Access Menus" ON public.menus;
+DROP POLICY IF EXISTS "Admin Full Access Hero Slides" ON public.hero_slides;
+DROP POLICY IF EXISTS "Admin Full Access Products" ON public.products;
+DROP POLICY IF EXISTS "Admin Full Access User Profiles" ON public.user_profiles;
+DROP POLICY IF EXISTS "Admin Full Access Orders" ON public.orders;
+DROP POLICY IF EXISTS "Admin Full Access Content Blocks" ON public.content_blocks;
+DROP POLICY IF EXISTS "Admin Full Access Journal Articles" ON public.journal_articles;
+DROP POLICY IF EXISTS "Admin Full Access Media Library" ON public.media_library;
+
 -- 1. Public Read Policies (Allow anyone to read active items)
 CREATE POLICY "Public Read Active Menus" ON public.menus FOR SELECT USING (true);
 CREATE POLICY "Public Read Hero Slides" ON public.hero_slides FOR SELECT USING (true);
