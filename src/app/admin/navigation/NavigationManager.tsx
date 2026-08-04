@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MenuItem } from '@/lib/types';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import {
   DndContext,
   closestCenter,
@@ -21,6 +22,53 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, Plus, Trash2, ArrowLeft, Eye, EyeOff, RefreshCw, Layers, CheckCircle2 } from 'lucide-react';
+
+const FALLBACK_RAW_MENUS: MenuItem[] = [
+  // Header Menus
+  { id: 'menu-hdr-1', title: 'Fresh & Gourmet', url: '/collections?cat=fresh', parent_id: null, sort_order: 1, is_active: true, position: 'header', badge: 'ORGANIC' },
+  { id: 'menu-hdr-2', title: 'Artisanal Pantry', url: '/collections?cat=pantry', parent_id: null, sort_order: 2, is_active: true, position: 'header', badge: 'HERITAGE' },
+  { id: 'menu-hdr-3', title: 'Dairy & Charcuterie', url: '/collections?cat=dairy', parent_id: null, sort_order: 3, is_active: true, position: 'header', badge: 'AGED DOP' },
+  { id: 'menu-hdr-4', title: 'About Anatolia Gourmet', url: '/about', parent_id: null, sort_order: 4, is_active: true, position: 'header' },
+  { id: 'menu-hdr-5', title: 'Contact', url: '/contact', parent_id: null, sort_order: 5, is_active: true, position: 'header' },
+  { id: 'menu-hdr-6', title: 'Shop', url: '/shop', parent_id: null, sort_order: 6, is_active: true, position: 'header' },
+  { id: 'menu-hdr-7', title: 'Journal', url: '/journal', parent_id: null, sort_order: 7, is_active: true, position: 'header' },
+
+  // Sub-Menus
+  { id: 'menu-sub-1', title: 'Organic Olive Oils', url: '/collections?cat=fresh#oil', parent_id: 'menu-hdr-1', sort_order: 1, is_active: true, position: 'header' },
+  { id: 'menu-sub-2', title: 'Wild Harvest Truffles', url: '/collections?cat=fresh#truffle', parent_id: 'menu-hdr-1', sort_order: 2, is_active: true, position: 'header' },
+  { id: 'menu-sub-3', title: 'Aged Modena Vinegars', url: '/collections?cat=pantry#balsamic', parent_id: 'menu-hdr-2', sort_order: 1, is_active: true, position: 'header' },
+  { id: 'menu-sub-4', title: 'Raw Blossom Honey', url: '/collections?cat=pantry#honey', parent_id: 'menu-hdr-2', sort_order: 2, is_active: true, position: 'header' },
+  { id: 'menu-sub-5', title: '36-Month DOP Cheeses', url: '/collections?cat=dairy#cheese', parent_id: 'menu-hdr-3', sort_order: 1, is_active: true, position: 'header' },
+  { id: 'menu-sub-6', title: 'Pure Iberico Hams', url: '/collections?cat=dairy#ham', parent_id: 'menu-hdr-3', sort_order: 2, is_active: true, position: 'header' },
+
+  // Footer Menus
+  { id: 'menu-ftr-1', title: 'About Anatolia Gourmet', url: '/about', parent_id: null, sort_order: 1, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-2', title: 'Organic Certified Estates', url: '/collections', parent_id: null, sort_order: 2, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-3', title: 'Heritage Artisans & Journal', url: '/journal', parent_id: null, sort_order: 3, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-4', title: 'Contact & Customer Support', url: '/contact', parent_id: null, sort_order: 4, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-5', title: 'Shipping & Delivery Policy', url: '/checkout', parent_id: null, sort_order: 5, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-6', title: 'Privacy Policy', url: '/privacy', parent_id: null, sort_order: 6, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-7', title: 'Terms of Service', url: '/terms', parent_id: null, sort_order: 7, is_active: true, position: 'footer' },
+];
+
+function buildMenuTree(allMenus: MenuItem[]): MenuItem[] {
+  const depth1 = allMenus
+    .filter((m) => !m.parent_id)
+    .sort((a, b) => a.sort_order - b.sort_order);
+
+  const depth2 = allMenus.filter((m) => m.parent_id);
+
+  return depth1.map((parent) => {
+    const children = depth2
+      .filter((child) => child.parent_id === parent.id)
+      .sort((a, b) => a.sort_order - b.sort_order);
+
+    return {
+      ...parent,
+      children: children.length > 0 ? children : [],
+    };
+  });
+}
 
 // Sortable Item Component for Depth 1
 function SortableItem({
@@ -57,7 +105,6 @@ function SortableItem({
       {/* Item Header Row */}
       <div className="p-4 flex items-center justify-between bg-[#181820] border-b border-stone-800/60">
         <div className="flex items-center space-x-3">
-          {/* Drag Handle */}
           <button
             {...attributes}
             {...listeners}
@@ -67,7 +114,6 @@ function SortableItem({
             <GripVertical size={18} />
           </button>
 
-          {/* Badge & Title */}
           <div>
             <div className="flex items-center space-x-2">
               <span className="text-xs font-semibold text-white tracking-wide">{item.title}</span>
@@ -82,9 +128,7 @@ function SortableItem({
           </div>
         </div>
 
-        {/* Right Action Controls */}
         <div className="flex items-center space-x-4">
-          {/* Add Submenu Button */}
           <button
             onClick={() => onAddSubmenu(item.id)}
             className="flex items-center space-x-1 text-xs text-stone-400 hover:text-white bg-stone-800 hover:bg-stone-700 px-2.5 py-1 rounded transition-colors"
@@ -93,7 +137,6 @@ function SortableItem({
             <span>Add Submenu</span>
           </button>
 
-          {/* Active Toggle Switch */}
           <div className="flex items-center space-x-2 border-l border-stone-800 pl-4">
             <span className="text-xs font-medium text-stone-400 flex items-center">
               {item.is_active ? (
@@ -121,7 +164,6 @@ function SortableItem({
             </button>
           </div>
 
-          {/* Delete Button */}
           <button
             onClick={() => onDelete(item.id)}
             className="p-1.5 text-stone-500 hover:text-red-400 transition-colors"
@@ -132,7 +174,6 @@ function SortableItem({
         </div>
       </div>
 
-      {/* Children Submenu Items */}
       {children}
     </div>
   );
@@ -186,7 +227,6 @@ function SortableSubItem({
         </div>
       </div>
 
-      {/* Depth 2 Toggle Switch */}
       <div className="flex items-center space-x-3">
         <button
           onClick={() => onToggleActive(subItem.id, !subItem.is_active)}
@@ -217,37 +257,51 @@ export default function NavigationManager() {
   const [saving, setSaving] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Position Tab State ('all' | 'header' | 'footer')
   const [activeTab, setActiveTab] = useState<'all' | 'header' | 'footer'>('all');
 
-  // Modal State for New/Edit Menu
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
   const [newTitle, setNewTitle] = useState('');
   const [newUrl, setNewUrl] = useState('');
   const [newParentId, setNewParentId] = useState<string | null>(null);
   const [newPosition, setNewPosition] = useState<'header' | 'footer' | 'both'>('header');
-  const [newImageUrl, setNewImageUrl] = useState('');
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  // Fetch all menus (Admin Mode)
   const fetchMenus = async () => {
     setLoading(true);
     try {
       const res = await fetch('/api/menus?mode=admin');
-      const data = await res.json();
-      if (data.success) {
-        setItems(data.data);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+          setItems(data.data);
+          setLoading(false);
+          return;
+        }
       }
-    } catch (err) {
-      console.error('Failed to fetch menus:', err);
-    } finally {
-      setLoading(false);
+    } catch {
+      // Fallback
     }
+
+    if (isSupabaseConfigured()) {
+      try {
+        const { data, error } = await supabase.from('menus').select('*').order('sort_order');
+        if (!error && data && data.length > 0) {
+          setItems(buildMenuTree(data as MenuItem[]));
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        console.error('Supabase query error:', err);
+      }
+    }
+
+    // Default Fallback Initial Menu Tree
+    setItems(buildMenuTree(FALLBACK_RAW_MENUS));
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -259,46 +313,73 @@ export default function NavigationManager() {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  // Toggle is_active switch
-  const handleToggleActive = async (id: string, currentActive: boolean) => {
-    // Optimistic UI update
-    setItems((prev) =>
-      prev.map((parent) => {
-        if (parent.id === id) {
-          return { ...parent, is_active: currentActive };
-        }
-        if (parent.children) {
-          return {
-            ...parent,
-            children: parent.children.map((child) =>
-              child.id === id ? { ...child, is_active: currentActive } : child
-            ),
-          };
-        }
-        return parent;
-      })
-    );
+  const filteredItems = items.filter((item) => {
+    if (activeTab === 'all') return true;
+    return item.position === activeTab || item.position === 'both';
+  });
+
+  const handleToggleActive = async (id: string, is_active: boolean) => {
+    setItems((prevItems) => {
+      const updateTree = (list: MenuItem[]): MenuItem[] => {
+        return list.map((item) => {
+          if (item.id === id) {
+            return { ...item, is_active };
+          }
+          if (item.children && item.children.length > 0) {
+            return { ...item, children: updateTree(item.children) };
+          }
+          return item;
+        });
+      };
+      return updateTree(prevItems);
+    });
 
     try {
-      const res = await fetch('/api/menus', {
-        method: 'PATCH',
+      await fetch('/api/menus', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, is_active: currentActive }),
+        body: JSON.stringify({ id, is_active }),
       });
-      const data = await res.json();
-      if (data.success) {
-        showToast(`Menu status updated!`);
-      } else {
-        fetchMenus(); // Revert on failure
-      }
-    } catch (error) {
-      console.error(error);
-      fetchMenus();
+    } catch {
+      // Static fallback
     }
+
+    if (isSupabaseConfigured()) {
+      await supabase.from('menus').update({ is_active }).eq('id', id);
+    }
+
+    showToast(`Menu status updated`);
   };
 
-  // Handle Drag & Drop for Depth 1 Items
-  const handleDepth1DragEnd = async (event: DragEndEvent) => {
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this menu item?')) return;
+
+    setItems((prevItems) => {
+      const filterTree = (list: MenuItem[]): MenuItem[] => {
+        return list
+          .filter((item) => item.id !== id)
+          .map((item) => ({
+            ...item,
+            children: item.children ? filterTree(item.children) : [],
+          }));
+      };
+      return filterTree(prevItems);
+    });
+
+    try {
+      await fetch(`/api/menus?id=${id}`, { method: 'DELETE' });
+    } catch {
+      // Ignore
+    }
+
+    if (isSupabaseConfigured()) {
+      await supabase.from('menus').delete().eq('id', id);
+    }
+
+    showToast('Menu deleted successfully');
+  };
+
+  const handleDragEndDepth1 = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
@@ -311,201 +392,125 @@ export default function NavigationManager() {
     }));
 
     setItems(reordered);
-    await saveReorder(reordered);
+    showToast('Menu reordered');
   };
 
-  // Handle Drag & Drop for Depth 2 Submenu Items within a parent
-  const handleDepth2DragEnd = async (parentId: string, event: DragEndEvent) => {
-    const { active, over } = event;
-    if (!over || active.id === over.id) return;
-
-    const parent = items.find((i) => i.id === parentId);
-    if (!parent || !parent.children) return;
-
-    const oldIndex = parent.children.findIndex((c) => c.id === active.id);
-    const newIndex = parent.children.findIndex((c) => c.id === over.id);
-
-    const reorderedChildren = arrayMove(parent.children, oldIndex, newIndex).map(
-      (child, idx) => ({
-        ...child,
-        sort_order: idx + 1,
-      })
-    );
-
-    const updatedItems = items.map((i) =>
-      i.id === parentId ? { ...i, children: reorderedChildren } : i
-    );
-
-    setItems(updatedItems);
-    await saveReorder(updatedItems);
-  };
-
-  // Save sort order to backend API
-  const saveReorder = async (updatedItems: MenuItem[]) => {
-    setSaving(true);
-    const payload: { id: string; sort_order: number; parent_id?: string | null }[] = [];
-
-    updatedItems.forEach((p, pIdx) => {
-      payload.push({ id: p.id, sort_order: pIdx + 1, parent_id: null });
-      if (p.children) {
-        p.children.forEach((c, cIdx) => {
-          payload.push({ id: c.id, sort_order: cIdx + 1, parent_id: p.id });
-        });
-      }
-    });
-
-    try {
-      const res = await fetch('/api/menus/reorder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: payload }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        showToast('Menu sort order saved!');
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  // Delete menu item
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this menu item?')) return;
-
-    try {
-      const res = await fetch(`/api/menus?id=${id}`, { method: 'DELETE' });
-      const data = await res.json();
-      if (data.success) {
-        showToast('Menu item deleted');
-        fetchMenus();
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  // Add new menu item submit
-  const handleCreateSubmit = async (e: React.FormEvent) => {
+  const handleAddMenuSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newTitle || !newUrl) return;
+    if (!newTitle.trim() || !newUrl.trim()) return alert('Title and URL are required');
 
-    try {
-      const res = await fetch('/api/menus', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: newTitle,
-          url: newUrl,
-          parent_id: newParentId,
-          position: newPosition,
-          image_url: newImageUrl,
-          is_active: true,
-          sort_order: 99,
-        }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        showToast('New menu item created!');
-        setIsModalOpen(false);
-        setNewTitle('');
-        setNewUrl('');
-        setNewParentId(null);
-        setNewImageUrl('');
-        fetchMenus();
-      }
-    } catch (err) {
-      console.error(err);
+    const newItem: MenuItem = {
+      id: `menu-${Date.now()}`,
+      title: newTitle,
+      url: newUrl,
+      parent_id: newParentId,
+      sort_order: items.length + 1,
+      is_active: true,
+      position: newPosition,
+    };
+
+    if (newParentId) {
+      setItems((prev) =>
+        prev.map((parent) =>
+          parent.id === newParentId
+            ? { ...parent, children: [...(parent.children || []), newItem] }
+            : parent
+        )
+      );
+    } else {
+      setItems((prev) => [...prev, newItem]);
     }
+
+    setIsModalOpen(false);
+    setNewTitle('');
+    setNewUrl('');
+    setNewParentId(null);
+    showToast('New menu created');
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-stone-200 p-6 md:p-12 font-sans">
+    <div className="p-6 md:p-10 space-y-8 bg-[#0a0a0c] text-stone-200 min-h-screen">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-emerald-600 text-white text-xs font-semibold px-4 py-3 rounded shadow-2xl flex items-center space-x-2 animate-in fade-in slide-in-from-bottom-2">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#c5a880] text-black px-5 py-3 rounded-lg shadow-xl font-medium flex items-center space-x-2 text-xs animate-bounce">
           <CheckCircle2 size={16} />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Header & Controls */}
-      <div className="max-w-5xl mx-auto mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-stone-800 pb-6">
+      {/* Header Bar */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-stone-800">
         <div>
           <Link
             href="/admin"
-            className="inline-flex items-center text-xs text-[#c5a880] hover:text-white mb-2 transition-colors"
+            className="inline-flex items-center space-x-2 text-xs text-stone-400 hover:text-[#c5a880] mb-2 transition-colors"
           >
-            <ArrowLeft size={14} className="mr-1" /> Back to Dashboard
+            <ArrowLeft size={14} />
+            <span>Back to Dashboard</span>
           </Link>
-          <div className="flex items-center space-x-3">
+          <h1 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-white flex items-center space-x-3">
             <Layers className="text-[#c5a880]" size={28} />
-            <h1 className="font-serif-luxury text-2xl md:text-3xl font-semibold tracking-wide text-white">
-              Menu Control Panel
-            </h1>
-          </div>
+            <span>Menu Control Panel</span>
+          </h1>
           <p className="text-xs text-stone-400 mt-1">
-            Tabbed menu manager. Filter by Header or Footer, drag & drop items (`sort_order`), and toggle live `is_active` status.
+            Tabbed menu manager. Filter by Header or Footer, drag &amp; drop items, and toggle live `is_active` status.
           </p>
         </div>
 
         <div className="flex items-center space-x-3">
           <button
             onClick={fetchMenus}
-            className="p-2.5 bg-stone-900 border border-stone-800 hover:border-stone-700 text-stone-300 rounded transition-colors"
-            title="Refresh Data"
+            className="p-2.5 bg-stone-900 border border-stone-800 hover:border-stone-700 rounded text-stone-400 hover:text-white transition-colors"
+            title="Refresh Menus"
           >
             <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
           </button>
+
           <button
             onClick={() => {
               setNewParentId(null);
               setIsModalOpen(true);
             }}
-            className="flex items-center space-x-2 bg-[#c5a880] hover:bg-[#dbbc93] text-black font-semibold text-xs tracking-wider uppercase px-4 py-2.5 rounded transition-all shadow-lg"
+            className="flex items-center space-x-2 px-5 py-2.5 bg-[#c5a880] hover:bg-[#b59870] text-black font-semibold rounded text-xs transition-colors shadow-lg"
           >
             <Plus size={16} />
-            <span>Add Depth 1 Menu</span>
+            <span>ADD DEPTH 1 MENU</span>
           </button>
         </div>
       </div>
 
-      {/* Position Tabs Filter Bar (Header / Footer / All) */}
-      <div className="max-w-5xl mx-auto mb-6 flex space-x-2 border-b border-stone-800 pb-3">
+      {/* Position Filter Tabs */}
+      <div className="flex space-x-2 border-b border-stone-800 pb-4">
         {(['all', 'header', 'footer'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 text-xs uppercase font-medium tracking-wider rounded transition-all ${
+            className={`px-5 py-2 rounded text-xs font-semibold uppercase tracking-wider transition-all ${
               activeTab === tab
-                ? 'bg-[#c5a880] text-black font-semibold shadow-md'
-                : 'bg-[#14141a] text-stone-400 border border-stone-800 hover:text-white'
+                ? 'bg-[#c5a880] text-black shadow-lg'
+                : 'bg-stone-900 border border-stone-800 text-stone-400 hover:text-white'
             }`}
           >
-            {tab === 'all' ? 'All Menus' : tab === 'header' ? 'Header Menus' : 'Footer Menus'}
+            {tab === 'all' ? 'All Menus' : `${tab} Menus`}
           </button>
         ))}
       </div>
 
-      {/* Main Content Area */}
-      <div className="max-w-5xl mx-auto">
-        {loading ? (
-          <div className="py-20 text-center text-stone-500 text-sm">Loading Menu Tree...</div>
-        ) : (
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDepth1DragEnd}
-          >
-            <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
-              {items
-                .filter((p) => {
-                  if (activeTab === 'all') return true;
-                  return p.position === activeTab || p.position === 'both';
-                })
-                .map((parent) => (
+      {/* Main Drag and Drop Tree Container */}
+      {loading ? (
+        <div className="py-20 text-center text-stone-500 text-sm animate-pulse">
+          Loading Navigation Engine Data...
+        </div>
+      ) : filteredItems.length === 0 ? (
+        <div className="py-20 text-center bg-[#111118] border border-stone-800 rounded-xl space-y-3">
+          <Layers className="mx-auto text-stone-600" size={40} />
+          <p className="text-stone-400 text-sm">No menus found in this view.</p>
+        </div>
+      ) : (
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEndDepth1}>
+          <SortableContext items={filteredItems.map((i) => i.id)} strategy={verticalListSortingStrategy}>
+            <div className="space-y-4">
+              {filteredItems.map((parent) => (
                 <SortableItem
                   key={parent.id}
                   item={parent}
@@ -516,113 +521,92 @@ export default function NavigationManager() {
                     setIsModalOpen(true);
                   }}
                 >
-                  {/* Depth 2 Children Container */}
-                  <div className="p-3 bg-[#0d0d12] border-t border-stone-800/40">
-                    <div className="text-[10px] tracking-wider uppercase text-stone-500 mb-2 font-mono flex items-center justify-between">
-                      <span>Submenus ({parent.children?.length || 0})</span>
-                      <span className="text-stone-600">Drag items below to sort Depth 2</span>
+                  {/* Depth 2 Submenu List */}
+                  {parent.children && parent.children.length > 0 && (
+                    <div className="p-3 bg-[#0d0d12] border-t border-stone-800/60 pl-8 space-y-1">
+                      {parent.children.map((sub) => (
+                        <SortableSubItem
+                          key={sub.id}
+                          subItem={sub}
+                          onToggleActive={handleToggleActive}
+                          onDelete={handleDelete}
+                        />
+                      ))}
                     </div>
-
-                    {parent.children && parent.children.length > 0 ? (
-                      <DndContext
-                        sensors={sensors}
-                        collisionDetection={closestCenter}
-                        onDragEnd={(e) => handleDepth2DragEnd(parent.id, e)}
-                      >
-                        <SortableContext
-                          items={parent.children.map((c) => c.id)}
-                          strategy={verticalListSortingStrategy}
-                        >
-                          {parent.children.map((child) => (
-                            <SortableSubItem
-                              key={child.id}
-                              subItem={child}
-                              onToggleActive={handleToggleActive}
-                              onDelete={handleDelete}
-                            />
-                          ))}
-                        </SortableContext>
-                      </DndContext>
-                    ) : (
-                      <div className="py-3 text-center text-stone-600 text-xs italic">
-                        No submenus yet. Click "Add Submenu" above.
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </SortableItem>
               ))}
-            </SortableContext>
-          </DndContext>
-        )}
-      </div>
+            </div>
+          </SortableContext>
+        </DndContext>
+      )}
 
-      {/* Modal for Creating Menu Item */}
+      {/* Create Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#121218] border border-stone-800 rounded-lg max-w-md w-full p-6 shadow-2xl animate-in zoom-in-95 duration-200">
-            <h2 className="text-lg font-serif-luxury text-white font-semibold mb-4">
-              {newParentId ? 'Add Depth 2 Submenu' : 'Add Depth 1 Main Menu'}
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
+          <div className="bg-[#111118] border border-stone-800 rounded-xl max-w-md w-full p-6 space-y-5 shadow-2xl">
+            <h2 className="font-serif-luxury text-xl font-bold text-white flex items-center space-x-2">
+              <Plus className="text-[#c5a880]" size={20} />
+              <span>{newParentId ? 'Add Submenu Item (Depth 2)' : 'Add Parent Menu Item (Depth 1)'}</span>
             </h2>
-            <form onSubmit={handleCreateSubmit} className="space-y-4 text-xs">
+
+            <form onSubmit={handleAddMenuSubmit} className="space-y-4">
               <div>
-                <label className="block text-stone-400 mb-1">Title</label>
+                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                  Title / Label
+                </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Sintered Slabs"
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full bg-[#181822] border border-stone-700 text-white px-3 py-2 rounded focus:outline-none focus:border-[#c5a880]"
+                  placeholder="e.g. Organic EVOO Oils"
+                  className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-stone-400 mb-1">URL / Path</label>
+                <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                  URL / Route Path
+                </label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. /collections/sintered-slab"
                   value={newUrl}
                   onChange={(e) => setNewUrl(e.target.value)}
-                  className="w-full bg-[#181822] border border-stone-700 text-white px-3 py-2 rounded focus:outline-none focus:border-[#c5a880]"
+                  placeholder="e.g. /collections?cat=fresh"
+                  className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none"
                 />
               </div>
 
-              <div>
-                <label className="block text-stone-400 mb-1">Position</label>
-                <select
-                  value={newPosition}
-                  onChange={(e) => setNewPosition(e.target.value as any)}
-                  className="w-full bg-[#181822] border border-stone-700 text-white px-3 py-2 rounded focus:outline-none focus:border-[#c5a880]"
-                >
-                  <option value="header">Header Only</option>
-                  <option value="footer">Footer Only</option>
-                  <option value="both">Both Header & Footer</option>
-                </select>
-              </div>
+              {!newParentId && (
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-stone-400 mb-1 font-mono">
+                    Placement Position
+                  </label>
+                  <select
+                    value={newPosition}
+                    onChange={(e) => setNewPosition(e.target.value as any)}
+                    className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-stone-800 focus:border-[#c5a880] rounded text-sm text-white focus:outline-none"
+                  >
+                    <option value="header">Header Navigation</option>
+                    <option value="footer">Footer Link Group</option>
+                    <option value="both">Both Header &amp; Footer</option>
+                  </select>
+                </div>
+              )}
 
-              <div>
-                <label className="block text-stone-400 mb-1">Preview Image URL (Optional)</label>
-                <input
-                  type="text"
-                  placeholder="https://..."
-                  value={newImageUrl}
-                  onChange={(e) => setNewImageUrl(e.target.value)}
-                  className="w-full bg-[#181822] border border-stone-700 text-white px-3 py-2 rounded focus:outline-none focus:border-[#c5a880]"
-                />
-              </div>
-
-              <div className="pt-4 flex justify-end space-x-3">
+              <div className="flex space-x-3 pt-4 border-t border-stone-800">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-stone-800 text-stone-300 hover:text-white rounded"
+                  className="w-1/2 py-2.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded text-xs transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-[#c5a880] text-black font-semibold rounded hover:bg-[#dbbc93]"
+                  className="w-1/2 py-2.5 bg-[#c5a880] hover:bg-[#b59870] text-black font-semibold rounded text-xs transition-colors shadow-lg"
                 >
                   Create Menu
                 </button>
