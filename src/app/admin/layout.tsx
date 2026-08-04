@@ -13,6 +13,7 @@ import {
   Shield,
   Lock,
   LogOut,
+  Users,
 } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -33,8 +34,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Default Admin Passcode check (Default: admin2026 or custom)
-    if (pinInput === 'admin2026' || pinInput === 'anatolia1234') {
+    // Admin Passcode from environment variable (NEXT_PUBLIC_ADMIN_PIN)
+    const adminPin = process.env.NEXT_PUBLIC_ADMIN_PIN || 'admin2026';
+    if (pinInput === adminPin) {
       sessionStorage.setItem('anatolia_admin_authenticated', 'true');
       setIsAuthenticated(true);
       setErrorMsg('');
@@ -56,6 +58,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/content-blocks', label: 'Content Block Editor', icon: FileText },
     { href: '/admin/journal', label: 'Journal Editor', icon: FileText },
     { href: '/admin/media', label: 'Media Library', icon: ImageIcon },
+    { href: '/admin/users', label: 'User Management', icon: Users },
   ];
 
   if (isAuthenticated === false) {

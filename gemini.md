@@ -36,3 +36,17 @@
 - [x] **메인 히어로 뱅크 비디오 및 메인 카피 실시간 변경**: 비디오 MP4 & HD 이미지 CMS (`/admin/hero`, `/admin/content-blocks`)
 - [x] **컬렉션/제품 카테고리 CRUD & 이미지 업로드**: 제품 추가/수정/삭제 & 4대 특성 (`/admin/products`)
 - [x] **뉴스/이벤트/블로그 게시글 Editor**: WYSIWYG / Markdown 게시글 편집기 (`/admin/journal` & `/journal`)
+
+2.3 관리자 백오피스 CMS (Admin CMS)
+1. **접속 방식 및 라우팅**:
+   - 퍼블릭 UI에서는 숨김 처리되어 있으며, 주소창에 `도메인/admin` (또는 `/admin`) 입력으로 직통 접속 지원.
+   - 미인증 시 `/admin/login` 자동 이동, 인증 완료 시 `/admin/dashboard` 연결.
+2. **럭셔리 다크 테마 디자인 시스템**:
+   - `#111111` Sidebar + Velvet Pink (`#D81B60`) Active Indicator + Black Glass Topbar + `#141414` Dark KPI Cards.
+3. **핵심 관리 모듈 (100% 보존 및 연동)**:
+   - **대시보드**: 매출액, 주문 건수, 물류 현황, 1:1 문의 등 실시간 KPI 요약.
+   - **제품 관리 (`ProductManagement.tsx`)**: 제품 등록/수정/삭제, 베스트셀러 및 재고 상태 관리.
+   - **주문 및 물류 관리 (`OrderManagement.tsx`)**: 택배사 Tracking 연동 및 송장번호 등록.
+   - **콘텐츠 및 미디어 관리 (`ContentManagement.tsx`, `MediaCenter.tsx`)**: 공지/뉴스/ESG 자료실 연동.
+   - **고객 관리 (`CustomerManagement.tsx`)**: 회원 정보 및 저장 배송지 맵핑 조회.
+   - **권한 관리 (`UserManagement.tsx`)**: siteadmin 전용 직원 계정 및 메뉴별 권한(Dashboard, Site, Content 등) 부여.
