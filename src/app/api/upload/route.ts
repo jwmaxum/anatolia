@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { addMediaItem } from '@/lib/media-db';
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 // ─── 보안 설정 ───────────────────────────────────────────────────
 const ALLOWED_MIME_TYPES: Record<string, string> = {
