@@ -176,21 +176,22 @@ CREATE POLICY "Public Read Content Blocks" ON public.content_blocks FOR SELECT U
 CREATE POLICY "Public Read Published Journal Articles" ON public.journal_articles FOR SELECT USING (true);
 CREATE POLICY "Public Read Media Library" ON public.media_library FOR SELECT USING (true);
 
--- 2. Customer & Admin Policies for User Profiles & Orders
-CREATE POLICY "Users Read Own Profile" ON public.user_profiles FOR SELECT USING (auth.uid() = id OR true);
-CREATE POLICY "Users Update Own Profile" ON public.user_profiles FOR UPDATE USING (auth.uid() = id OR true);
-CREATE POLICY "Users Read Own Orders" ON public.orders FOR SELECT USING (auth.uid() = user_id OR true);
-CREATE POLICY "Users Insert Orders" ON public.orders FOR INSERT WITH CHECK (true);
+-- 2. Customer Policies for User Profiles & Orders (Authenticated Users Only)
+CREATE POLICY "Users Read Own Profile" ON public.user_profiles FOR SELECT USING (auth.uid() = id);
+CREATE POLICY "Users Update Own Profile" ON public.user_profiles FOR UPDATE USING (auth.uid() = id);
+CREATE POLICY "Users Read Own Orders" ON public.orders FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users Insert Orders" ON public.orders FOR INSERT WITH CHECK (auth.uid() = user_id OR user_id IS NULL);
 
--- 3. Admin Full Access Policies
-CREATE POLICY "Admin Full Access Menus" ON public.menus FOR ALL USING (true);
-CREATE POLICY "Admin Full Access Hero Slides" ON public.hero_slides FOR ALL USING (true);
-CREATE POLICY "Admin Full Access Products" ON public.products FOR ALL USING (true);
-CREATE POLICY "Admin Full Access User Profiles" ON public.user_profiles FOR ALL USING (true);
-CREATE POLICY "Admin Full Access Orders" ON public.orders FOR ALL USING (true);
-CREATE POLICY "Admin Full Access Content Blocks" ON public.content_blocks FOR ALL USING (true);
-CREATE POLICY "Admin Full Access Journal Articles" ON public.journal_articles FOR ALL USING (true);
-CREATE POLICY "Admin Full Access Media Library" ON public.media_library FOR ALL USING (true);
+-- 3. Admin & Service Role Access Policies (Service Role / Admin Role)
+CREATE POLICY "Admin Full Access Menus" ON public.menus FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access Hero Slides" ON public.hero_slides FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access Products" ON public.products FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access User Profiles" ON public.user_profiles FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access Orders" ON public.orders FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access Content Blocks" ON public.content_blocks FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access Journal Articles" ON public.journal_articles FOR ALL USING (auth.role() = 'service_role');
+CREATE POLICY "Admin Full Access Media Library" ON public.media_library FOR ALL USING (auth.role() = 'service_role');
+
 
 -- ==============================================================================
 -- INITIAL SEED DATA INSERT STATEMENTS
