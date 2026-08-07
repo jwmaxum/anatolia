@@ -13,12 +13,12 @@ interface CategoryItem {
 }
 
 const CATEGORIES: CategoryItem[] = [
-  { id: '1', name: 'Olive Oils', icon: '🫒', url: '/collections?cat=fresh#oil', colorBg: 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200', count: '14 Items' },
-  { id: '2', name: 'DOP Cheeses', icon: '🧀', url: '/collections?cat=dairy#cheese', colorBg: 'bg-amber-50 hover:bg-amber-100 border-amber-200', count: '18 Items' },
-  { id: '3', name: 'Rare Truffles', icon: '🍄', url: '/collections?cat=fresh#truffle', colorBg: 'bg-[#FAFAF8] hover:bg-stone-100 border-stone-200', count: '8 Items' },
-  { id: '4', name: 'Charcuterie', icon: '🥩', url: '/collections?cat=dairy#ham', colorBg: 'bg-rose-50 hover:bg-rose-100 border-rose-200', count: '12 Items' },
-  { id: '5', name: 'Aged Balsamic', icon: '🍷', url: '/collections?cat=pantry#balsamic', colorBg: 'bg-purple-50 hover:bg-purple-100 border-purple-200', count: '9 Items' },
-  { id: '6', name: 'Wild Honey', icon: '🍯', url: '/collections?cat=pantry#honey', colorBg: 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200', count: '11 Items' },
+  { id: '1', name: '비비고 만두', icon: '🥟', url: '/collections?cat=fresh#mandu', colorBg: 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200', count: '14 품목' },
+  { id: '2', name: '원소주 & 증류주', icon: '🍾', url: '/collections?cat=dairy#soju', colorBg: 'bg-amber-50 hover:bg-amber-100 border-amber-200', count: '18 품목' },
+  { id: '3', name: '떡볶이 밀키트', icon: '🥘', url: '/collections?cat=fresh#tteok', colorBg: 'bg-rose-50 hover:bg-rose-100 border-rose-200', count: '8 품목' },
+  { id: '4', name: '크리스피 치킨', icon: '🍗', url: '/collections?cat=fresh#chicken', colorBg: 'bg-yellow-50 hover:bg-yellow-100 border-yellow-200', count: '12 품목' },
+  { id: '5', name: '생막걸리 & 탁주', icon: '🍶', url: '/collections?cat=dairy#makgeolli', colorBg: 'bg-purple-50 hover:bg-purple-100 border-purple-200', count: '9 품목' },
+  { id: '6', name: 'K-간식 & 디저트', icon: '🍿', url: '/collections?cat=pantry#snack', colorBg: 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200', count: '11 품목' },
 ];
 
 export default function CategoryIcons() {
@@ -29,7 +29,7 @@ export default function CategoryIcons() {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-bold text-[#14532D] uppercase tracking-[0.2em]">Quick Explore</span>
           <h2 className="font-jakarta text-2xl sm:text-3xl font-extrabold text-stone-900 mt-1">
-            Explore Gourmet Categories
+            K-푸드 &amp; K-주류 카테고리
           </h2>
         </div>
 

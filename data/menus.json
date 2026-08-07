@@ -1,41 +1,38 @@
 [
   {
     "id": "menu-hdr-1",
-    "title": "Fresh & Gourmet",
+    "title": "K-냉동식품",
     "url": "/collections?cat=fresh",
     "parent_id": null,
     "sort_order": 1,
     "is_active": true,
     "position": "header",
-    "badge": "ORGANIC",
-    "image_url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80"
+    "badge": "HOT"
   },
   {
     "id": "menu-hdr-2",
-    "title": "Artisanal Pantry",
-    "url": "/collections?cat=pantry",
+    "title": "K-주류 & 전통주",
+    "url": "/collections?cat=dairy",
     "parent_id": null,
     "sort_order": 2,
     "is_active": true,
     "position": "header",
-    "badge": "HERITAGE",
-    "image_url": "https://images.unsplash.com/photo-1541544741938-0af808871cc0?auto=format&fit=crop&w=800&q=80"
+    "badge": "PREMIUM"
   },
   {
     "id": "menu-hdr-3",
-    "title": "Dairy & Charcuterie",
-    "url": "/collections?cat=dairy",
+    "title": "오늘의 특가",
+    "url": "/collections?cat=deals",
     "parent_id": null,
     "sort_order": 3,
     "is_active": true,
     "position": "header",
-    "badge": "AGED DOP",
-    "image_url": "https://images.unsplash.com/photo-1452195100486-9cc805987862?auto=format&fit=crop&w=800&q=80"
+    "badge": "SALE"
   },
   {
     "id": "menu-hdr-4",
-    "title": "About Anatolia Gourmet",
-    "url": "/about",
+    "title": "베스트셀러",
+    "url": "/shop",
     "parent_id": null,
     "sort_order": 4,
     "is_active": true,
@@ -43,8 +40,8 @@
   },
   {
     "id": "menu-hdr-5",
-    "title": "Contact",
-    "url": "/contact",
+    "title": "K-간식 & 디저트",
+    "url": "/collections?cat=pantry",
     "parent_id": null,
     "sort_order": 5,
     "is_active": true,
@@ -52,26 +49,17 @@
   },
   {
     "id": "menu-hdr-6",
-    "title": "Shop",
-    "url": "/shop",
+    "title": "K-레시피 & 저널",
+    "url": "/journal",
     "parent_id": null,
     "sort_order": 6,
     "is_active": true,
     "position": "header"
   },
   {
-    "id": "menu-hdr-7",
-    "title": "Journal",
-    "url": "/journal",
-    "parent_id": null,
-    "sort_order": 7,
-    "is_active": true,
-    "position": "header"
-  },
-  {
     "id": "menu-sub-1",
-    "title": "Organic Olive Oils",
-    "url": "/collections?cat=fresh#oil",
+    "title": "CJ 비비고 왕교자 만두",
+    "url": "/collections?cat=fresh#mandu",
     "parent_id": "menu-hdr-1",
     "sort_order": 1,
     "is_active": true,
@@ -79,8 +67,8 @@
   },
   {
     "id": "menu-sub-2",
-    "title": "Wild Harvest Truffles",
-    "url": "/collections?cat=fresh#truffle",
+    "title": "K-수제 떡볶이 & 밀키트",
+    "url": "/collections?cat=fresh#tteok",
     "parent_id": "menu-hdr-1",
     "sort_order": 2,
     "is_active": true,
@@ -88,43 +76,43 @@
   },
   {
     "id": "menu-sub-3",
-    "title": "Aged Modena Vinegars",
-    "url": "/collections?cat=pantry#balsamic",
-    "parent_id": "menu-hdr-2",
-    "sort_order": 1,
+    "title": "크리스피 양념 & 간장치킨",
+    "url": "/collections?cat=fresh#chicken",
+    "parent_id": "menu-hdr-1",
+    "sort_order": 3,
     "is_active": true,
     "position": "header"
   },
   {
     "id": "menu-sub-4",
-    "title": "Raw Blossom Honey",
-    "url": "/collections?cat=pantry#honey",
+    "title": "원소주 & 증류식 소주",
+    "url": "/collections?cat=dairy#soju",
+    "parent_id": "menu-hdr-2",
+    "sort_order": 1,
+    "is_active": true,
+    "position": "header"
+  },
+  {
+    "id": "menu-sub-5",
+    "title": "느린마을 생막걸리 & 탁주",
+    "url": "/collections?cat=dairy#makgeolli",
     "parent_id": "menu-hdr-2",
     "sort_order": 2,
     "is_active": true,
     "position": "header"
   },
   {
-    "id": "menu-sub-5",
-    "title": "36-Month DOP Cheeses",
-    "url": "/collections?cat=dairy#cheese",
-    "parent_id": "menu-hdr-3",
-    "sort_order": 1,
-    "is_active": true,
-    "position": "header"
-  },
-  {
     "id": "menu-sub-6",
-    "title": "Pure Iberico Hams",
-    "url": "/collections?cat=dairy#ham",
-    "parent_id": "menu-hdr-3",
-    "sort_order": 2,
+    "title": "참이슬 후레쉬 & 하이트 맥주",
+    "url": "/collections?cat=dairy#beer",
+    "parent_id": "menu-hdr-2",
+    "sort_order": 3,
     "is_active": true,
     "position": "header"
   },
   {
     "id": "menu-ftr-1",
-    "title": "About Anatolia Gourmet",
+    "title": "K-FOOD & LIQUOR 소개",
     "url": "/about",
     "parent_id": null,
     "sort_order": 1,
@@ -133,7 +121,7 @@
   },
   {
     "id": "menu-ftr-2",
-    "title": "Organic Certified Estates",
+    "title": "K-냉동식품 컬렉션",
     "url": "/collections",
     "parent_id": null,
     "sort_order": 2,
@@ -142,8 +130,8 @@
   },
   {
     "id": "menu-ftr-3",
-    "title": "Heritage Artisans & Journal",
-    "url": "/journal",
+    "title": "K-주류 & 전통주 컬렉션",
+    "url": "/collections?cat=dairy",
     "parent_id": null,
     "sort_order": 3,
     "is_active": true,
@@ -151,7 +139,7 @@
   },
   {
     "id": "menu-ftr-4",
-    "title": "Contact & Customer Support",
+    "title": "고객 센터 & 문의",
     "url": "/contact",
     "parent_id": null,
     "sort_order": 4,
@@ -160,7 +148,7 @@
   },
   {
     "id": "menu-ftr-5",
-    "title": "Shipping & Delivery Policy",
+    "title": "24시간 에어 냉장배송 안내",
     "url": "/checkout",
     "parent_id": null,
     "sort_order": 5,
@@ -169,7 +157,7 @@
   },
   {
     "id": "menu-ftr-6",
-    "title": "Privacy Policy",
+    "title": "개인정보 처리방침",
     "url": "/privacy",
     "parent_id": null,
     "sort_order": 6,
@@ -178,7 +166,7 @@
   },
   {
     "id": "menu-ftr-7",
-    "title": "Terms of Service",
+    "title": "이용약관",
     "url": "/terms",
     "parent_id": null,
     "sort_order": 7,

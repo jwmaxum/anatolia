@@ -152,35 +152,35 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
         </div>
       </div>
 
-      {/* Main Header Nav Container */}
+      {/* Main Header Row 1: Logo | Centered Search | Action Icons */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 relative">
           
           {/* Logo */}
           <Link href="/" className="flex items-center group flex-shrink-0 z-20">
             <div className="flex flex-col">
-              <span className="font-jakarta text-2xl tracking-[0.2em] font-extrabold text-[#14532D] group-hover:text-[#EAB308] transition-colors">
+              <span className="font-jakarta text-2xl tracking-[0.18em] font-extrabold text-[#14532D] group-hover:text-[#EAB308] transition-colors">
                 ANATOLIA
               </span>
-              <span className="text-[9px] tracking-[0.35em] text-[#EAB308] font-bold -mt-1 uppercase">
-                GOURMET & FINE FOODS
+              <span className="text-[9px] tracking-[0.3em] text-[#EAB308] font-bold -mt-1 uppercase">
+                K-FOOD &amp; K-LIQUOR MARKET
               </span>
             </div>
           </Link>
 
-          {/* Center: Search Bar (Absolute positioned on desktop) */}
-          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-full max-w-sm xl:max-w-md items-center z-10 pointer-events-auto" ref={searchRef}>
+          {/* Center: Search Bar (Absolute centered on desktop) */}
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-full max-w-md xl:max-w-lg items-center z-20 pointer-events-auto" ref={searchRef}>
             <div className="relative w-full">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
-                placeholder={t('search_placeholder', 'Search...')}
-                className="w-full bg-white border border-stone-200 rounded-full py-2 pl-5 pr-10 text-sm text-stone-800 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20 transition-all placeholder:text-stone-400 shadow-sm"
+                placeholder={t('search_placeholder', '만두, 원소주, 막걸리, 떡볶이, 치킨 검색...')}
+                className="w-full bg-white border-2 border-stone-200 rounded-full py-2.5 pl-5 pr-12 text-sm text-stone-800 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20 transition-all placeholder:text-stone-400 shadow-sm"
               />
               <button className="absolute right-4 top-1/2 -translate-y-1/2 text-[#14532D] hover:text-[#EAB308] transition-colors" aria-label="Submit Search">
-                <Search size={16} />
+                <Search size={18} />
               </button>
               
               {/* Desktop Autocomplete Dropdown */}
@@ -188,93 +188,8 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
             </div>
           </div>
 
-          {/* Right Area: Navigation + Icons */}
-          <div className="flex items-center z-20">
-            {/* Desktop Navigation (Depth 1 & Dropdown Megamenu) */}
-            <nav className="hidden lg:flex items-center space-x-7 mr-6" aria-label="Primary Navigation">
-            {menus.map((parent) => {
-              const hasChildren = parent.children && parent.children.length > 0;
-              const isHovered = activeMenuId === parent.id;
-
-              return (
-                <div
-                  key={parent.id}
-                  className="relative group py-6"
-                  onMouseEnter={() => setActiveMenuId(parent.id)}
-                  onMouseLeave={() => setActiveMenuId(null)}
-                >
-                  <Link
-                    href={parent.url}
-                    className="flex items-center text-xs tracking-[0.12em] uppercase font-bold font-jakarta text-stone-800 group-hover:text-[#14532D] transition-colors py-1"
-                  >
-                    <span>{parent.title}</span>
-                    {hasChildren && (
-                      <ChevronDown
-                        size={13}
-                        className={`ml-1 transition-transform duration-200 ${
-                          isHovered ? 'rotate-180 text-[#14532D]' : 'text-stone-400'
-                        }`}
-                      />
-                    )}
-                  </Link>
-
-                  {/* Active Indicator Line */}
-                  <span
-                    className={`absolute bottom-4 left-0 h-[2.5px] bg-[#14532D] transition-all duration-300 ${
-                      isHovered ? 'w-full opacity-100' : 'w-0 opacity-0'
-                    }`}
-                  />
-
-                  {/* Megamenu Dropdown Container */}
-                  {hasChildren && isHovered && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[620px] bg-white border border-stone-200 shadow-2xl rounded-lg p-6 grid grid-cols-12 gap-6 animate-in fade-in slide-in-from-top-2 duration-200">
-                      {/* Left: Depth 2 Link Items */}
-                      <div className="col-span-6 space-y-2.5 border-r border-stone-100 pr-4">
-                        <div className="text-[10px] tracking-[0.18em] uppercase font-extrabold text-[#14532D] mb-3 pb-1 border-b border-stone-100 font-jakarta">
-                          {parent.title} Selections
-                        </div>
-                        {parent.children?.map((child) => (
-                          <Link
-                            key={child.id}
-                            href={child.url}
-                            className="block text-xs font-medium text-stone-700 hover:text-[#14532D] hover:translate-x-1 transition-all duration-150 py-1"
-                          >
-                            <span className="text-[#EAB308] mr-1.5">•</span>
-                            {child.title}
-                          </Link>
-                        ))}
-                      </div>
-
-                      {/* Right: Megamenu Featured Image Preview (Anatolia Style) */}
-                      <div className="col-span-6 flex flex-col justify-center items-center bg-[#FAFAF8] rounded-md p-3 border border-stone-200">
-                        {activeParentMenu?.image_url ? (
-                          <div className="w-full h-full min-h-[140px] relative overflow-hidden rounded group/img">
-                            <img
-                              src={activeParentMenu.image_url}
-                              alt={parent.title}
-                              className="w-full h-36 object-cover rounded transform group-hover/img:scale-105 transition-transform duration-500"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-2.5">
-                              <span className="text-[11px] font-bold text-white tracking-wide">
-                                Explore {parent.title}
-                              </span>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="text-center p-4 text-stone-500 text-xs font-medium italic">
-                            Crafted for Fine Dining & Gourmet Living
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-
-          {/* Right Action Buttons */}
-          <div className="flex items-center space-x-3 sm:space-x-4 border-l border-transparent lg:border-stone-200 lg:pl-6 transition-all">
+          {/* Right Action Icons (Account, Wishlist, Cart) */}
+          <div className="flex items-center space-x-3 sm:space-x-4 z-20">
             {/* Mobile Search Icon */}
             <button
               className="lg:hidden p-2 text-stone-700 hover:text-[#14532D] transition-colors"
@@ -290,7 +205,7 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
               aria-label="Wishlist"
               className="relative p-2 text-stone-700 hover:text-[#14532D] transition-colors"
             >
-              <Heart size={19} />
+              <Heart size={20} />
               {wishlist.length > 0 && (
                 <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-[#DC2626] animate-pulse" />
               )}
@@ -303,7 +218,7 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
               className="p-2 text-stone-700 hover:text-[#14532D] transition-colors flex items-center space-x-1"
               title={isLoggedIn ? `Account (${user?.name})` : 'Customer Login'}
             >
-              <User size={19} />
+              <User size={20} />
             </Link>
 
             {/* Cart Drawer Trigger Button */}
@@ -312,7 +227,7 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
               aria-label="Shopping Cart"
               className="relative p-2 text-stone-800 hover:text-[#14532D] transition-colors flex items-center"
             >
-              <ShoppingBag size={20} />
+              <ShoppingBag size={21} />
               {cartItemCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 bg-[#DC2626] text-white font-extrabold text-[10px] w-4 h-4 rounded-full flex items-center justify-center shadow-md">
                   {cartItemCount}
@@ -323,13 +238,99 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
             {/* Mobile Hamburger Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-stone-300 hover:text-white transition-colors"
+              className="lg:hidden p-2 text-stone-800 hover:text-[#14532D] transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-          </div>
+
+        </div>
+      </div>
+
+      {/* Row 2: Desktop Horizontal GNB Navigation Bar */}
+      <div className="hidden lg:block border-t border-b border-stone-200/80 bg-[#FAFAF8]/95 backdrop-blur">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center space-x-8 h-12" aria-label="Primary Navigation">
+            {menus.map((parent) => {
+              const hasChildren = parent.children && parent.children.length > 0;
+              const isHovered = activeMenuId === parent.id;
+
+              return (
+                <div
+                  key={parent.id}
+                  className="relative group h-full flex items-center"
+                  onMouseEnter={() => setActiveMenuId(parent.id)}
+                  onMouseLeave={() => setActiveMenuId(null)}
+                >
+                  <Link
+                    href={parent.url}
+                    className="flex items-center text-xs tracking-[0.08em] uppercase font-bold font-jakarta text-stone-800 group-hover:text-[#14532D] transition-colors py-2"
+                  >
+                    <span>{parent.title}</span>
+                    {parent.badge && (
+                      <span className="ml-1.5 px-1.5 py-0.2 rounded text-[9px] font-extrabold bg-[#DC2626] text-white">
+                        {parent.badge}
+                      </span>
+                    )}
+                    {hasChildren && (
+                      <ChevronDown
+                        size={13}
+                        className={`ml-1 transition-transform duration-200 ${
+                          isHovered ? 'rotate-180 text-[#14532D]' : 'text-stone-400'
+                        }`}
+                      />
+                    )}
+                  </Link>
+
+                  {/* Active Indicator Line */}
+                  <span
+                    className={`absolute bottom-0 left-0 h-[2.5px] bg-[#14532D] transition-all duration-300 ${
+                      isHovered ? 'w-full opacity-100' : 'w-0 opacity-0'
+                    }`}
+                  />
+
+                  {/* Megamenu Dropdown Container */}
+                  {hasChildren && isHovered && (
+                    <div className="absolute top-full left-0 w-[580px] bg-white border border-stone-200 shadow-2xl rounded-lg p-6 grid grid-cols-12 gap-6 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                      {/* Left: Depth 2 Link Items */}
+                      <div className="col-span-6 space-y-2.5 border-r border-stone-100 pr-4">
+                        <div className="text-[10px] tracking-[0.18em] uppercase font-extrabold text-[#14532D] mb-3 pb-1 border-b border-stone-100 font-jakarta">
+                          {parent.title} 인기 메뉴
+                        </div>
+                        {parent.children?.map((child) => (
+                          <Link
+                            key={child.id}
+                            href={child.url}
+                            className="block text-xs font-medium text-stone-700 hover:text-[#14532D] hover:translate-x-1 transition-all duration-150 py-1"
+                          >
+                            <span className="text-[#EAB308] mr-1.5">•</span>
+                            {child.title}
+                          </Link>
+                        ))}
+                      </div>
+
+                      {/* Right: Megamenu Featured Image Preview */}
+                      <div className="col-span-6 flex flex-col justify-center items-center bg-[#FAFAF8] rounded-md p-3 border border-stone-200">
+                        <div className="w-full h-full min-h-[130px] relative overflow-hidden rounded group/img">
+                          <img
+                            src="https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80"
+                            alt={parent.title}
+                            className="w-full h-32 object-cover rounded transform group-hover/img:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-2.5">
+                            <span className="text-[11px] font-bold text-white tracking-wide">
+                              Explore {parent.title}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
         </div>
       </div>
 
