@@ -22,11 +22,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400;1,9..40,700&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#1a1a1a] text-stone-100 antialiased selection:bg-[#c5a880] selection:text-black">
+      <body className="min-h-screen flex flex-col bg-[#FAFAF8] text-stone-800 antialiased selection:bg-[#14532D] selection:text-white">
         <AppProviders>
           {/* RSC Header with Active Menu Engine & Multi-language Selector */}
           <Header />
