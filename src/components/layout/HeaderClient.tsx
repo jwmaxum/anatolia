@@ -23,6 +23,7 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState<string | null>(null);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -57,10 +58,10 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
 
       {/* Main Header Nav Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 relative">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link href="/" className="flex items-center group flex-shrink-0 z-20">
             <div className="flex flex-col">
               <span className="font-serif-luxury text-2xl tracking-[0.25em] font-semibold text-white group-hover:text-[#c59b27] transition-colors">
                 ANATOLIA
@@ -71,8 +72,24 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
             </div>
           </Link>
 
-          {/* Desktop Navigation (Depth 1 & Dropdown Megamenu) */}
-          <nav className="hidden lg:flex items-center space-x-8" aria-label="Primary Navigation">
+          {/* Center: Search Bar (Absolute positioned on desktop) */}
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-full max-w-sm xl:max-w-md items-center z-10 pointer-events-auto">
+            <div className="relative w-full">
+              <input
+                type="text"
+                placeholder={t('search_placeholder', 'Search...')}
+                className="w-full bg-[#141815]/80 backdrop-blur border border-[#232a26] rounded-full py-2 pl-5 pr-10 text-sm text-stone-300 focus:outline-none focus:border-[#c59b27] focus:ring-1 focus:ring-[#c59b27] transition-all placeholder:text-stone-600"
+              />
+              <button className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500 hover:text-[#c59b27] transition-colors" aria-label="Submit Search">
+                <Search size={16} />
+              </button>
+            </div>
+          </div>
+
+          {/* Right Area: Navigation + Icons */}
+          <div className="flex items-center z-20">
+            {/* Desktop Navigation (Depth 1 & Dropdown Megamenu) */}
+            <nav className="hidden lg:flex items-center space-x-7 mr-6" aria-label="Primary Navigation">
             {menus.map((parent) => {
               const hasChildren = parent.children && parent.children.length > 0;
               const isHovered = activeMenuId === parent.id;
@@ -155,14 +172,15 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <Link
-              href="/shop"
-              aria-label="Shop Catalog"
-              className="p-2 text-stone-300 hover:text-[#c59b27] transition-colors hidden sm:flex items-center space-x-1 text-xs uppercase font-medium tracking-wider"
+          <div className="flex items-center space-x-3 sm:space-x-4 border-l border-transparent lg:border-[#232a26] lg:pl-6 transition-all">
+            {/* Mobile Search Icon */}
+            <button
+              className="lg:hidden p-2 text-stone-300 hover:text-[#c59b27] transition-colors"
+              aria-label="Search"
+              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
             >
-              <span>Shop</span>
-            </Link>
+              <Search size={20} />
+            </button>
 
             {/* Wishlist Link */}
             <Link
@@ -209,8 +227,26 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Search Overlay */}
+      {mobileSearchOpen && (
+        <div className="lg:hidden absolute top-20 inset-x-0 bg-[#0d110e]/98 border-b border-[#232a26] shadow-xl p-4 animate-in slide-in-from-top-2 duration-200 z-40">
+          <div className="relative w-full">
+            <input
+              type="text"
+              placeholder={t('search_placeholder', 'Search...')}
+              className="w-full bg-[#141815] border border-[#232a26] rounded-full py-2.5 pl-4 pr-10 text-sm text-stone-300 focus:outline-none focus:border-[#c59b27] focus:ring-1 focus:ring-[#c59b27] transition-all"
+              autoFocus
+            />
+            <button className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-500 hover:text-[#c59b27] transition-colors">
+              <Search size={18} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Hamburger Menu Drawer */}
       {mobileMenuOpen && (
