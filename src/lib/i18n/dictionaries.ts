@@ -57,6 +57,11 @@ export const DICTIONARIES: Record<Language, Record<string, string>> = {
     journal_title: '저널 & 뉴스', journal_subtitle: '미식 인사이트 & 문화', read_more: '더 읽기', all_articles: '전체 기사',
     cart_empty: '장바구니가 비어 있습니다.', cart_total: '합계', checkout: '결제하기', remove: '삭제',
     loading: '로딩 중...', error_occurred: '오류가 발생했습니다.', no_results: '결과가 없습니다.', page_not_found: '페이지를 찾을 수 없습니다.', go_home: '홈으로 돌아가기',
+    account_dashboard: '마이페이지 대시보드', account_orders: '주문 내역', account_addresses: '배송지 관리', account_details: '회원 정보 수정',
+    account_wishlist: '위시리스트', account_logout: '로그아웃', account_welcome: '안녕하세요', account_signed_in_as: '로그인 계정',
+    access_restricted: '접근이 제한되었습니다', login_required: '고객 계정 로그인이 필요합니다.', go_to_login: '고객 로그인 페이지로 이동',
+    recent_orders: '최근 주문 내역', no_orders_yet: '아직 주문 내역이 없습니다.', shipping_address: '기본 배송지 주소', billing_address: '결제 청구지 주소',
+    save_changes: '변경 사항 저장', profile_updated: '회원 정보가 성공적으로 변경되었습니다.',
   },
   en: {
     site_tagline: 'ANATOLIA LUXURY GOURMET & FINE FOODS',

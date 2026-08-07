@@ -22,10 +22,13 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
+import { useLanguage } from '@/lib/i18n/LanguageContext';
+
 function MyAccountContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialTab = searchParams.get('tab') || 'dashboard';
+  const { t } = useLanguage();
 
   const { user, orders, logout, isLoggedIn, updateProfile } = useAuth();
   const { wishlist, removeFromWishlist } = useWishlist();
@@ -54,14 +57,14 @@ function MyAccountContent() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#141815] flex flex-col justify-center items-center p-6 text-center space-y-4">
-        <h2 className="font-serif-luxury text-2xl text-white">Access Restricted</h2>
-        <p className="text-xs text-stone-400">Please log in to access your WooCommerce account dashboard.</p>
+      <div className="min-h-screen bg-[#FAFAF8] flex flex-col justify-center items-center p-6 text-center space-y-4 font-sans">
+        <h2 className="font-jakarta text-2xl font-bold text-stone-900">{t('access_restricted', '접근이 제한되었습니다')}</h2>
+        <p className="text-xs text-stone-500">{t('login_required', '송영민푸드 고객 계정 로그인이 필요합니다.')}</p>
         <Link
           href="/account/login"
-          className="bg-[#c59b27] hover:bg-[#b08820] text-black font-semibold text-xs uppercase px-5 py-2.5 rounded"
+          className="bg-[#14532D] hover:bg-[#1b6a3b] text-white font-semibold text-xs px-6 py-3 rounded-md transition-colors"
         >
-          Go to Customer Login
+          {t('go_to_login', '고객 로그인 페이지로 이동')}
         </Link>
       </div>
     );
@@ -84,94 +87,94 @@ function MyAccountContent() {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 font-sans">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Left Navigation Sidebar */}
-        <aside className="lg:col-span-3 bg-[#101411] border border-emerald-900/30 rounded-lg p-4 space-y-1 h-fit">
-          <div className="p-3 mb-2 border-b border-emerald-900/30">
-            <div className="text-xs text-stone-400 font-light">Signed in as</div>
-            <div className="font-serif-luxury text-base font-semibold text-white truncate">{user?.name}</div>
-            <div className="text-[11px] text-[#c59b27] font-mono truncate">{user?.email}</div>
+        <aside className="lg:col-span-3 bg-white border border-stone-200 rounded-xl p-4 space-y-1 h-fit shadow-sm">
+          <div className="p-3 mb-2 border-b border-stone-100">
+            <div className="text-xs text-stone-400 font-medium">{t('account_signed_in_as', '로그인 계정')}</div>
+            <div className="font-jakarta text-base font-bold text-stone-900 truncate">{user?.name}</div>
+            <div className="text-[11px] text-[#14532D] font-mono font-semibold truncate">{user?.email}</div>
           </div>
 
           <button
             onClick={() => setActiveTab('dashboard')}
-            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded text-xs font-medium transition-all ${
+            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
               activeTab === 'dashboard'
-                ? 'bg-[#c59b27] text-black font-semibold shadow'
-                : 'text-stone-300 hover:bg-stone-900 hover:text-white'
+                ? 'bg-[#14532D] text-white shadow'
+                : 'text-stone-700 hover:bg-stone-100 hover:text-[#14532D]'
             }`}
           >
             <LayoutDashboard size={16} />
-            <span>Dashboard</span>
+            <span>{t('account_dashboard', '마이페이지 대시보드')}</span>
           </button>
 
           <button
             onClick={() => setActiveTab('orders')}
-            className={`w-full flex items-center justify-between px-3 py-2.5 rounded text-xs font-medium transition-all ${
+            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
               activeTab === 'orders'
-                ? 'bg-[#c59b27] text-black font-semibold shadow'
-                : 'text-stone-300 hover:bg-stone-900 hover:text-white'
+                ? 'bg-[#14532D] text-white shadow'
+                : 'text-stone-700 hover:bg-stone-100 hover:text-[#14532D]'
             }`}
           >
             <div className="flex items-center space-x-3">
               <ShoppingBag size={16} />
-              <span>Orders</span>
+              <span>{t('account_orders', '주문 내역')}</span>
             </div>
-            <span className="font-mono text-[10px] bg-stone-800 text-stone-300 px-2 py-0.5 rounded-full">
+            <span className="font-mono text-[10px] bg-stone-200 text-stone-800 font-bold px-2 py-0.5 rounded-full">
               {orders.length}
             </span>
           </button>
 
           <button
             onClick={() => setActiveTab('addresses')}
-            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded text-xs font-medium transition-all ${
+            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
               activeTab === 'addresses'
-                ? 'bg-[#c59b27] text-black font-semibold shadow'
-                : 'text-stone-300 hover:bg-stone-900 hover:text-white'
+                ? 'bg-[#14532D] text-white shadow'
+                : 'text-stone-700 hover:bg-stone-100 hover:text-[#14532D]'
             }`}
           >
             <MapPin size={16} />
-            <span>Addresses</span>
+            <span>{t('account_addresses', '배송지 관리')}</span>
           </button>
 
           <button
             onClick={() => setActiveTab('profile')}
-            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded text-xs font-medium transition-all ${
+            className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
               activeTab === 'profile'
-                ? 'bg-[#c59b27] text-black font-semibold shadow'
-                : 'text-stone-300 hover:bg-stone-900 hover:text-white'
+                ? 'bg-[#14532D] text-white shadow'
+                : 'text-stone-700 hover:bg-stone-100 hover:text-[#14532D]'
             }`}
           >
             <User size={16} />
-            <span>Account Details</span>
+            <span>{t('account_details', '회원 정보 수정')}</span>
           </button>
 
           <button
             onClick={() => setActiveTab('wishlist')}
-            className={`w-full flex items-center justify-between px-3 py-2.5 rounded text-xs font-medium transition-all ${
+            className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
               activeTab === 'wishlist'
-                ? 'bg-[#c59b27] text-black font-semibold shadow'
-                : 'text-stone-300 hover:bg-stone-900 hover:text-white'
+                ? 'bg-[#14532D] text-white shadow'
+                : 'text-stone-700 hover:bg-stone-100 hover:text-[#14532D]'
             }`}
           >
             <div className="flex items-center space-x-3">
               <Heart size={16} />
-              <span>Wishlist</span>
+              <span>{t('account_wishlist', '위시리스트')}</span>
             </div>
-            <span className="font-mono text-[10px] bg-stone-800 text-stone-300 px-2 py-0.5 rounded-full">
+            <span className="font-mono text-[10px] bg-stone-200 text-stone-800 font-bold px-2 py-0.5 rounded-full">
               {wishlist.length}
             </span>
           </button>
 
-          <div className="pt-4 border-t border-emerald-900/30">
+          <div className="pt-4 border-t border-stone-100">
             <button
               onClick={handleLogout}
-              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded text-xs text-red-400 hover:bg-red-950/40 hover:text-red-300 transition-all font-medium"
+              className="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-xs text-red-600 hover:bg-red-50 hover:text-red-700 transition-all font-bold"
             >
               <LogOut size={16} />
-              <span>Log Out</span>
+              <span>{t('account_logout', '로그아웃')}</span>
             </button>
           </div>
         </aside>
@@ -182,67 +185,67 @@ function MyAccountContent() {
           {/* Tab 1: Dashboard Overview */}
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
-              <div className="bg-[#101411] border border-emerald-900/30 rounded-lg p-6 sm:p-8 space-y-4">
-                <h2 className="font-serif-luxury text-2xl text-white font-light">
-                  Hello <span className="text-[#c59b27] font-semibold">{user?.name}</span>!
+              <div className="bg-white border border-stone-200 rounded-xl p-6 sm:p-8 space-y-4 shadow-sm">
+                <h2 className="font-jakarta text-2xl text-stone-900 font-bold">
+                  {t('account_welcome', '안녕하세요')}, <span className="text-[#14532D]">{user?.name}</span>님!
                 </h2>
-                <p className="text-xs text-stone-300 leading-relaxed font-light">
-                  From your WooCommerce account dashboard you can view your{' '}
-                  <button onClick={() => setActiveTab('orders')} className="text-[#c59b27] underline">
-                    recent orders
+                <p className="text-xs text-stone-600 leading-relaxed">
+                  송영민푸드 고객 마이페이지에서 고객님의{' '}
+                  <button onClick={() => setActiveTab('orders')} className="text-[#14532D] font-bold underline">
+                    {t('recent_orders', '최근 주문 내역')}
                   </button>
-                  , manage your{' '}
-                  <button onClick={() => setActiveTab('addresses')} className="text-[#c59b27] underline">
-                    shipping and billing addresses
+                  을 확인하시고,{' '}
+                  <button onClick={() => setActiveTab('addresses')} className="text-[#14532D] font-bold underline">
+                    {t('shipping_address', '기본 배송지 주소')}
                   </button>
-                  , and edit your{' '}
-                  <button onClick={() => setActiveTab('profile')} className="text-[#c59b27] underline">
-                    password and account details
+                  와{' '}
+                  <button onClick={() => setActiveTab('profile')} className="text-[#14532D] font-bold underline">
+                    {t('account_details', '회원 정보')}
                   </button>
-                  .
+                  를 관리하실 수 있습니다.
                 </p>
               </div>
 
               {/* Dashboard Stats */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="bg-[#101411] border border-emerald-900/30 p-5 rounded-lg space-y-1">
-                  <div className="text-stone-400 text-xs uppercase font-mono">Total Orders</div>
-                  <div className="font-mono text-3xl font-bold text-[#c59b27]">{orders.length}</div>
-                  <div className="text-[11px] text-stone-500">Lifetime purchases</div>
+                <div className="bg-white border border-stone-200 p-5 rounded-xl space-y-1 shadow-sm">
+                  <div className="text-stone-500 text-xs font-bold font-mono">총 주문 건수</div>
+                  <div className="font-mono text-3xl font-bold text-[#14532D]">{orders.length}</div>
+                  <div className="text-[11px] text-stone-400">누적 구매 횟수</div>
                 </div>
-                <div className="bg-[#101411] border border-emerald-900/30 p-5 rounded-lg space-y-1">
-                  <div className="text-stone-400 text-xs uppercase font-mono">Wishlist Items</div>
-                  <div className="font-mono text-3xl font-bold text-[#c59b27]">{wishlist.length}</div>
-                  <div className="text-[11px] text-stone-500">Saved products</div>
+                <div className="bg-white border border-stone-200 p-5 rounded-xl space-y-1 shadow-sm">
+                  <div className="text-stone-500 text-xs font-bold font-mono">위시리스트 저장</div>
+                  <div className="font-mono text-3xl font-bold text-[#EAB308]">{wishlist.length}</div>
+                  <div className="text-[11px] text-stone-400">관심 상품 목록</div>
                 </div>
-                <div className="bg-[#101411] border border-emerald-900/30 p-5 rounded-lg space-y-1">
-                  <div className="text-stone-400 text-xs uppercase font-mono">Membership Tier</div>
-                  <div className="font-serif-luxury text-xl font-bold text-amber-400 flex items-center space-x-1">
-                    <ShieldCheck size={18} />
-                    <span>VIP Heritage</span>
+                <div className="bg-white border border-stone-200 p-5 rounded-xl space-y-1 shadow-sm">
+                  <div className="text-stone-500 text-xs font-bold font-mono">회원 등급</div>
+                  <div className="font-jakarta text-lg font-bold text-[#14532D] flex items-center space-x-1">
+                    <ShieldCheck size={18} className="text-[#EAB308]" />
+                    <span>송영민푸드 VIP 멤버</span>
                   </div>
-                  <div className="text-[11px] text-stone-500">Free Express Shipping active</div>
+                  <div className="text-[11px] text-emerald-700 font-bold">24시간 에어 냉장배송 혜택 적용</div>
                 </div>
               </div>
 
               {/* Recent Order Preview */}
               {orders.length > 0 && (
-                <div className="bg-[#101411] border border-emerald-900/30 rounded-lg p-6 space-y-4">
-                  <div className="flex justify-between items-center border-b border-emerald-900/30 pb-3">
-                    <h3 className="font-serif-luxury text-lg text-white font-medium">Recent Order</h3>
+                <div className="bg-white border border-stone-200 rounded-xl p-6 space-y-4 shadow-sm">
+                  <div className="flex justify-between items-center border-b border-stone-100 pb-3">
+                    <h3 className="font-jakarta text-base font-bold text-stone-900">최근 주문</h3>
                     <button
                       onClick={() => setActiveTab('orders')}
-                      className="text-xs text-[#c59b27] hover:underline font-mono"
+                      className="text-xs text-[#14532D] font-bold hover:underline font-mono"
                     >
-                      View All Orders →
+                      전체 주문 내역 보기 &rarr;
                     </button>
                   </div>
                   <div className="flex justify-between items-center text-xs font-mono">
                     <div>
-                      <span className="text-stone-500">Order ID: </span>
-                      <span className="text-stone-200 font-bold">{orders[0].id}</span>
+                      <span className="text-stone-500">주문 번호: </span>
+                      <span className="text-stone-900 font-bold">{orders[0].id}</span>
                     </div>
-                    <span className="bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded text-[11px]">
+                    <span className="bg-emerald-100 text-[#14532D] font-bold px-2.5 py-1 rounded-full text-[11px]">
                       {orders[0].status}
                     </span>
                   </div>

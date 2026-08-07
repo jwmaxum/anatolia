@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Lock, Mail, User, ArrowRight, ShieldCheck, Sparkles, KeyRound } from 'lucide-react';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export default function CustomerLoginPage() {
   const router = useRouter();
   const { login, signup, isLoggedIn, user } = useAuth();
+  const { t } = useLanguage();
 
   // Active Tab for mobile or toggle view: 'login' | 'register'
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
@@ -26,17 +28,17 @@ export default function CustomerLoginPage() {
 
   if (isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#141815] flex flex-col justify-center items-center p-6 text-center space-y-4">
-        <div className="w-16 h-16 rounded-full bg-[#c59b27]/20 border border-[#c59b27] text-[#c59b27] flex items-center justify-center">
+      <div className="min-h-screen bg-[#FAFAF8] flex flex-col justify-center items-center p-6 text-center space-y-4 font-sans">
+        <div className="w-16 h-16 rounded-full bg-emerald-100 border border-[#14532D] text-[#14532D] flex items-center justify-center">
           <User size={32} />
         </div>
-        <h2 className="font-serif-luxury text-2xl text-white">Already Logged In</h2>
-        <p className="text-xs text-stone-400">Welcome back, {user?.name} ({user?.email})</p>
+        <h2 className="font-jakarta text-2xl font-bold text-stone-900">이미 로그인되어 있습니다</h2>
+        <p className="text-xs text-stone-500">환영합니다, {user?.name}님 ({user?.email})</p>
         <Link
           href="/account"
-          className="bg-[#c59b27] hover:bg-[#b08820] text-black font-semibold text-xs uppercase px-5 py-2.5 rounded"
+          className="bg-[#14532D] hover:bg-[#1b6a3b] text-white font-semibold text-xs uppercase px-6 py-3 rounded-md transition-colors"
         >
-          Go to My Account Dashboard
+          마이페이지 대시보드로 이동
         </Link>
       </div>
     );
@@ -61,9 +63,9 @@ export default function CustomerLoginPage() {
   };
 
   const handleFillDemo = () => {
-    setLoginEmail('demo@anatolia.com');
+    setLoginEmail('demo@songyoungminfood.com');
     setLoginPassword('password123');
-    const res = login('demo@anatolia.com', 'password123');
+    const res = login('demo@songyoungminfood.com', 'password123');
     setLoginMsg(res);
     if (res.success) {
       setTimeout(() => router.push('/account'), 600);
@@ -71,84 +73,84 @@ export default function CustomerLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#141815] text-stone-100 pb-24">
+    <div className="min-h-screen bg-[#FAFAF8] text-stone-800 pb-24 font-sans">
       {/* Hero Banner Header */}
-      <div className="bg-[#0d110e] border-b border-emerald-900/30 py-12 px-4 sm:px-6 lg:px-8 text-center space-y-3">
-        <div className="inline-flex items-center space-x-2 bg-[#c59b27]/10 border border-[#c59b27]/30 text-[#c59b27] text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest">
+      <div className="bg-white border-b border-stone-200 py-12 px-4 sm:px-6 lg:px-8 text-center space-y-3 shadow-sm">
+        <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200 text-[#14532D] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">
           <KeyRound size={13} />
-          <span>WooCommerce Customer Portal</span>
+          <span>송영민푸드 고객 서비스 포털</span>
         </div>
-        <h1 className="font-serif-luxury text-3xl sm:text-4xl font-light text-white">
-          My Account
+        <h1 className="font-jakarta text-3xl sm:text-4xl font-extrabold text-stone-900">
+          고객 마이페이지 로그인
         </h1>
-        <p className="text-xs text-stone-400 font-light max-w-md mx-auto">
-          Access your order history, manage addresses, track shipments, and view saved items.
+        <p className="text-xs text-stone-500 font-medium max-w-md mx-auto">
+          주문 내역 조회, 배송지 관리, 배송 상태 추적 및 위시리스트 관리를 위한 포털입니다.
         </p>
       </div>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
         
         {/* Quick One-Click Demo Login Bar */}
-        <div className="bg-[#18221b] border border-emerald-800/40 rounded-lg p-4 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center space-x-3 text-xs text-stone-300">
-            <Sparkles className="text-[#c59b27] flex-shrink-0" size={18} />
+        <div className="bg-white border border-stone-200 rounded-xl p-4 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm">
+          <div className="flex items-center space-x-3 text-xs text-stone-700">
+            <Sparkles className="text-[#EAB308] flex-shrink-0" size={18} />
             <div>
-              <span className="font-semibold text-white">Quick Demo Access: </span>
-              <span className="text-stone-400 font-mono">Test account (demo@anatolia.com)</span>
+              <span className="font-bold text-stone-900">1-Click 체험용 테스트 계정: </span>
+              <span className="text-[#14532D] font-mono font-bold">(demo@songyoungminfood.com)</span>
             </div>
           </div>
           <button
             onClick={handleFillDemo}
-            className="bg-[#c59b27] hover:bg-[#b08820] text-black font-semibold text-xs px-4 py-2 rounded uppercase tracking-wider transition-colors whitespace-nowrap"
+            className="bg-[#14532D] hover:bg-[#1b6a3b] text-white font-bold text-xs px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
           >
-            Instant Demo Login
+            체험용 계정 즉시 로그인
           </button>
         </div>
 
         {/* Mobile Tab Toggle Switch */}
-        <div className="flex md:hidden border-b border-emerald-900/30 mb-6">
+        <div className="flex md:hidden border-b border-stone-200 mb-6">
           <button
             onClick={() => setActiveTab('login')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 uppercase tracking-wider ${
+            className={`flex-1 py-3 text-sm font-bold border-b-2 tracking-wider ${
               activeTab === 'login'
-                ? 'border-[#c59b27] text-[#c59b27]'
+                ? 'border-[#14532D] text-[#14532D]'
                 : 'border-transparent text-stone-400'
             }`}
           >
-            Login
+            로그인
           </button>
           <button
             onClick={() => setActiveTab('register')}
-            className={`flex-1 py-3 text-sm font-medium border-b-2 uppercase tracking-wider ${
+            className={`flex-1 py-3 text-sm font-bold border-b-2 tracking-wider ${
               activeTab === 'register'
-                ? 'border-[#c59b27] text-[#c59b27]'
+                ? 'border-[#14532D] text-[#14532D]'
                 : 'border-transparent text-stone-400'
             }`}
           >
-            Register
+            회원가입
           </button>
         </div>
 
-        {/* 2-Column WooCommerce Container */}
+        {/* 2-Column Container */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           
           {/* Left Column: Login Form */}
           <div
-            className={`bg-[#101411] border border-emerald-900/30 rounded-lg p-6 sm:p-8 space-y-6 shadow-xl ${
+            className={`bg-white border border-stone-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm ${
               activeTab === 'register' ? 'hidden md:block' : 'block'
             }`}
           >
-            <div className="border-b border-emerald-900/30 pb-3">
-              <h2 className="font-serif-luxury text-xl text-white font-medium">Login</h2>
-              <p className="text-xs text-stone-400 mt-1">If you have an account with us, please log in.</p>
+            <div className="border-b border-stone-100 pb-3">
+              <h2 className="font-jakarta text-xl text-stone-900 font-bold">고객 로그인</h2>
+              <p className="text-xs text-stone-500 mt-1">송영민푸드 계정이 있으신 경우 로그인해 주세요.</p>
             </div>
 
             {loginMsg && (
               <div
-                className={`text-xs p-3 rounded border ${
+                className={`text-xs p-3 rounded-lg border font-bold ${
                   loginMsg.success
-                    ? 'bg-emerald-950/80 border-emerald-700/50 text-emerald-400'
-                    : 'bg-red-950/80 border-red-800/50 text-red-400'
+                    ? 'bg-emerald-50 border-emerald-300 text-[#14532D]'
+                    : 'bg-red-50 border-red-300 text-red-600'
                 }`}
               >
                 {loginMsg.message}
@@ -157,71 +159,71 @@ export default function CustomerLoginPage() {
 
             <form onSubmit={handleLoginSubmit} className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="text-stone-300 font-medium">Username or email address *</label>
+                <label className="text-stone-700 font-bold">이메일 주소 *</label>
                 <div className="relative">
-                  <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+                  <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
                   <input
                     type="email"
                     required
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="demo@anatolia.com"
-                    className="w-full bg-stone-900 border border-emerald-900/40 rounded pl-8 pr-3 py-2.5 text-stone-200 focus:outline-none focus:border-[#c59b27]"
+                    placeholder="demo@songyoungminfood.com"
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg pl-8 pr-3 py-2.5 text-stone-900 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-stone-300 font-medium">Password *</label>
+                <label className="text-stone-700 font-bold">비밀번호 *</label>
                 <div className="relative">
-                  <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+                  <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
                   <input
                     type="password"
                     required
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-stone-900 border border-emerald-900/40 rounded pl-8 pr-3 py-2.5 text-stone-200 focus:outline-none focus:border-[#c59b27]"
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg pl-8 pr-3 py-2.5 text-stone-900 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20"
                   />
                 </div>
               </div>
 
               <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center space-x-2 text-stone-400 cursor-pointer">
-                  <input type="checkbox" className="accent-[#c59b27] rounded" defaultChecked />
-                  <span>Remember me</span>
+                <label className="flex items-center space-x-2 text-stone-600 cursor-pointer">
+                  <input type="checkbox" className="accent-[#14532D] rounded" defaultChecked />
+                  <span>로그인 상태 유지</span>
                 </label>
-                <a href="#" onClick={(e) => { e.preventDefault(); alert('Password reset link sent to email.'); }} className="text-[#c59b27] hover:underline">
-                  Lost your password?
+                <a href="#" onClick={(e) => { e.preventDefault(); alert('비밀번호 재설정 이메일이 발송되었습니다.'); }} className="text-[#14532D] font-bold hover:underline">
+                  비밀번호를 잊으셨나요?
                 </a>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#c59b27] hover:bg-[#b08820] text-black font-semibold py-3 px-4 rounded uppercase tracking-widest transition-all shadow-lg flex items-center justify-center space-x-2"
+                className="w-full bg-[#14532D] hover:bg-[#1b6a3b] text-white font-bold py-3 px-4 rounded-lg transition-all shadow flex items-center justify-center space-x-2"
               >
-                <span>Log In</span>
+                <span>로그인하기</span>
                 <ArrowRight size={15} />
               </button>
             </form>
 
             {/* Social Logins */}
-            <div className="pt-4 border-t border-emerald-900/30 text-center space-y-3">
-              <span className="text-[11px] text-stone-500 uppercase tracking-wider block">Or sign in with</span>
+            <div className="pt-4 border-t border-stone-100 text-center space-y-3">
+              <span className="text-[11px] text-stone-400 font-bold uppercase tracking-wider block">간편 간편 로그인</span>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={handleFillDemo}
-                  className="bg-stone-900 hover:bg-stone-800 border border-emerald-900/40 py-2 rounded text-xs text-stone-300 transition-colors"
+                  className="bg-stone-100 hover:bg-stone-200 border border-stone-300 py-2 rounded-lg text-xs font-bold text-stone-800 transition-colors"
                 >
-                  Google Account
+                  Google 계정
                 </button>
                 <button
                   type="button"
                   onClick={handleFillDemo}
-                  className="bg-amber-950/40 hover:bg-amber-900/40 border border-amber-800/40 py-2 rounded text-xs text-amber-300 transition-colors"
+                  className="bg-[#FEE500] hover:bg-[#FADA00] border border-[#E5CE00] py-2 rounded-lg text-xs font-bold text-[#3C1E1E] transition-colors"
                 >
-                  Kakao Sign In
+                  카카오 간편로그인
                 </button>
               </div>
             </div>
@@ -229,21 +231,21 @@ export default function CustomerLoginPage() {
 
           {/* Right Column: Register Form */}
           <div
-            className={`bg-[#101411] border border-emerald-900/30 rounded-lg p-6 sm:p-8 space-y-6 shadow-xl ${
+            className={`bg-white border border-stone-200 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm ${
               activeTab === 'login' ? 'hidden md:block' : 'block'
             }`}
           >
-            <div className="border-b border-emerald-900/30 pb-3">
-              <h2 className="font-serif-luxury text-xl text-white font-medium">Register</h2>
-              <p className="text-xs text-stone-400 mt-1">Create a new customer account to enjoy seamless checkout.</p>
+            <div className="border-b border-stone-100 pb-3">
+              <h2 className="font-jakarta text-xl text-stone-900 font-bold">신규 회원가입</h2>
+              <p className="text-xs text-stone-500 mt-1">송영민푸드 회원으로 가입하시고 프레시 혜택을 누리세요.</p>
             </div>
 
             {regMsg && (
               <div
-                className={`text-xs p-3 rounded border ${
+                className={`text-xs p-3 rounded-lg border font-bold ${
                   regMsg.success
-                    ? 'bg-emerald-950/80 border-emerald-700/50 text-emerald-400'
-                    : 'bg-red-950/80 border-red-800/50 text-red-400'
+                    ? 'bg-emerald-50 border-emerald-300 text-[#14532D]'
+                    : 'bg-red-50 border-red-300 text-red-600'
                 }`}
               >
                 {regMsg.message}
@@ -252,63 +254,65 @@ export default function CustomerLoginPage() {
 
             <form onSubmit={handleRegisterSubmit} className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="text-stone-300 font-medium">Full Name *</label>
+                <label className="text-stone-700 font-bold">이름 (성함) *</label>
                 <div className="relative">
-                  <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+                  <User size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
                   <input
                     type="text"
                     required
                     value={regName}
                     onChange={(e) => setRegName(e.target.value)}
-                    placeholder="Lorenzo Medici"
-                    className="w-full bg-stone-900 border border-emerald-900/40 rounded pl-8 pr-3 py-2.5 text-stone-200 focus:outline-none focus:border-[#c59b27]"
+                    placeholder="홍길동"
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg pl-8 pr-3 py-2.5 text-stone-900 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-stone-300 font-medium">Email address *</label>
+                <label className="text-stone-700 font-bold">이메일 주소 *</label>
                 <div className="relative">
-                  <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+                  <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
                   <input
                     type="email"
                     required
                     value={regEmail}
                     onChange={(e) => setRegEmail(e.target.value)}
                     placeholder="user@domain.com"
-                    className="w-full bg-stone-900 border border-emerald-900/40 rounded pl-8 pr-3 py-2.5 text-stone-200 focus:outline-none focus:border-[#c59b27]"
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg pl-8 pr-3 py-2.5 text-stone-900 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-stone-300 font-medium">Password *</label>
+                <label className="text-stone-700 font-bold">비밀번호 *</label>
                 <div className="relative">
-                  <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-500" />
+                  <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
                   <input
                     type="password"
                     required
                     value={regPassword}
                     onChange={(e) => setRegPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full bg-stone-900 border border-emerald-900/40 rounded pl-8 pr-3 py-2.5 text-stone-200 focus:outline-none focus:border-[#c59b27]"
+                    placeholder="비밀번호 6자리 이상 입력..."
+                    className="w-full bg-stone-50 border border-stone-300 rounded-lg pl-8 pr-3 py-2.5 text-stone-900 focus:outline-none focus:border-[#14532D] focus:ring-2 focus:ring-[#14532D]/20"
                   />
                 </div>
               </div>
 
-              <p className="text-[11px] text-stone-400 font-light leading-relaxed">
-                Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.
-              </p>
+              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 text-[11px] leading-relaxed font-medium">
+                <ShieldCheck size={14} className="inline mr-1 text-[#14532D]" />
+                신규 가입 시 24시간 프레시 냉장배송 무료 쿠폰 및 15% 할인 쿠폰이 즉시 발급됩니다.
+              </div>
 
               <button
                 type="submit"
-                className="w-full bg-stone-800 hover:bg-stone-700 text-stone-200 font-semibold py-3 px-4 rounded uppercase tracking-widest transition-all border border-stone-700 flex items-center justify-center space-x-2"
+                className="w-full bg-[#14532D] hover:bg-[#1b6a3b] text-white font-bold py-3 px-4 rounded-lg transition-all shadow flex items-center justify-center space-x-2"
               >
-                <span>Register Account</span>
+                <span>회원가입 신청</span>
                 <ArrowRight size={15} />
               </button>
             </form>
           </div>
+
         </div>
       </main>
     </div>
