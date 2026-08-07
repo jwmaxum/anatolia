@@ -2,8 +2,8 @@ import React from 'react';
 import HeroManager from './HeroManager';
 
 export const metadata = {
-  title: 'Hero Banner & Media Slider CMS | Anatolia Admin',
-  description: 'Manage main landing page video backgrounds, image sliders, titles and CTA buttons.',
+  title: '히어로 비디오 & 슬라이더 CMS | 송영민푸드 관리자',
+  description: '송영민푸드 메인 랜딩 비주얼, MP4 동영상 및 이미지 슬라이더, 카피 문구 CMS.',
 };
 
 export default function AdminHeroPage() {

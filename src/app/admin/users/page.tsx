@@ -39,28 +39,30 @@ const ROLE_LABELS: Record<UserRole, { label: string; color: string; bg: string }
 const SAMPLE_USERS: AdminUser[] = [
   {
     id: '1',
-    email: 'admin@anatolia.com',
-    name: '관리자',
+    email: 'admin@songyoungminfood.com',
+    name: '총괄 최고 관리자',
     role: 'admin',
     status: 'active',
     created_at: '2026-01-01T00:00:00Z',
-    company: 'Anatolia',
+    company: '송영민푸드',
   },
   {
     id: '2',
-    email: 'editor@anatolia.com',
-    name: '에디터',
+    email: 'editor@songyoungminfood.com',
+    name: 'K-푸드 에디터',
     role: 'editor',
     status: 'active',
     created_at: '2026-02-01T00:00:00Z',
+    company: '송영민푸드',
   },
   {
     id: '3',
-    email: 'viewer@anatolia.com',
-    name: '뷰어',
+    email: 'viewer@songyoungminfood.com',
+    name: '일반 뷰어',
     role: 'viewer',
     status: 'inactive',
     created_at: '2026-03-01T00:00:00Z',
+    company: '송영민푸드',
   },
 ];
 

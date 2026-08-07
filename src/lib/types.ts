@@ -56,7 +56,7 @@ export interface JournalArticle {
   id: string;
   title: string;
   slug: string;
-  category: 'News' | 'Event' | 'Architecture' | 'Design';
+  category: 'News' | 'Event' | 'Architecture' | 'Design' | '뉴스' | 'K-레시피' | string;
   content: string; // Markdown / Text content
   excerpt: string;
   cover_image: string;

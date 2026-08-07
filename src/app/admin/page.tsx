@@ -17,8 +17,8 @@ import {
 import type { KpiData } from '@/app/api/kpi/route';
 
 export const metadata = {
-  title: 'Admin Dashboard Hub | Anatolia',
-  description: 'Integrated Content Management System dashboard for Anatolia Web App.',
+  title: '송영민푸드 관리자 대시보드 | Song Youngmin Food CMS',
+  description: '송영민푸드 K-Food 마켓플레이스 실시간 대시보드 및 백오피스 관제실.',
 };
 
 async function fetchKpi(): Promise<KpiData & { configured: boolean }> {
@@ -57,33 +57,33 @@ export default async function AdminDashboardPage() {
 
   const kpiCards = [
     {
-      label: '총 주문',
+      label: '총 주문 수',
       value: kpi.totalOrders.toString(),
       sub: `미처리 ${kpi.pendingOrders}건`,
       subColor: kpi.pendingOrders > 0 ? 'text-amber-400' : 'text-emerald-400',
       icon: ShoppingCart,
-      iconColor: 'text-[#c5a880]',
+      iconColor: 'text-[#EAB308]',
     },
     {
-      label: '총 매출',
+      label: '총 매출액',
       value: formatCurrency(kpi.totalRevenue),
-      sub: '누적 주문 합계',
+      sub: '누적 결제 합계',
       subColor: 'text-stone-500',
       icon: TrendingUp,
       iconColor: 'text-emerald-400',
     },
     {
-      label: '등록 제품',
+      label: 'K-푸드 등록 상품',
       value: kpi.totalProducts.toString(),
-      sub: 'Products',
+      sub: '개 품목 판매중',
       subColor: 'text-stone-500',
       icon: Package,
       iconColor: 'text-sky-400',
     },
     {
-      label: '회원 수',
+      label: '가입 회원 수',
       value: kpi.totalUsers.toString(),
-      sub: '가입 사용자',
+      sub: '명 등록됨',
       subColor: 'text-stone-500',
       icon: Users,
       iconColor: 'text-violet-400',
@@ -92,40 +92,40 @@ export default async function AdminDashboardPage() {
 
   const cmsCards = [
     {
-      label: 'Menu Engine',
+      label: '메뉴 엔진',
       value: kpi.activeMenus.toString(),
-      sub: 'Active Menus',
+      sub: '활성 메뉴 개수',
       icon: Layers,
-      iconColor: 'text-[#c5a880]',
+      iconColor: 'text-[#EAB308]',
       href: '/admin/navigation',
-      linkLabel: 'Manage Navigation',
+      linkLabel: '메뉴 관리 바로가기',
     },
     {
-      label: 'Media Assets',
+      label: '미디어 파일',
       value: kpi.totalMediaItems.toString(),
-      sub: 'Files',
+      sub: '업로드된 파일',
       icon: ImageIcon,
       iconColor: 'text-emerald-400',
       href: '/admin/media',
-      linkLabel: 'Upload & Manage',
+      linkLabel: '미디어 라이브러리',
     },
     {
-      label: 'Journal Articles',
+      label: 'K-레시피 저널',
       value: kpi.publishedArticles.toString(),
-      sub: 'Published',
+      sub: '발행된 아티클',
       icon: BookOpen,
       iconColor: 'text-amber-400',
       href: '/admin/journal',
-      linkLabel: 'Edit Journal',
+      linkLabel: '저널 편집 바로가기',
     },
     {
-      label: 'Pending Orders',
+      label: '미처리 대기 주문',
       value: kpi.pendingOrders.toString(),
-      sub: 'Awaiting action',
+      sub: '배송 대기중',
       icon: Clock,
       iconColor: kpi.pendingOrders > 0 ? 'text-red-400' : 'text-stone-500',
       href: '/admin/products',
-      linkLabel: 'View Products',
+      linkLabel: '제품/주문 확인',
     },
   ];
 
@@ -135,15 +135,15 @@ export default async function AdminDashboardPage() {
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-stone-800 pb-6 gap-4">
         <div>
-          <div className="flex items-center space-x-2 text-[#c5a880] text-xs font-mono uppercase tracking-widest mb-1">
+          <div className="flex items-center space-x-2 text-[#EAB308] text-xs font-mono uppercase tracking-widest mb-1">
             <ShieldCheck size={16} />
-            <span>Anatolia Admin Management Hub</span>
+            <span>송영민푸드 통합 관제실</span>
           </div>
-          <h1 className="font-serif-luxury text-3xl font-semibold text-white tracking-wide">
-            Content &amp; Engine Control Panel
+          <h1 className="font-jakarta text-3xl font-bold text-white tracking-wide">
+            실시간 백오피스 대시보드
           </h1>
           <p className="text-stone-400 text-xs mt-1">
-            실시간 DB 연동 KPI · 메뉴/히어로/콘텐츠 CMS · 미디어 라이브러리 통합 관리
+            실시간 DB 연동 KPI · K-Food 제품/메뉴/히어로 CMS · 미디어 라이브러리 통합 관리
           </p>
         </div>
 
@@ -155,9 +155,9 @@ export default async function AdminDashboardPage() {
           )}
           <Link
             href="/"
-            className="px-4 py-2 bg-[#c5a880] text-black font-semibold text-xs tracking-wider uppercase rounded hover:bg-[#dbbc93] transition-colors"
+            className="px-4 py-2 bg-[#14532D] hover:bg-[#1b6a3b] text-white font-semibold text-xs tracking-wider rounded transition-colors"
           >
-            View Live Website
+            라이브 쇼핑몰 바로가기 &rarr;
           </Link>
         </div>
       </div>

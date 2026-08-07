@@ -109,14 +109,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   const navLinks = [
-    { href: '/admin', label: 'Dashboard Hub', icon: LayoutDashboard },
-    { href: '/admin/navigation', label: 'Menu Engine', icon: Layers },
-    { href: '/admin/hero', label: 'Hero Slider CMS', icon: Film },
-    { href: '/admin/products', label: 'Product CRUD', icon: Shield },
-    { href: '/admin/content-blocks', label: 'Content Block Editor', icon: FileText },
-    { href: '/admin/journal', label: 'Journal Editor', icon: FileText },
-    { href: '/admin/media', label: 'Media Library', icon: ImageIcon },
-    { href: '/admin/users', label: 'User Management', icon: Users },
+    { href: '/admin', label: '실시간 대시보드', icon: LayoutDashboard },
+    { href: '/admin/navigation', label: '메뉴 엔진 (GNB/Footer)', icon: Layers },
+    { href: '/admin/hero', label: '히어로 비디오/슬라이더', icon: Film },
+    { href: '/admin/products', label: 'K-푸드 & 주류 제품 관리', icon: Shield },
+    { href: '/admin/content-blocks', label: '페이지 섹션 콘텐츠', icon: FileText },
+    { href: '/admin/journal', label: 'K-레시피 & 저널 에디터', icon: FileText },
+    { href: '/admin/media', label: '미디어 라이브러리 CDN', icon: ImageIcon },
+    { href: '/admin/users', label: '사용자 권한 관리', icon: Users },
   ];
 
   if (isAuthenticated === false) {
@@ -124,11 +124,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <div className="min-h-screen bg-[#0a0a0c] text-stone-200 flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-[#111118] border border-stone-800 rounded-xl p-8 shadow-2xl space-y-6">
           <div className="text-center space-y-2">
-            <div className="w-12 h-12 bg-[#c5a880]/10 border border-[#c5a880]/30 text-[#c5a880] rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-12 h-12 bg-[#EAB308]/10 border border-[#EAB308]/30 text-[#EAB308] rounded-full flex items-center justify-center mx-auto mb-4">
               <Lock size={24} />
             </div>
-            <h1 className="text-2xl font-serif-luxury font-bold text-white tracking-wide">
-              Anatolia CMS Access
+            <h1 className="text-2xl font-bold text-white tracking-wide font-jakarta">
+              송영민푸드 관리자 로그인
             </h1>
             <p className="text-xs text-stone-400">
               관리자 계정 아이디와 비밀번호를 입력하세요.

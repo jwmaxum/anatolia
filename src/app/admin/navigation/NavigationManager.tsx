@@ -25,30 +25,29 @@ import { GripVertical, Plus, Trash2, ArrowLeft, Eye, EyeOff, RefreshCw, Layers, 
 
 const FALLBACK_RAW_MENUS: MenuItem[] = [
   // Header Menus
-  { id: 'menu-hdr-1', title: 'Fresh & Gourmet', url: '/collections?cat=fresh', parent_id: null, sort_order: 1, is_active: true, position: 'header', badge: 'ORGANIC' },
-  { id: 'menu-hdr-2', title: 'Artisanal Pantry', url: '/collections?cat=pantry', parent_id: null, sort_order: 2, is_active: true, position: 'header', badge: 'HERITAGE' },
-  { id: 'menu-hdr-3', title: 'Dairy & Charcuterie', url: '/collections?cat=dairy', parent_id: null, sort_order: 3, is_active: true, position: 'header', badge: 'AGED DOP' },
-  { id: 'menu-hdr-4', title: 'About Anatolia Gourmet', url: '/about', parent_id: null, sort_order: 4, is_active: true, position: 'header' },
-  { id: 'menu-hdr-5', title: 'Contact', url: '/contact', parent_id: null, sort_order: 5, is_active: true, position: 'header' },
-  { id: 'menu-hdr-6', title: 'Shop', url: '/shop', parent_id: null, sort_order: 6, is_active: true, position: 'header' },
-  { id: 'menu-hdr-7', title: 'Journal', url: '/journal', parent_id: null, sort_order: 7, is_active: true, position: 'header' },
+  { id: 'menu-hdr-1', title: 'K-냉동식품', url: '/collections?cat=fresh', parent_id: null, sort_order: 1, is_active: true, position: 'header', badge: 'HOT' },
+  { id: 'menu-hdr-2', title: 'K-주류 & 전통주', url: '/collections?cat=dairy', parent_id: null, sort_order: 2, is_active: true, position: 'header', badge: 'PREMIUM' },
+  { id: 'menu-hdr-3', title: '오늘의 특가', url: '/collections?cat=deals', parent_id: null, sort_order: 3, is_active: true, position: 'header', badge: 'SALE' },
+  { id: 'menu-hdr-4', title: '베스트셀러', url: '/shop', parent_id: null, sort_order: 4, is_active: true, position: 'header' },
+  { id: 'menu-hdr-5', title: 'K-간식 & 디저트', url: '/collections?cat=pantry', parent_id: null, sort_order: 5, is_active: true, position: 'header' },
+  { id: 'menu-hdr-6', title: 'K-레시피 & 저널', url: '/journal', parent_id: null, sort_order: 6, is_active: true, position: 'header' },
 
   // Sub-Menus
-  { id: 'menu-sub-1', title: 'Organic Olive Oils', url: '/collections?cat=fresh#oil', parent_id: 'menu-hdr-1', sort_order: 1, is_active: true, position: 'header' },
-  { id: 'menu-sub-2', title: 'Wild Harvest Truffles', url: '/collections?cat=fresh#truffle', parent_id: 'menu-hdr-1', sort_order: 2, is_active: true, position: 'header' },
-  { id: 'menu-sub-3', title: 'Aged Modena Vinegars', url: '/collections?cat=pantry#balsamic', parent_id: 'menu-hdr-2', sort_order: 1, is_active: true, position: 'header' },
-  { id: 'menu-sub-4', title: 'Raw Blossom Honey', url: '/collections?cat=pantry#honey', parent_id: 'menu-hdr-2', sort_order: 2, is_active: true, position: 'header' },
-  { id: 'menu-sub-5', title: '36-Month DOP Cheeses', url: '/collections?cat=dairy#cheese', parent_id: 'menu-hdr-3', sort_order: 1, is_active: true, position: 'header' },
-  { id: 'menu-sub-6', title: 'Pure Iberico Hams', url: '/collections?cat=dairy#ham', parent_id: 'menu-hdr-3', sort_order: 2, is_active: true, position: 'header' },
+  { id: 'menu-sub-1', title: 'CJ 비비고 왕교자 만두', url: '/collections?cat=fresh#mandu', parent_id: 'menu-hdr-1', sort_order: 1, is_active: true, position: 'header' },
+  { id: 'menu-sub-2', title: 'K-수제 떡볶이 & 밀키트', url: '/collections?cat=fresh#tteok', parent_id: 'menu-hdr-1', sort_order: 2, is_active: true, position: 'header' },
+  { id: 'menu-sub-3', title: '크리스피 양념 & 간장치킨', url: '/collections?cat=fresh#chicken', parent_id: 'menu-hdr-1', sort_order: 3, is_active: true, position: 'header' },
+  { id: 'menu-sub-4', title: '원소주 & 증류식 소주', url: '/collections?cat=dairy#soju', parent_id: 'menu-hdr-2', sort_order: 1, is_active: true, position: 'header' },
+  { id: 'menu-sub-5', title: '느린마을 생막걸리 & 탁주', url: '/collections?cat=dairy#makgeolli', parent_id: 'menu-hdr-2', sort_order: 2, is_active: true, position: 'header' },
+  { id: 'menu-sub-6', title: '참이슬 후레쉬 & 하이트 맥주', url: '/collections?cat=dairy#beer', parent_id: 'menu-hdr-2', sort_order: 3, is_active: true, position: 'header' },
 
   // Footer Menus
-  { id: 'menu-ftr-1', title: 'About Anatolia Gourmet', url: '/about', parent_id: null, sort_order: 1, is_active: true, position: 'footer' },
-  { id: 'menu-ftr-2', title: 'Organic Certified Estates', url: '/collections', parent_id: null, sort_order: 2, is_active: true, position: 'footer' },
-  { id: 'menu-ftr-3', title: 'Heritage Artisans & Journal', url: '/journal', parent_id: null, sort_order: 3, is_active: true, position: 'footer' },
-  { id: 'menu-ftr-4', title: 'Contact & Customer Support', url: '/contact', parent_id: null, sort_order: 4, is_active: true, position: 'footer' },
-  { id: 'menu-ftr-5', title: 'Shipping & Delivery Policy', url: '/checkout', parent_id: null, sort_order: 5, is_active: true, position: 'footer' },
-  { id: 'menu-ftr-6', title: 'Privacy Policy', url: '/privacy', parent_id: null, sort_order: 6, is_active: true, position: 'footer' },
-  { id: 'menu-ftr-7', title: 'Terms of Service', url: '/terms', parent_id: null, sort_order: 7, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-1', title: 'K-FOOD & LIQUOR 소개', url: '/about', parent_id: null, sort_order: 1, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-2', title: 'K-냉동식품 컬렉션', url: '/collections', parent_id: null, sort_order: 2, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-3', title: 'K-주류 & 전통주 컬렉션', url: '/collections?cat=dairy', parent_id: null, sort_order: 3, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-4', title: '고객 센터 & 문의', url: '/contact', parent_id: null, sort_order: 4, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-5', title: '24시간 에어 냉장배송 안내', url: '/checkout', parent_id: null, sort_order: 5, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-6', title: '개인정보 처리방침', url: '/privacy', parent_id: null, sort_order: 6, is_active: true, position: 'footer' },
+  { id: 'menu-ftr-7', title: '이용약관', url: '/terms', parent_id: null, sort_order: 7, is_active: true, position: 'footer' },
 ];
 
 function buildMenuTree(allMenus: MenuItem[]): MenuItem[] {
