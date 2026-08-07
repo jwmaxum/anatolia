@@ -1,16 +1,17 @@
-# Anatolia 웹 애플리케이션 개발 완료 보고서 (PROJECT_DEVELOPMENT_SUMMARY.md)
+# 송영민푸드 (Song Youngmin Food) K-Food 웹 애플리케이션 개발 완료 보고서 (PROJECT_DEVELOPMENT_SUMMARY.md)
 
-- **사이트 참조**: https://www.anatolia.com/
+- **사이트 브랜드**: **송영민푸드 (Song Youngmin Food)**
+- **주요 키워드 (SEO)**: `K-Food`, `Korea Food`, `K-Fresh Food`, `송영민푸드`, `Song Youngmin Food`, `K-Frozen Food`, `K-Liquor`
 - **GitHub 저장소**: https://github.com/jwmaxum/anatolia.git
-- **기술 스택**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, Lucide Icons, @dnd-kit, Supabase SDK, Cloudflare Pages
+- **기술 스택**: Next.js 16.3.0 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS, Lucide Icons, @dnd-kit, Supabase SDK, Jest
 
 ---
 
 ## 1. 프로젝트 개요 (Overview)
 
-본 프로젝트는 글로벌 최고급 타일 및 소결석 슬라브 제조 브랜드인 **Anatolia**의 럭셔리 웹사이트 레이아웃과 감성을 동일하게 구현한 풀스택 웹 애플리케이션입니다. 
+본 프로젝트는 대한민국 프리미엄 K-냉동식품(비비고 만두, 떡볶이 밀키트, 크리스피 치킨)과 명품 K-주류 및 전통주(원소주 24%, 느린마을 생막걸리, 참이슬)를 직배송하는 럭셔리 커머스 플랫폼 **송영민푸드 (Song Youngmin Food)** 풀스택 웹 애플리케이션입니다.
 
-RSC(React Server Components) 기반의 **Dynamic Layout & Menu Engine**, **Page Section CMS**, **Integrated Admin Dashboard**, **Product CRUD**, **Journal Editor**, **Supabase DB Integration**, **7개 국어 다국어 지원(i18n & RTL)** 및 **Cloudflare Pages 자동 배포**가 완벽하게 통합 구축되어 있습니다.
+공식 로고 이미지(`public/logo.png`) 연동, **2-Tier Header Layout**을 통한 검색창-메뉴 겹침 현상 0% 해결, **10개 섹션 전문 e-커머스 마켓플레이스 홈 레이아웃**, **K-Food/K-Liquor 백엔드 데이터베이스**, **7개 국어 다국어 지원 (i18n & RTL)** 및 **통합 어드민 백오피스 CMS**가 완벽히 구현되어 있습니다.
 
 ---
 
@@ -19,90 +20,84 @@ RSC(React Server Components) 기반의 **Dynamic Layout & Menu Engine**, **Page 
 | 체크리스트 기능 | 구현 상태 | 관련 라우터 및 관리자 화면 |
 | :--- | :---: | :--- |
 | **Header GNB 메뉴 관리** | **[x] 완료** | `/admin/navigation` (Header 탭, `@dnd-kit` 드래그 앤 드롭 순서 변경 & 토글) |
-| **Footer 링크 그룹 관리** | **[x] 완료** | `/admin/navigation` (Footer 탭, 회사소개/고객지원 링크그룹 온오프 관리) |
-| **메인 히어로 뱅크 비디오 및 카피 실시간 변경** | **[x] 완료** | `/admin/hero` (MP4/HD 슬라이더 CMS) & `/admin/content-blocks` |
-| **컬렉션/제품 카테고리 CRUD & 이미지 업로드** | **[x] 완료** | `/admin/products` (제품 추가/수정/삭제 & 4대 자재 특성 관리) |
-| **뉴스/이벤트/블로그 게시글 Editor** | **[x] 완료** | `/admin/journal` (WYSIWYG/Markdown 아티클 편집기) & `/journal` |
+| **Footer 링크 그룹 관리** | **[x] 완료** | `/admin/navigation` (Footer 탭, 회사소개/고객지원 온오프 관리) |
+| **메인 히어로 뱅크 비디오 및 카피 실시간 변경** | **[x] 완료** | `/admin/hero` (K-Food MP4/HD 슬라이더 CMS) & `/admin/content-blocks` |
+| **컬렉션/제품 카테고리 CRUD & 이미지 업로드** | **[x] 완료** | `/admin/products` (K-Food 제품 CRUD & 4대 특성: format/finish/color/look) |
+| **뉴스/이벤트/블로그 게시글 Editor** | **[x] 완료** | `/admin/journal` (WYSIWYG/Markdown K-Recipe 아티클 편집기) & `/journal` |
+| **사용자 권한 관리** | **[x] 완료** | `/admin/users` (admin/editor/viewer 역할 CRUD & 활성화 토글) |
+| **실시간 KPI 대시보드** | **[x] 완료** | `/admin` (`/api/kpi` 주문/매출/제품/회원 DB 집계 대시보드) |
+| **미디어 라이브러리 CDN** | **[x] 완료** | `/admin/media` (이미지/동영상 보안 검증 업로드 & 1-Click URL 복사) |
 
 ---
 
-## 3. UI/UX 디자인 시스템 (Anatolia Style)
+## 3. UI/UX 디자인 시스템 (Song Youngmin Food Style)
 
-- **Color Tokens**:
-  - Light Gray: `#F8F8F9` (배경 및 보더)
-  - Pure White: `#FFFFFF` (카드 및 텍스트 강조)
-  - Dark Charcoal: `#1A1A1A` / `#0A0A0C` (럭셔리 다크 테마)
-  - Accent Gold: `#c5a880` / Muted Earth: `#9e7f55` (브랜드 골드 포인트)
-- **Typography**:
-  - Sans-serif: `Inter`, `Montserrat` (모던하고 시각적으로 깔끔한 본문)
-  - Luxury Serif: `Playfair Display` (헤드라인 및 시그니처 텍스트)
-- **Layout & Animations**:
-  - Full-bleed 메인 랜딩 비주얼 슬라이더 및 히어로 비디오
-  - 여유로운 여백 (Padding/Margin)으로 시각적 쾌적함 제공
-  - 마우스 호버 시 Smooth Zoom-in (`scale-105`, `.img-zoom-hover`) 및 페이드인 애니메이션 효과 적용
+- **자연색 계열 시각적 컬러 팔레트 (Trust & Natural Food)**:
+  - **Primary Green**: `#14532D` (Deep Nature Green - 신뢰와 신선함을 전달하는 메인 컬러)
+  - **Secondary Amber**: `#EAB308` (Warm Amber Gold - 프리미엄 골드 포인트 및 배지)
+  - **Accent Red**: `#DC2626` (Vivid Red - 할인율, 특가 뱃지, 장바구니 카운트 알림)
+  - **Background**: `#FAFAF8` (Natural Off-White - 눈이 편안한 자연 친화적 배경)
+- **타이포그래피 (Typography)**:
+  - Google Fonts: `Inter`, `Plus Jakarta Sans`, `DM Sans`
+  - **Headings**: `700`~`800` 두께로 가독성 및 강렬한 시각적 위계 부여
+  - **Body Text**: `400`~`500` 두께로 쾌적한 가독성 확보
+- **2-Tier Header Layout (메뉴 & 검색창 겹침 0% 완벽 구조)**:
+  - **1단 행 (h-20)**: 송영민푸드 공식 로고 이미지 (`public/logo.png`) | 중앙 고정 대형 검색창 (실시간 자동완성 팝업) | 마이페이지, 위시리스트, 장바구니 아이콘
+  - **2단 행 (h-12)**: 데스크탑 GNB 전용 내비게이션 바 (`K-냉동식품`, `K-주류 & 전통주`, `오늘의 특가`, `베스트셀러`, `K-간식`, `K-레시피`)
+- **Animations**:
+  - 마우스 호버 시 줌인 효과 (`scale-105`), 페이드인 모달 및 Smooth Micro-animations 적용
 
 ---
 
-## 4. 다국어 지원 시스템 (7개 국어 i18n & RTL)
+## 4. SEO 최적화 (K-Food, Korea Food, K-Fresh Food)
 
-- **기본 언어**: **한국어 (`ko` - Korean)**
+- **Metadata Configuration (`src/app/layout.tsx`)**:
+  - **Title**: `송영민푸드 (Song Youngmin Food) | Premium K-Food, Korea Food & K-Fresh Food`
+  - **Description**: `송영민푸드(Song Youngmin Food) 공식 몰. K-Food, Korea Food, K-Fresh Food, 대한민국 대표 K-냉동식품(비비고 왕교자, 떡볶이, 치킨) 및 프리미엄 K-주류/전통주(원소주, 생막걸리) 24시간 프레시 에어 배송.`
+  - **Keywords**: `K-Food`, `Korea Food`, `K-Fresh Food`, `송영민푸드`, `Song Youngmin Food`, `K-Frozen Food`, `K-Liquor`, `원소주`, `비비고만두`, `생막걸리`, `전통주`, `떡볶이 밀키트`
+  - **OpenGraph Social Meta**: SNS 공유 시 송영민푸드 로고와 메타 카드 자동 노출
+  - **JSON-LD Structured Data**: Google/Naver 검색엔진 수집용 Organization 구조화 데이터 적용
+
+---
+
+## 5. 홈 페이지 10개 섹션 마켓플레이스 레이아웃 (Marketplace Structure)
+
+1. **Main Hero Visual CMS (`HeroSlider.tsx`)**: K-Food & K-Liquor 비디오/HD 비주얼 슬라이더
+2. **Today's Deals (`TodaysDeals.tsx`)**: 24시간 카운트다운 타이머, 할인 뱃지, 즉시 장바구니 담기
+3. **Category Circle Icons (`CategoryIcons.tsx`)**: 🥟 비비고 만두 | 🍾 원소주 & 증류주 | 🥘 떡볶이 밀키트 | 🍗 크리스피 치킨 | 🍶 생막걸리 | 🍿 K-간식
+4. **Best Sellers (`BestSellers.tsx`)**: #1~#4 랭킹 뱃지, 별점 평가, 카테고리 필터 탭
+5. **Fresh Today Cold Shipping Banner (`FreshToday.tsx`)**: 24시간 에어 냉장배송 보증 안내
+6. **Partner Artisans & Distilleries (`PartnerBrands.tsx`)**: 대한민국 엄선 도가 및 푸드 파트너 브랜드
+7. **K-Recipes & Journal (`RecipesSection.tsx`)**: 한식 레시피 및 저널 인사이트
+8. **Customer Reviews (`CustomerReviews.tsx`)**: 5.0 Star 구매자 리얼 리뷰
+9. **Newsletter Club Subscription (`NewsletterSection.tsx`)**: 송영민푸드 클럽 이메일 구독 폼
+10. **Footer Component (`FooterClient.tsx`)**: 송영민푸드 공식 로고, 사업자 정보, 7개 언어 i18n 셀렉터
+
+---
+
+## 6. 다국어 지원 시스템 (7개 국어 i18n & RTL)
+
+- **기본 언어**: **한국어 (`ko` - 기본)**
 - **지원 언어 목록 (7개 국어)**:
   1. `ko` - 🇰🇷 한국어 (기본 설정)
   2. `en` - 🇺🇸 English
   3. `zh` - 🇨🇳 中文 (중국어)
   4. `ja` - 🇯🇵 日本語 (일본어)
-  5. `ar` - 🇸🇦 العربية (**RTL 오른쪽->왼쪽 레이아웃 방향 지원**)
+  5. `ar` - 🇸🇦 العربية (**RTL 오른쪽->왼쪽 레이아웃 방향 자동 전환**)
   6. `es` - 🇪🇸 Español (스페인어)
   7. `id` - 🇮🇩 Bahasa Indonesia (인도네시아어)
-- **i18n 구현 컴포넌트**:
-  - `src/lib/i18n/dictionaries.ts`: 7개 국어 동적 번역 맵
-  - `src/lib/i18n/LanguageContext.tsx`: React Context Provider & localStorage 상태 저장 및 아랍어(`ar`) 선택 시 `document.dir = 'rtl'` 자동 감지
-  - `src/components/layout/LanguageSelector.tsx`: 지구본 아이콘 기반 7개 국어 셀렉터 UI
+- **i18n 핵심 파일**:
+  - `src/lib/i18n/dictionaries.ts`: 7개 국어 동적 번역 딕셔너리 (50+ 키)
+  - `src/lib/i18n/LanguageContext.tsx`: React Context Provider & localStorage 상태 저장
 
 ---
 
-## 5. 단계별 개발 단계 (Phases)
+## 7. 백엔드 데이터베이스 및 Persistence (`src/lib/` & `data/`)
 
-### Phase 1: Dynamic Layout & Menu Engine 구축
-- Next.js 서버 컴포넌트(RSC)에서 `is_active = true`인 메뉴 항목만 Fetch하여 Header/Footer 컴포넌트에 주입.
-- Depth 1, Depth 2 드롭다운 메뉴 및 모바일 햄버거 메가메뉴 자동 매핑.
-- `/admin/navigation`: `@dnd-kit` 기반 드래그 앤 드롭 순서 변경 (`sort_order`) & On/Off 토글 스위치.
-
-### Phase 2: Page Section CMS & Lookbook Showcase
-- `/admin/hero`: MP4 비디오 배경 및 고해상도 이미지 슬라이더 관리자 폼.
-- `/collections`: 자재 특성에 맞춘 4대 카테고리 필터링 (Format, Surface Finish, Color, Look) 및 Lookbook 비주얼 그리드 레이아웃.
-- Quick Spec Modal: 제품 클릭 시 모달 팝업으로 상세 규격 및 갤러리 이미지 확인.
-
-### Phase 3: Integrated Admin Dashboard Hub
-- `/admin`: 4대 메트릭 카드 및 반응형 사이드바 내비게이션을 포함한 통합 대시보드 허브.
-- `/admin/content-blocks`: 메인/서브 페이지 섹션별 텍스트, 미디어, 배지 수정.
-- `/admin/media`: 이미지/비디오 파일 업로드 및 `/public/uploads` 직관적 CDN 관리와 1-Click URL 복사 기능.
-
----
-
-## 6. Supabase 백엔드 데이터베이스연동 (Supabase Integration)
-
-- **`supabase/schema.sql`**:
-  - 6개 핵심 테이블 DDL 스키마:
-    - `menus`: Header/Footer 내비게이션 엔지니어링
-    - `hero_slides`: 히어로 비디오 & 이미지 슬라이더 CMS
-    - `products`: 타일/소결석 제품 CRUD
-    - `content_blocks`: 섹션 콘텐츠 블록
-    - `journal_articles`: 뉴스/이벤트 저널 아티클
-    - `media_library`: 미디어 파일 업로드 자산 관리
-  - Performance Index, RLS (Row Level Security) 읽기/관리 보안 정책 및 초기 시드 데이터 `INSERT INTO` 문 수록.
-- **환경 변수 구상**:
-  - `.env.example` 및 `.env.local` 제공.
-  - `src/lib/supabase.ts`: `@supabase/supabase-js` 기반 SDK 연동 클라이언트 모듈.
-
----
-
-## 7. Cloudflare Pages 배포 및 CI/CD 구축
-
-- **Static HTML Export**: `next.config.ts` 에 `output: 'export'` 설정으로 빌드 시 `out` 디렉토리에 정적 웹 사이트 생성.
-- **`wrangler.toml`**: Cloudflare Pages 빌드 출력 디렉토리(`pages_build_output_dir = "out"`) 지정.
-- **GitHub Actions (`.github/workflows/deploy.yml`)**:
-  - `main` 브랜치 푸시 시 Node.js 20 환경에서 `npm run build` 자동 검증 및 CI Pipeline 동작.
+- **`products-db.ts` & `data/products.json`**: K-Food 카탈로그 (CJ 비비고 왕교자, 원소주 24%, 눈꽃 떡볶이 밀키트, 느린마을 생막걸리, 순살 반반치킨, 참이슬 후레쉬)
+- **`menus-db.ts` & `data/menus.json`**: Depth 1 & Depth 2 K-Food GNB/Footer 메뉴
+- **`cms-db.ts` & `data/hero-slides.json`**: K-Food 히어로 슬라이더 데이터
+- **`supabase/schema.sql`**: RLS 보안 정책 및 6개 핵심 테이블 DDL 명세
 
 ---
 
@@ -110,61 +105,42 @@ RSC(React Server Components) 기반의 **Dynamic Layout & Menu Engine**, **Page 
 
 ```text
 anatoria/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml              # GitHub Actions CI/CD Pipeline
-├── data/                           # 파일 시스템 JSON 시드 데이터
+├── data/                           # JSON 데이터 persistence
 │   ├── content-blocks.json
 │   ├── hero-slides.json
 │   ├── journal.json
 │   ├── media-library.json
 │   ├── menus.json
 │   └── products.json
-├── public/                         # 정적 자산 및 업로드 폴더
+├── public/                         # 정적 자산 및 업로드
+│   ├── logo.png                    # 송영민푸드 공식 로고 이미지
 │   └── uploads/
 ├── src/
 │   ├── app/
-│   │   ├── admin/                  # 어드민 관리자 라우트 그룹
-│   │   │   ├── content-blocks/     # 섹션 콘텐츠 CMS
-│   │   │   ├── hero/               # 히어로 비디오/슬라이더 CMS
-│   │   │   ├── journal/            # 뉴스/이벤트 저널 에디터
-│   │   │   ├── media/              # 미디어 라이브러리 업로드
-│   │   │   ├── navigation/         # Header/Footer 메뉴 엔지니어링
-│   │   │   ├── products/           # 제품 카테고리 CRUD
-│   │   │   └── page.tsx            # 통합 어드민 대시보드 허브
-│   │   ├── api/                    # REST API 라우트
+│   │   ├── admin/                  # 어드민 백오피스 CMS (PIN 로그인, 대시보드)
 │   │   │   ├── content-blocks/
 │   │   │   ├── hero/
 │   │   │   ├── journal/
 │   │   │   ├── media/
-│   │   │   ├── menus/
+│   │   │   ├── navigation/
 │   │   │   ├── products/
-│   │   │   └── upload/
-│   │   ├── collections/            # 룩북 쇼케이스 & 4대 필터링
-│   │   ├── journal/                # 공개 저널 & 뉴스 아티클
-│   │   │   └── [slug]/             # 저널 아티클 상세 페이지
-│   │   ├── globals.css             # Anatolia 브랜드 스타일 시스템
-│   │   ├── layout.tsx              # Root Layout (LanguageProvider 적용)
-│   │   └── page.tsx                # Full-bleed 메인 랜딩 페이지
+│   │   │   ├── users/              # 사용자 권한 관리
+│   │   │   └── page.tsx            # KPI 실시간 집계 대시보드
+│   │   ├── api/                    # REST API 라우트 (/api/kpi, /api/products, etc.)
+│   │   ├── collections/            # 컬렉션 & 4대 특성 필터링
+│   │   ├── journal/                # K-Recipe 저널 상세
+│   │   ├── globals.css             # 송영민푸드 디자인 시스템 (#14532D, #EAB308, #DC2626)
+│   │   ├── layout.tsx              # Root Layout (K-Food SEO 메타데이터 & JSON-LD)
+│   │   └── page.tsx                # 10개 섹션 마켓플레이스 홈
 │   ├── components/
-│   │   ├── home/
-│   │   │   └── HeroSlider.tsx      # 동적 메인 비주얼 슬라이더
+│   │   ├── home/                   # 8개 홈 섹션 컴포넌트
 │   │   └── layout/
-│   │       ├── Header.tsx / HeaderClient.tsx
-│   │       ├── Footer.tsx / FooterClient.tsx
-│   │       └── LanguageSelector.tsx # 7개 국어 다국어 셀렉터 UI
+│   │       ├── HeaderClient.tsx    # 2-Tier Header & 검색 자동완성
+│   │       ├── FooterClient.tsx    # 송영민푸드 푸터 & 로고
+│   │       └── LanguageSelector.tsx # 7개 국어 i18n
 │   └── lib/
-│       ├── i18n/
-│       │   ├── dictionaries.ts     # 7개 국어 번역 맵
-│       │   └── LanguageContext.tsx # 다국어 Context Provider & RTL
-│       ├── supabase.ts             # Supabase SDK 연동 모듈
-│       ├── types.ts                # TypeScript 데이터 인터페이스
+│       ├── i18n/                   # 7개 언어 번역 맵
 │       └── *-db.ts                 # 데이터베이스 헬퍼 모듈
-├── supabase/
-│   └── schema.sql                  # Supabase 전체 DDL & Seed Data SQL
-├── .env.example                    # 환경 변수 예제 파일
-├── gemini.md                       # 사양 가이드라인 문서
-├── next.config.ts                  # Next.js 설정 (output: 'export')
-├── package.json                    # 프로젝트 의존성 명세
-└── wrangler.toml                   # Cloudflare Pages 설정 파일
+├── PROJECT_DEVELOPMENT_SUMMARY.md  # 프로젝트 전체 완료 보고서
+└── gemini.md                       # 프로젝트 개발 사양 가이드
 ```

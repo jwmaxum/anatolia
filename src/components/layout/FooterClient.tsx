@@ -22,17 +22,14 @@ export default function FooterClient({ menus }: FooterClientProps) {
           {/* Brand Info & Language Selector */}
           <div className="md:col-span-4 space-y-4">
             <Link href="/" className="inline-block">
-              <div className="flex flex-col">
-                <span className="font-serif-luxury text-2xl tracking-[0.25em] font-semibold text-white">
-                  ANATOLIA
-                </span>
-                <span className="text-[9px] tracking-[0.35em] text-[#c59b27] font-medium uppercase -mt-1">
-                  GOURMET & FINE FOODS
-                </span>
-              </div>
+              <img
+                src="/logo.png"
+                alt="송영민푸드 (Song Youngmin Food) - K-Food, Korea Food &amp; K-Fresh Food"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             <p className="text-xs text-stone-400 leading-relaxed max-w-sm">
-              {t('hero_subtitle', 'Global leader in artisanal extra virgin olive oils, aged DOP cheeses, and organic gourmet ingredients.')}
+              송영민푸드 (Song Youngmin Food) | Premium K-Food, Korea Food &amp; K-Fresh Food Marketplace. 대한민국 대표 K-냉동식품 및 명품 전통주 24시간 에어 프레시 배송.
             </p>
             <div className="pt-2">
               <LanguageSelector />

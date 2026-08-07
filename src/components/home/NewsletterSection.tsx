@@ -26,17 +26,17 @@ export default function NewsletterSection() {
             </div>
 
             <h2 className="font-jakarta text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Join the Anatolia Gourmet Club
+              Join the Song Youngmin Food Club
             </h2>
 
             <p className="text-emerald-100 text-xs sm:text-sm font-medium leading-relaxed">
-              Subscribe to receive private harvest releases, seasonal recipes by Michelin chefs, and exclusive 15% off your first order.
+              Subscribe to receive private harvest releases, seasonal recipes by K-Food chefs, and exclusive 15% off your first order.
             </p>
 
             {subscribed ? (
               <div className="bg-white/15 border border-white/30 rounded-2xl p-4 flex items-center justify-center space-x-2 text-white font-bold text-sm animate-in fade-in duration-300">
                 <CheckCircle2 size={20} className="text-[#EAB308]" />
-                <span>Thank you for subscribing! Welcome to the Anatolia Club.</span>
+                <span>Thank you for subscribing! Welcome to Song Youngmin Food.</span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">

@@ -1,15 +1,17 @@
-# Anatolia Web Project Guide & Specification (gemini.md)
+# 송영민푸드 (Song Youngmin Food) K-Food Project Guide & Specification (gemini.md)
 
 ## 프로젝트 개요
-- **사이트 참조**: https://www.anatolia.com/
-- **목적**: Anatolia 브랜드의 동일한 레이아웃 및 럭셔리 디자인 구현, Dynamic Layout & Menu Engine, Page Section CMS, Integrated Admin Dashboard, Product CRUD, Journal Editor, Supabase DB Integration 및 7개 국어 다국어 지원 (i18n).
-- **기술 스택**: Next.js 16.3.0 (App Router), React 19, TypeScript, Tailwind CSS, Lucide Icons, @dnd-kit, Supabase, Jest
+- **브랜드명**: **송영민푸드 (Song Youngmin Food)**
+- **SEO 키워드**: `K-Food`, `Korea Food`, `K-Fresh Food`, `송영민푸드`, `Song Youngmin Food`, `K-Frozen Food`, `K-Liquor`
+- **목적**: 송영민푸드 브랜드의 럭셔리 K-Food 마켓플레이스 레이아웃, 2-Tier Header, Dynamic Layout & Menu Engine, Page Section CMS, Integrated Admin Dashboard, Product CRUD, Journal Editor, Supabase DB Integration 및 7개 국어 다국어 지원 (i18n).
+- **기술 스택**: Next.js 16.3.0 (App Router, Turbopack), React 19, TypeScript, Tailwind CSS, Lucide Icons, @dnd-kit, Supabase, Jest
 
 ---
 
-## 핵심 UI/UX 스타일 가이드라인 (Anatolia Style)
-- **Colors**: Light Gray `#F8F8F9`, Pure White `#FFFFFF`, Dark Charcoal `#1A1A1A`, Accent Gold `#c5a880` / Muted Earth `#9e7f55`.
-- **Typography**: Sans-serif (Inter, Montserrat) + Serif (Playfair Display) Headings.
+## 핵심 UI/UX 스타일 가이드라인 (Song Youngmin Food Style)
+- **Colors**: Primary Green `#14532D`, Secondary Amber `#EAB308`, Accent Red `#DC2626`, Background Off-White `#FAFAF8`, Dark Charcoal `#0A0A0C` (Admin CMS).
+- **Typography**: `Inter`, `Plus Jakarta Sans`, `DM Sans` (Headings 700~800, Body 400~500).
+- **Header**: 2-Tier Header (Row 1: Logo image + Centered Search + Actions / Row 2: Clean GNB Navigation bar).
 - **Layout & Animations**:
   - Full-bleed 메인 비주얼
   - 여유로운 여백 (Padding/Margin)

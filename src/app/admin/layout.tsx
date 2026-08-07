@@ -199,14 +199,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Admin Header Logo */}
           <div className="pb-6 border-b border-stone-800/80 mb-6 flex justify-between items-center">
             <Link href="/admin" className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded bg-[#c5a880] flex items-center justify-center text-black font-bold font-serif-luxury text-lg">
-                A
-              </div>
+              <img
+                src="/logo.png"
+                alt="송영민푸드"
+                className="h-8 w-auto object-contain"
+              />
               <div className="flex flex-col">
-                <span className="font-serif-luxury text-sm font-semibold tracking-wider text-white">
-                  ANATOLIA
+                <span className="font-jakarta text-xs font-extrabold tracking-wider text-white">
+                  송영민푸드
                 </span>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-[#c5a880]">
+                <span className="text-[9px] uppercase tracking-[0.15em] text-[#EAB308]">
                   CMS Studio
                 </span>
               </div>

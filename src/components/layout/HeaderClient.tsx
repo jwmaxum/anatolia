@@ -157,15 +157,12 @@ export default function HeaderClient({ menus }: HeaderClientProps) {
         <div className="flex items-center justify-between h-20 relative">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center group flex-shrink-0 z-20">
-            <div className="flex flex-col">
-              <span className="font-jakarta text-2xl tracking-[0.18em] font-extrabold text-[#14532D] group-hover:text-[#EAB308] transition-colors">
-                ANATOLIA
-              </span>
-              <span className="text-[9px] tracking-[0.3em] text-[#EAB308] font-bold -mt-1 uppercase">
-                K-FOOD &amp; K-LIQUOR MARKET
-              </span>
-            </div>
+          <Link href="/" className="flex items-center group flex-shrink-0 z-20 py-1">
+            <img
+              src="/logo.png"
+              alt="송영민푸드 (Song Youngmin Food) - K-Food, Korea Food &amp; K-Fresh Food"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Center: Search Bar (Absolute centered on desktop) */}
